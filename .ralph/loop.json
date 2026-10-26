@@ -1,0 +1,10 @@
+{
+  "project": "AuraPlan AI - Celebration & Event Planner",
+  "status": "active",
+  "loop_iteration": 1,
+  "max_iterations": 20,
+  "current_phase": "Phase 1: Domain Architecture & Data Models",
+  "goal": "Build an award-winning GenAI Celebration & Event Planner exceeding 97 evaluation score across weddings, birthdays, and community events",
+  "tasks_file": ".gsd/TASKS.md",
+  "state_file": ".gsd/STATE.md"
+}
