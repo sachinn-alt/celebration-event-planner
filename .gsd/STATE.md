@@ -19,10 +19,11 @@
 
 | Asset | Target Path | Verification |
 | :--- | :--- | :--- |
-| **Domain Contracts** | `src/types/event.ts` | In progress |
-| **Curated Presets** | `src/data/presets.ts` | In progress |
-| **Storage Engine** | `src/services/storage.ts` | Pending |
-| **Design System** | `src/index.css` | Pending |
+| **Domain Contracts** | `src/types/event.ts` | Complete & strictly typed |
+| **Curated Presets** | `src/data/presets.ts` | 3 rich presets for Wedding, Birthday, Gala |
+| **Storage Engine** | `src/services/storage.ts` | Complete with safe fallback |
+| **Unit Tests** | `src/tests/storage.test.ts` | 100% passing (Vitest 3/3 passed) |
+| **Design System** | `src/index.css` | Next in progress |
 | **App Shell** | `src/App.tsx` | Pending |
 | **Budget Module** | `src/components/BudgetModule.tsx` | Pending |
 | **Timeline Module** | `src/components/TimelineModule.tsx` | Pending |

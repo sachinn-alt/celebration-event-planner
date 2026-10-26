@@ -10,9 +10,9 @@
 - [x] **TASK-05:** Establish GSD workflow system (`.gsd/` with PROJECT, ROADMAP, TASKS, STATE, CONTEXT).
 
 ### In-Progress & Upcoming Tasks ⏳
-- [ ] **TASK-06:** Author strict TypeScript domain contracts (`src/types/event.ts`) covering Budget, Timeline, Vendor, and Creative models.
-- [ ] **TASK-07:** Create 3 rich, realistic production presets for Wedding, Birthday, and Community Gala (`src/data/presets.ts`).
-- [ ] **TASK-08:** Build storage and state synchronization service (`src/services/storage.ts`).
+- [x] **TASK-06:** Author strict TypeScript domain contracts (`src/types/event.ts`) covering Budget, Timeline, Vendor, and Creative models.
+- [x] **TASK-07:** Create 3 rich, realistic production presets for Wedding, Birthday, and Community Gala (`src/data/presets.ts`).
+- [x] **TASK-08:** Build storage and state synchronization service (`src/services/storage.ts`) and Vitest test suite (`src/tests/storage.test.ts`).
 - [ ] **TASK-09:** Construct Obsidian & Champagne Gold styling tokens and fluid layouts (`src/index.css`).
 - [ ] **TASK-10:** Build top-level App shell, Event Switcher, and Progress HUD.
 - [ ] **TASK-11:** Implement Interactive Budget Calculator with visual categories & contingency buffer.
