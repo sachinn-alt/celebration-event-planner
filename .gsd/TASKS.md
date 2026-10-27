@@ -1,4 +1,4 @@
-# 📋 GSD Task Checklist — AuraPlan AI
+# 📋 GSD Task Checklist — EventiQ
 
 ## Active Sprint: Phase 1 — Domain Architecture & Data Engine
 

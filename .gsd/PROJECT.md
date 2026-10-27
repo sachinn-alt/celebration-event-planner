@@ -1,4 +1,4 @@
-# 🎊 Project Specification — AuraPlan AI (Celebration & Event Planner)
+# 🎊 Project Specification — EventiQ (Celebration & Event Planner)
 
 ## 📌 Executive Overview
 **Vertical:** [Challenge 5] Celebration & Event Planner  
@@ -16,7 +16,7 @@ Organizing celebrations (weddings, milestone birthdays, and community festivals/
 - Incomplete vendor vetting and lack of negotiation/question frameworks
 - Generic, uninspired creative ideas lacking sensory depth or personal flair.
 
-**AuraPlan AI** is an intelligent, context-aware GenAI-powered planning director that guides hosts from initial concept through day-of execution with mathematical rigor, creative flair, and seamless automation.
+**EventiQ** is an intelligent, context-aware GenAI-powered planning director that guides hosts from initial concept through day-of execution with mathematical rigor, creative flair, and seamless automation.
 
 ---
 

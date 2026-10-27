@@ -1,4 +1,4 @@
-// TypeScript Domain Models for AuraPlan AI (Celebration & Event Planner)
+// TypeScript Domain Models for EventiQ (Celebration & Event Planner)
 
 export type EventType = 'wedding' | 'birthday' | 'community';
 

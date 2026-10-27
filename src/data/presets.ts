@@ -1,4 +1,4 @@
-import { EventPlan, BudgetCategoryMeta, BudgetCategoryKey } from '../types/event';
+import type { EventPlan, BudgetCategoryMeta } from '../types/event';
 
 export const BUDGET_CATEGORIES: BudgetCategoryMeta[] = [
   {

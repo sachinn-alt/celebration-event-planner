@@ -1,9 +1,9 @@
-import { EventPlan, BudgetCategoryKey } from '../types/event';
+import type { EventPlan, BudgetCategoryKey } from '../types/event';
 import { PRESET_EVENTS } from '../data/presets';
 
-const STORAGE_KEY_EVENTS = 'auraplan_events_v1';
-const STORAGE_KEY_ACTIVE_ID = 'auraplan_active_id_v1';
-const STORAGE_KEY_API_KEY = 'auraplan_gemini_api_key_v1';
+const STORAGE_KEY_EVENTS = 'eventiq_events_v1';
+const STORAGE_KEY_ACTIVE_ID = 'eventiq_active_id_v1';
+const STORAGE_KEY_API_KEY = 'eventiq_gemini_api_key_v1';
 
 const memoryStorage: Record<string, string> = {};
 

@@ -1,4 +1,4 @@
-# 🧠 GSD Context & System Boundaries — AuraPlan AI
+# 🧠 GSD Context & System Boundaries — EventiQ
 
 ## Key Evaluation Constraints
 - **Attempt Limit:** 3 maximum attempts allowed.
@@ -15,4 +15,4 @@
 ## AI Architecture Philosophy
 The application provides two concurrent AI execution paths:
 1. **Live Gemini API Integration:** Users can provide an optional Gemini API key to trigger live Google Gemini models. The key is securely stored in browser session/local storage, never logged, and never transmitted to external third parties.
-2. **Context-Aware Heuristic Intelligence:** Evaluators may run the application without an API key. AuraPlan AI includes a deeply modeled decision engine that analyzes budget distributions, guest counts, timeline constraints, and event types to output real, high-value contextual advice without network dependencies.
+2. **Context-Aware Heuristic Intelligence:** Evaluators may run the application without an API key. EventiQ includes a deeply modeled decision engine that analyzes budget distributions, guest counts, timeline constraints, and event types to output real, high-value contextual advice without network dependencies.
