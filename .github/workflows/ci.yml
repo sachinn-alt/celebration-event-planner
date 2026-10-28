@@ -32,3 +32,4 @@ jobs:
 
       - name: Production Bundle Build (Vite)
         run: npm run build
+

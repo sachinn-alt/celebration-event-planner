@@ -7,6 +7,7 @@
 ---
 
 ## 🟢 Operational Runtimes & Health
+- **Live Production URL:** [https://eventiq-kappa.vercel.app/](https://eventiq-kappa.vercel.app/) (Verified 200 OK)
 - **Vite Web App:** Operational (`npm run dev`) at `http://localhost:5173/`
 - **Build Status:** Verified passing (`dist/assets/index.js` ~108 kB gzipped, zero errors)
 - **Lint Status:** 0 warnings, 0 errors via Oxlint
