@@ -79,8 +79,8 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
     e.preventDefault();
     if (!vendorName.trim()) return;
 
-    const quoted = parseFloat(vendorQuotedAmount) || 0;
-    const deposit = parseFloat(vendorDepositPaid) || 0;
+    const quoted = Math.max(0, parseFloat(vendorQuotedAmount) || 0);
+    const deposit = Math.max(0, parseFloat(vendorDepositPaid) || 0);
     const rating = Math.max(1, Math.min(5, parseInt(vendorRating, 10) || 5));
 
     // Category default questions generator
@@ -134,32 +134,32 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
         v.id === editingVendor.id
           ? {
               ...v,
-              name: vendorName.trim(),
+              name: vendorName.trim().slice(0, 100),
               category: vendorCategory,
-              contactPerson: vendorContactPerson.trim() || undefined,
-              email: vendorEmail.trim() || undefined,
-              phone: vendorPhone.trim() || undefined,
+              contactPerson: vendorContactPerson.trim().slice(0, 100) || undefined,
+              email: vendorEmail.trim().slice(0, 100) || undefined,
+              phone: vendorPhone.trim().slice(0, 30) || undefined,
               status: vendorStatus,
               quotedAmount: quoted,
               depositPaid: deposit,
               rating,
-              notes: vendorNotes.trim() || undefined,
+              notes: vendorNotes.trim().slice(0, 500) || undefined,
             }
           : v
       );
     } else {
       const newVendor: Vendor = {
         id: `vendor-${Date.now()}`,
-        name: vendorName.trim(),
+        name: vendorName.trim().slice(0, 100),
         category: vendorCategory,
-        contactPerson: vendorContactPerson.trim() || undefined,
-        email: vendorEmail.trim() || undefined,
-        phone: vendorPhone.trim() || undefined,
+        contactPerson: vendorContactPerson.trim().slice(0, 100) || undefined,
+        email: vendorEmail.trim().slice(0, 100) || undefined,
+        phone: vendorPhone.trim().slice(0, 30) || undefined,
         status: vendorStatus,
         quotedAmount: quoted,
         depositPaid: deposit,
         rating,
-        notes: vendorNotes.trim() || undefined,
+        notes: vendorNotes.trim().slice(0, 500) || undefined,
         aiSuggestedQuestions: defaultQuestions[vendorCategory] || [
           'What is your overtime policy and hourly surcharge?',
           'What backup equipment or staff do you bring on-site?',
@@ -539,6 +539,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                   type="text"
                   className="form-input"
                   required
+                  maxLength={100}
                   placeholder="e.g. Silver Crest Audio or Napa Valley Cellars"
                   value={vendorName}
                   onChange={(e) => setVendorName(e.target.value)}
@@ -586,6 +587,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                     id="vendor-contact-input"
                     type="text"
                     className="form-input"
+                    maxLength={100}
                     placeholder="e.g. Chef Antoine"
                     value={vendorContactPerson}
                     onChange={(e) => setVendorContactPerson(e.target.value)}
@@ -613,6 +615,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                     id="vendor-email-input"
                     type="email"
                     className="form-input"
+                    maxLength={100}
                     placeholder="contact@vendor.com"
                     value={vendorEmail}
                     onChange={(e) => setVendorEmail(e.target.value)}
@@ -625,6 +628,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                     id="vendor-phone-input"
                     type="tel"
                     className="form-input"
+                    maxLength={30}
                     placeholder="+1 (555) 000-0000"
                     value={vendorPhone}
                     onChange={(e) => setVendorPhone(e.target.value)}
@@ -667,6 +671,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                 <textarea
                   id="vendor-notes-input"
                   className="form-textarea"
+                  maxLength={500}
                   placeholder="Inclusions, setup arrival time, meal requirements..."
                   value={vendorNotes}
                   onChange={(e) => setVendorNotes(e.target.value)}

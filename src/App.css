@@ -64,8 +64,36 @@
   color: var(--text-muted);
 }
 
+.archetype-switcher {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.archetype-switcher::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .hide-on-mobile {
     display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .archetype-switcher button {
+    padding: 6px 10px !important;
+    font-size: 0.72rem !important;
+    min-height: 40px;
+  }
+  .nav-tab-btn {
+    padding: var(--space-2) var(--space-3) !important;
+    font-size: var(--type-caption-xs) !important;
+    min-height: 44px;
+  }
+  .modal-content {
+    padding: var(--space-4) !important;
+    border-radius: var(--radius-lg) !important;
   }
 }

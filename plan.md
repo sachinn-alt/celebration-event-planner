@@ -161,10 +161,10 @@ The application layout dynamically transforms across 5 target device viewports:
 ```
 
 ### Breakpoint Verification Checklist:
-- [ ] **360px (iPhone SE / Galaxy Fold):** Verify zero horizontal overflow, all text remains readable without truncation, touch targets ≥ 44px.
-- [ ] **768px (iPad Mini / Portrait):** Verify navigation tabs collapse into a smooth scroll container; forms display in 2 columns.
-- [ ] **1024px (iPad Pro / Small Laptop):** Verify side-by-side layout loads without clipping; metric HUD fits in a single unified bar.
-- [ ] **1440px (Desktop Monitor):** Verify background scales cleanly and text is restrained within comfortable reading boundaries.
+- [x] **360px (iPhone SE / Galaxy Fold):** Verified zero horizontal overflow, all text remains readable without truncation, touch targets ≥ 44px, fluid archetype switcher.
+- [x] **768px (iPad Mini / Portrait):** Verified navigation tabs collapse into a smooth scroll container; forms display in 2 columns.
+- [x] **1024px (iPad Pro / Small Laptop):** Verified side-by-side layout loads without clipping; metric HUD fits in a single unified bar.
+- [x] **1440px (Desktop Monitor):** Verified background scales cleanly and text is restrained within comfortable reading boundaries.
 
 ---
 

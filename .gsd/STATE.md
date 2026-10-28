@@ -34,6 +34,7 @@
 | **AI Copilot Drawer** | `src/components/AiCopilot.tsx` | Proactive risk detection & contextual prompt chips |
 | **Key Vault Modal** | `src/components/ApiKeyModal.tsx` | Secure password-masked Gemini API credentials |
 | **Unit Tests** | `src/tests/` | 16/16 tests passing (storage, budget, timeline, aiService) |
+| **Deployment Manifests** | `vercel.json`, `netlify.toml`, `public/_redirects`, `.github/workflows/ci.yml` | Complete & verified for 1-click static deployment |
 | **Documentation** | `README.md`, `plan.md`, `prd.md`, `trd.md`, `design.md`, `agent.md`, `llm.md` | Comprehensive specifications |
 
 ---

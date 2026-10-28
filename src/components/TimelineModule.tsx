@@ -110,26 +110,26 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
         m.id === editingMilestone.id
           ? {
               ...m,
-              title: milestoneTitle.trim(),
+              title: milestoneTitle.trim().slice(0, 100),
               phase: milestonePhase,
-              timeframe: milestoneTimeframe.trim(),
-              description: milestoneDescription.trim(),
+              timeframe: milestoneTimeframe.trim().slice(0, 50),
+              description: milestoneDescription.trim().slice(0, 500),
               priority: milestonePriority,
-              assignedTo: milestoneAssignedTo.trim() || undefined,
+              assignedTo: milestoneAssignedTo.trim().slice(0, 50) || undefined,
             }
           : m
       );
     } else {
       const newMilestone: TimelineMilestone = {
         id: `milestone-${Date.now()}`,
-        title: milestoneTitle.trim(),
+        title: milestoneTitle.trim().slice(0, 100),
         phase: milestonePhase,
-        timeframe: milestoneTimeframe.trim() || 'Flexible',
-        description: milestoneDescription.trim(),
+        timeframe: milestoneTimeframe.trim().slice(0, 50) || 'Flexible',
+        description: milestoneDescription.trim().slice(0, 500),
         category: 'general',
         completed: false,
         priority: milestonePriority,
-        assignedTo: milestoneAssignedTo.trim() || undefined,
+        assignedTo: milestoneAssignedTo.trim().slice(0, 50) || undefined,
       };
       updatedTimeline = [...event.timeline, newMilestone];
     }
@@ -452,6 +452,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                   type="text"
                   className="form-input"
                   required
+                  maxLength={100}
                   placeholder="e.g. Sommelier Wine Tasting or Ceremony Processional"
                   value={milestoneTitle}
                   onChange={(e) => setMilestoneTitle(e.target.value)}
@@ -508,6 +509,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                     id="milestone-assigned-input"
                     type="text"
                     className="form-input"
+                    maxLength={50}
                     placeholder="e.g. Maid of Honor, Stage Manager"
                     value={milestoneAssignedTo}
                     onChange={(e) => setMilestoneAssignedTo(e.target.value)}
@@ -520,6 +522,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                 <textarea
                   id="milestone-description-input"
                   className="form-textarea"
+                  maxLength={500}
                   placeholder="Key steps, deliverables, location specifics..."
                   value={milestoneDescription}
                   onChange={(e) => setMilestoneDescription(e.target.value)}

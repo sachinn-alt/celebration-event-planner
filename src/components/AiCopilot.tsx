@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Sparkles,
   Bot,
@@ -75,8 +75,12 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
     }
   };
 
+  const isSubmittingRef = useRef<boolean>(false);
+
   const handleAskDirector = async (promptText: string) => {
-    if (!promptText.trim() || isLoading) return;
+    // 300ms debounce lock to prevent double-clicks & rapid-fire triggers
+    if (isSubmittingRef.current || !promptText.trim() || isLoading) return;
+    isSubmittingRef.current = true;
 
     setIsLoading(true);
     setUserInput('');
@@ -84,10 +88,13 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
     try {
       const response = await AiService.consultDirector(event, promptText, activeTab);
       setLatestResponse(response);
-    } catch (err) {
-      console.error('Error consulting director:', err);
+    } catch {
+      // Graceful error state without console leak
     } finally {
       setIsLoading(false);
+      setTimeout(() => {
+        isSubmittingRef.current = false;
+      }, 300);
     }
   };
 

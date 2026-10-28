@@ -65,7 +65,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
         role: speechRole,
         tone: speechTone,
         durationMinutes: speechDuration,
-        anecdotes: speechAnecdote.trim() || undefined,
+        anecdotes: speechAnecdote.trim().slice(0, 500) || undefined,
       });
 
       const newDraft: SpeechDraft = {
@@ -399,6 +399,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                   id="speech-anecdote-input"
                   type="text"
                   className="form-input"
+                  maxLength={500}
                   placeholder="e.g. The crazy road trip to Big Sur, or how they stayed late to help launch our initiative..."
                   value={speechAnecdote}
                   onChange={(e) => setSpeechAnecdote(e.target.value)}

@@ -69,24 +69,24 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
         i.id === editingItem.id
           ? {
               ...i,
-              name: itemName.trim(),
+              name: itemName.trim().slice(0, 100),
               category: itemCategory,
               estimatedCost: estCost,
               actualCost: actCost,
               status: itemStatus,
-              notes: itemNotes.trim(),
+              notes: itemNotes.trim().slice(0, 500),
             }
           : i
       );
     } else {
       const newItem: BudgetItem = {
         id: `item-${Date.now()}`,
-        name: itemName.trim(),
+        name: itemName.trim().slice(0, 100),
         category: itemCategory,
         estimatedCost: estCost,
         actualCost: actCost,
         status: itemStatus,
-        notes: itemNotes.trim(),
+        notes: itemNotes.trim().slice(0, 500),
       };
       updatedItems = [...event.budget.items, newItem];
     }
@@ -528,6 +528,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                   type="text"
                   className="form-input"
                   required
+                  maxLength={100}
                   placeholder="e.g. Barrel Room Rental or Acoustic Duo"
                   value={itemName}
                   onChange={(e) => setItemName(e.target.value)}
@@ -598,6 +599,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                 <textarea
                   id="expense-item-notes"
                   className="form-textarea"
+                  maxLength={500}
                   placeholder="Terms, deadlines, or contact details..."
                   value={itemNotes}
                   onChange={(e) => setItemNotes(e.target.value)}

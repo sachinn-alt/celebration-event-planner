@@ -149,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Archetype Quick Switcher */}
         <div
-          className="no-print"
+          className="no-print archetype-switcher"
           style={{
             display: 'flex',
             alignItems: 'center',

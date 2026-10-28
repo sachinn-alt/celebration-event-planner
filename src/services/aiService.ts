@@ -324,8 +324,8 @@ Let’s raise a glass: To good company, warm laughter, and a night to remember!`
       try {
         const liveResult = await this.callGeminiApi(apiKey, plan, prompt, currentTab);
         return liveResult;
-      } catch (err) {
-        console.warn('Gemini API call failed, falling back to heuristic engine:', err);
+      } catch {
+        // Fall back gracefully to local heuristic engine without leaking API key in logs
       }
     }
 
@@ -389,19 +389,34 @@ Respond strictly in JSON matching this schema:
       },
     };
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 12000);
+    let response: Response | null = null;
+    const maxRetries = 2;
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
 
-    if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status} ${response.statusText}`);
+      try {
+        response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+          signal: controller.signal,
+        });
+      } finally {
+        clearTimeout(timeout);
+      }
+
+      // Exponential backoff retry logic (1s, 2s) on HTTP 429 rate limit responses
+      if (response && response.status === 429 && attempt < maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
+        continue;
+      }
+      break;
+    }
+
+    if (!response || !response.ok) {
+      throw new Error(`Gemini API error: ${response ? `${response.status} ${response.statusText}` : 'Network error'}`);
     }
 
     const data = await response.json();

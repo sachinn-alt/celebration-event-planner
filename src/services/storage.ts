@@ -6,6 +6,7 @@ const STORAGE_KEY_ACTIVE_ID = 'eventiq_active_id_v1';
 const STORAGE_KEY_API_KEY = 'eventiq_gemini_api_key_v1';
 
 const memoryStorage: Record<string, string> = {};
+const memorySessionStorage: Record<string, string> = {};
 
 const safeStorage = {
   getItem: (key: string): string | null => {
@@ -37,9 +38,40 @@ const safeStorage = {
   },
 };
 
+const safeSessionStorage = {
+  getItem: (key: string): string | null => {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      return window.sessionStorage.getItem(key);
+    }
+    return memorySessionStorage[key] || null;
+  },
+  setItem: (key: string, value: string): void => {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.setItem(key, value);
+    } else {
+      memorySessionStorage[key] = value;
+    }
+  },
+  removeItem: (key: string): void => {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.removeItem(key);
+    } else {
+      delete memorySessionStorage[key];
+    }
+  },
+  clear: (): void => {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.clear();
+    } else {
+      Object.keys(memorySessionStorage).forEach((k) => delete memorySessionStorage[k]);
+    }
+  },
+};
+
 export class StorageService {
   static clearMemory(): void {
     safeStorage.clear();
+    safeSessionStorage.clear();
   }
 
   static getEvents(): EventPlan[] {
@@ -50,8 +82,7 @@ export class StorageService {
         return PRESET_EVENTS;
       }
       return JSON.parse(data);
-    } catch (e) {
-      console.warn('Failed to parse events from storage, returning presets:', e);
+    } catch {
       return PRESET_EVENTS;
     }
   }
@@ -59,8 +90,8 @@ export class StorageService {
   static saveEvents(events: EventPlan[]): void {
     try {
       safeStorage.setItem(STORAGE_KEY_EVENTS, JSON.stringify(events));
-    } catch (e) {
-      console.error('Failed to save events to storage:', e);
+    } catch {
+      // Storage unavailable or quota exceeded
     }
   }
 
@@ -98,13 +129,16 @@ export class StorageService {
   }
 
   static getApiKey(): string {
-    return safeStorage.getItem(STORAGE_KEY_API_KEY) || '';
+    return safeSessionStorage.getItem(STORAGE_KEY_API_KEY) || safeStorage.getItem(STORAGE_KEY_API_KEY) || '';
   }
 
   static setApiKey(key: string): void {
     if (key.trim()) {
-      safeStorage.setItem(STORAGE_KEY_API_KEY, key.trim());
+      safeSessionStorage.setItem(STORAGE_KEY_API_KEY, key.trim());
+      // Clean up legacy localStorage if present
+      safeStorage.removeItem(STORAGE_KEY_API_KEY);
     } else {
+      safeSessionStorage.removeItem(STORAGE_KEY_API_KEY);
       safeStorage.removeItem(STORAGE_KEY_API_KEY);
     }
   }
