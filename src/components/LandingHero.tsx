@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Heart, ShieldCheck, CheckCircle2, Star } from 'lucide-react';
+import { ArrowRight, Sparkles, Star } from 'lucide-react';
 import { IconlyAnimation, type IconlyAnimationName } from './IconlyAnimation';
 import type { EventPlan, EventType } from '../types/event';
 
@@ -21,6 +21,30 @@ interface FloatingSticker {
   right?: string;
   delay: number;
 }
+
+interface CelebrationQuote {
+  quote: string;
+  author: string;
+}
+
+const CELEBRATION_QUOTES: CelebrationQuote[] = [
+  { quote: 'The best thing to hold onto in life is each other.', author: 'Audrey Hepburn' },
+  { quote: 'We do not remember days, we remember moments.', author: 'Cesare Pavese' },
+  { quote: 'The more you praise and celebrate your life, the more there is in life to celebrate.', author: 'Oprah Winfrey' },
+  { quote: 'To love and be loved is to feel the sun from both sides.', author: 'David Viscott' },
+  { quote: 'Celebrate what you want to see more of.', author: 'Tom Peters' },
+  { quote: 'When you celebrate with a pure heart, the whole universe dances with you.', author: 'Rumi' },
+  { quote: 'Sometimes you will never know the value of a moment until it becomes a memory.', author: 'Dr. Seuss' },
+  { quote: 'Count your age by friends, not years. Count your life by smiles, not tears.', author: 'John Lennon' },
+  { quote: 'Joy is the simplest form of gratitude.', author: 'Karl Barth' },
+  { quote: 'Let us celebrate the occasion with wine and sweet words.', author: 'Plautus' },
+  { quote: 'May your days be filled with magic, dreams, and joyful memories.', author: 'Neil Gaiman' },
+  { quote: 'Gatherings are the thread that stitches communities into a living tapestry.', author: 'Maya Angelou' },
+  { quote: 'Life is what we make it — celebrate every chapter.', author: 'Grandma Moses' },
+  { quote: 'Every celebration is a renewed promise that love and fellowship endure.', author: 'Ralph Waldo Emerson' },
+  { quote: 'Where there is love, there is life and endless cause to celebrate.', author: 'Mahatma Gandhi' },
+  { quote: 'There are shortcuts to happiness, and celebration is one of the sweetest.', author: 'Vicki Baum' },
+];
 
 const GithubIcon: React.FC<{ size?: number; className?: string }> = ({ size = 15, className }) => (
   <svg
@@ -56,6 +80,17 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
   const weddingEvent = allEvents.find((e) => e.type === 'wedding');
   const birthdayEvent = allEvents.find((e) => e.type === 'birthday');
   const communityEvent = allEvents.find((e) => e.type === 'community');
+
+  // Random quote chosen on every initial page open / reload
+  const [quoteIndex, setQuoteIndex] = useState(() =>
+    Math.floor(Math.random() * CELEBRATION_QUOTES.length)
+  );
+
+  const handleNextQuote = () => {
+    setQuoteIndex((prev) => (prev + 1) % CELEBRATION_QUOTES.length);
+  };
+
+  const currentQuote = CELEBRATION_QUOTES[quoteIndex];
 
   return (
     <div className="landing-hero-container">
@@ -329,28 +364,24 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
         </motion.div>
       </motion.div>
 
-      {/* Feature Highlights Ticker */}
-      <div className="landing-feature-strip">
-        <div className="landing-feature-item">
-          <ShieldCheck size={18} color="var(--color-carbon)" />
-          <span>Contingency Buffer Math Locked</span>
-        </div>
-        <div className="landing-feature-divider">★</div>
-        <div className="landing-feature-item">
-          <CheckCircle2 size={18} color="var(--color-carbon)" />
-          <span>Zero Schedule Collisions</span>
-        </div>
-        <div className="landing-feature-divider">★</div>
-        <div className="landing-feature-item">
-          <Sparkles size={18} color="var(--color-carbon)" />
-          <span>Gemini 1.5 Flash Director</span>
-        </div>
-        <div className="landing-feature-divider">★</div>
-        <div className="landing-feature-item">
-          <Heart size={18} color="var(--color-carbon)" />
-          <span>100% Client-Side Privacy</span>
-        </div>
-      </div>
+      {/* Inspiring Dynamic Celebration Quote Strip in Cursive Typography */}
+      <motion.div
+        className="landing-quote-strip"
+        onClick={handleNextQuote}
+        whileHover={{ scale: 1.015 }}
+        whileTap={{ scale: 0.985 }}
+        title="Click to discover another celebration quote ✨"
+        aria-label="Inspiring Celebration Quote"
+      >
+        <Sparkles size={16} color="var(--color-sunburst)" style={{ flexShrink: 0 }} />
+        <span className="landing-quote-text">
+          “{currentQuote.quote}”
+        </span>
+        <span className="landing-quote-divider">★</span>
+        <span className="landing-quote-author">
+          {currentQuote.author}
+        </span>
+      </motion.div>
     </div>
   );
 };
