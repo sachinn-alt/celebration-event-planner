@@ -213,32 +213,32 @@
    Neo-Brutalist Statement Footer (Yellow Block / Jackphat Style)
    ========================================================================== */
 .brutalist-footer-wrapper {
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-6);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-4);
   width: 100%;
 }
 
 .brutalist-footer-card {
   background: var(--color-sunburst);
-  border: 3px solid #000000;
-  box-shadow: 6px 6px 0px #000000;
+  border: 2.5px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
   border-radius: 0px;
-  padding: 44px 48px 36px;
+  padding: 22px 28px 18px;
   position: relative;
   overflow: hidden;
 }
 
 .brutalist-footer-title {
   font-family: var(--font-display);
-  font-size: clamp(48px, 11vw, 136px);
+  font-size: clamp(28px, 4vw, 46px);
   font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.04em;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #000000;
   user-select: none;
   cursor: pointer;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   transition: transform 0.15s ease;
 }
 
@@ -251,21 +251,21 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 20px;
 }
 
 .brutalist-footer-nav {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 6px;
 }
 
 .brutalist-footer-link {
   font-family: var(--font-sans);
-  font-size: clamp(14px, 1.3vw, 18px);
+  font-size: 12.5px;
   font-weight: 800;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #000000;
   background: none;
@@ -296,7 +296,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 20px;
+  gap: 12px;
   text-align: right;
 }
 
@@ -304,40 +304,40 @@
   background: var(--color-mint-pop);
   color: #000000;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 10px 22px;
+  padding: 6px 14px;
   border: 2px solid #000000;
-  box-shadow: 3px 3px 0px #000000;
+  box-shadow: 2px 2px 0px #000000;
   border-radius: 0px;
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
 }
 
 .brutalist-scroll-top-btn:hover {
-  transform: translate(2px, 2px);
+  transform: translate(1px, 1px);
   box-shadow: 1px 1px 0px #000000;
   background: #4cd494;
 }
 
 .brutalist-scroll-top-btn:active {
-  transform: translate(3px, 3px);
+  transform: translate(2px, 2px);
   box-shadow: 0px 0px 0px #000000;
 }
 
 .brutalist-colophon {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #000000;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .brutalist-colophon-line {
@@ -345,8 +345,8 @@
 }
 
 .brutalist-colophon-signature {
-  margin-top: 4px;
-  font-size: 11px;
+  margin-top: 3px;
+  font-size: 9.5px;
   font-weight: 800;
   letter-spacing: 0.03em;
   color: #000000;
@@ -770,23 +770,24 @@
     justify-content: center;
   }
   .brutalist-footer-card {
-    padding: 28px 20px 24px;
-    box-shadow: 4px 4px 0px #000000;
-    border-width: 2.5px;
+    padding: 16px 16px 14px;
+    box-shadow: 3px 3px 0px #000000;
+    border-width: 2px;
   }
   .brutalist-footer-title {
-    font-size: clamp(38px, 12vw, 68px);
-    margin-bottom: 24px;
+    font-size: clamp(24px, 7vw, 34px);
+    margin-bottom: 12px;
   }
   .brutalist-footer-content {
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 14px;
   }
   .brutalist-footer-meta {
     align-items: flex-start;
     text-align: left;
     width: 100%;
+    gap: 10px;
   }
   .brutalist-scroll-top-btn {
     width: 100%;

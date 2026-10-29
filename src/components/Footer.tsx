@@ -9,7 +9,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({
   onSelectArchetype,
-  onOpenApiKeyModal,
+  onOpenApiKeyModal: _onOpenApiKeyModal,
 }) => {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,16 +74,6 @@ export const Footer: React.FC<FooterProps> = ({
                 <span className="brutalist-footer-link static">MILESTONE BIRTHDAYS</span>
                 <span className="brutalist-footer-link static">COMMUNITY GALAS</span>
               </>
-            )}
-
-            {onOpenApiKeyModal && (
-              <button
-                type="button"
-                className="brutalist-footer-link"
-                onClick={onOpenApiKeyModal}
-              >
-                GEMINI AI COPILOT VAULT
-              </button>
             )}
 
             <a
