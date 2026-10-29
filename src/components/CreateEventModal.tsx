@@ -412,3 +412,4 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
     </AnimatePresence>
   );
 };
+
