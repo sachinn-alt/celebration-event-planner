@@ -158,6 +158,17 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
     return matchesQuery && matchesCategory && matchesStatus;
   });
 
+  const hasActiveFilter =
+    selectedCategoryFilter !== 'all' ||
+    selectedStatusFilter !== 'all' ||
+    searchQuery.trim().length > 0;
+
+  const resetFilters = () => {
+    setSelectedCategoryFilter('all');
+    setSelectedStatusFilter('all');
+    setSearchQuery('');
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       {/* Module Intro & Main Action Bar */}
@@ -325,36 +336,27 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
       </div>
 
       {/* Filter and Search Bar */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 'var(--space-3)',
-        }}
-      >
-        <div style={{ position: 'relative', flex: '1', minWidth: '220px' }}>
+      <div className="filter-toolbar">
+        <div className="filter-search-box">
           <Search
             size={16}
-            style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }}
+            style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }}
           />
           <input
             type="text"
-            className="form-input"
-            style={{ paddingLeft: '36px' }}
+            className="filter-search-input"
             placeholder="Search expenses or notes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
-        <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
+        <div className="filter-pills-group">
           <select
-            className="form-select"
-            style={{ width: 'auto' }}
+            className={`form-select filter-select ${selectedCategoryFilter !== 'all' ? 'active-filter' : ''}`}
             value={selectedCategoryFilter}
             onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+            aria-label="Filter expenses by category"
           >
             <option value="all">All Categories</option>
             {BUDGET_CATEGORIES.map((c) => (
@@ -365,16 +367,29 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
           </select>
 
           <select
-            className="form-select"
-            style={{ width: 'auto' }}
+            className={`form-select filter-select ${selectedStatusFilter !== 'all' ? 'active-filter' : ''}`}
             value={selectedStatusFilter}
             onChange={(e) => setSelectedStatusFilter(e.target.value)}
+            aria-label="Filter expenses by lifecycle status"
           >
             <option value="all">All Statuses</option>
             <option value="estimated">Estimated</option>
             <option value="quoted">Quoted</option>
             <option value="paid">Paid</option>
           </select>
+
+          {hasActiveFilter && (
+            <button
+              type="button"
+              className="btn btn-sm btn-ghost"
+              style={{ height: '42px', padding: '0 14px', fontSize: '12px' }}
+              onClick={resetFilters}
+              title="Reset all filters"
+            >
+              <X size={14} />
+              <span>Reset</span>
+            </button>
+          )}
         </div>
       </div>
 

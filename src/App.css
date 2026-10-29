@@ -358,6 +358,99 @@
 }
 
 /* ==========================================================================
+   Filter Toolbar & Neo-Brutalist Pill Selects
+   ========================================================================== */
+.filter-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.filter-search-box {
+  position: relative;
+  flex: 1 1 240px;
+  min-width: 200px;
+}
+
+.filter-search-input {
+  height: 42px;
+  padding-left: 38px;
+  padding-right: 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border: 1.5px solid var(--color-carbon);
+  box-shadow: 2px 2px 0px #000000;
+  border-radius: var(--radius-full);
+  background: var(--color-paper-white);
+  width: 100%;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: all 0.15s ease;
+}
+
+.filter-search-input:focus {
+  outline: 2px solid var(--color-carbon);
+  outline-offset: 1px;
+}
+
+.filter-pills-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  height: 42px;
+  min-width: 148px;
+  max-width: 220px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-carbon);
+  background-color: var(--color-paper-white);
+  border: 1.5px solid var(--color-carbon);
+  border-radius: var(--radius-full);
+  box-shadow: 2px 2px 0px #000000;
+  padding: 0 36px 0 16px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.filter-select:hover {
+  background-color: var(--color-soft-mist);
+  transform: translateY(-1px);
+  box-shadow: 2px 3px 0px #000000;
+}
+
+.filter-select:focus {
+  outline: 2px solid var(--color-carbon);
+  outline-offset: 1px;
+}
+
+.filter-select.active-filter {
+  background-color: var(--color-sunburst);
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .filter-pills-group {
+    width: 100%;
+  }
+  .filter-select {
+    flex: 1 1 130px;
+    max-width: none;
+    min-width: 120px;
+  }
+}
+
+/* ==========================================================================
    Slush Landing Page — Sculptural Typography & Interactive Sticker Universe
    ========================================================================== */
 .landing-hero-container {
