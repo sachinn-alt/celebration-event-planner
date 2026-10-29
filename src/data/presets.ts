@@ -6,56 +6,56 @@ export const BUDGET_CATEGORIES: BudgetCategoryMeta[] = [
     label: 'Venue & Facilities',
     recommendedPercent: { wedding: 35, birthday: 30, community: 35 },
     icon: 'Building2',
-    color: '#E6C280', // Champagne Gold
+    color: '#4da2ff', // Electric Blue
   },
   {
     key: 'catering',
     label: 'Catering & Beverages',
     recommendedPercent: { wedding: 28, birthday: 32, community: 25 },
     icon: 'UtensilsCrossed',
-    color: '#D48C70', // Rose Terra
+    color: '#ffd731', // Sunburst
   },
   {
     key: 'photo_video',
     label: 'Photo & Video',
     recommendedPercent: { wedding: 12, birthday: 10, community: 8 },
     icon: 'Camera',
-    color: '#88A2D8', // Slate Lavender
+    color: '#e9ccff', // Lavender
   },
   {
     key: 'music_entertainment',
     label: 'Music & Entertainment',
     recommendedPercent: { wedding: 8, birthday: 14, community: 15 },
     icon: 'Music2',
-    color: '#B57CE6', // Electric Violet
+    color: '#5c4ade', // Voltage Violet
   },
   {
     key: 'decor_florals',
     label: 'Décor, Lighting & Florals',
     recommendedPercent: { wedding: 9, birthday: 6, community: 7 },
     icon: 'Flower2',
-    color: '#70B998', // Sage Emerald
+    color: '#55db9c', // Mint Pop
   },
   {
     key: 'attire_beauty',
     label: 'Attire & Styling',
     recommendedPercent: { wedding: 4, birthday: 4, community: 2 },
     icon: 'Sparkles',
-    color: '#F49EB4', // Blushing Quartz
+    color: '#e9ccff', // Lavender
   },
   {
     key: 'favors_invites',
     label: 'Invitations & Guest Favors',
     recommendedPercent: { wedding: 4, birthday: 4, community: 3 },
     icon: 'MailOpen',
-    color: '#E0A868', // Warm Amber
+    color: '#fb4903', // Ember
   },
   {
     key: 'contingency',
     label: 'Contingency Shield (Buffer)',
     recommendedPercent: { wedding: 10, birthday: 8, community: 10 },
     icon: 'ShieldCheck',
-    color: '#4ADE80', // Mint Green
+    color: '#55db9c', // Mint Pop
   },
 ];
 

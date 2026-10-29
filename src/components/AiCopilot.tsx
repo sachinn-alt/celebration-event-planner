@@ -173,11 +173,11 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
           <div
             style={{
               padding: 'var(--space-4)',
-              borderBottom: '1px solid var(--border-subtle)',
+              borderBottom: '1px solid var(--color-carbon)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              background: 'rgba(14, 19, 31, 0.95)',
+              background: 'var(--color-paper-white)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
@@ -185,15 +185,16 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                 style={{
                   width: '36px',
                   height: '36px',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'linear-gradient(135deg, var(--gold-400), var(--gold-600))',
+                  borderRadius: 'var(--radius-full)',
+                  background: 'var(--color-sunburst)',
+                  border: '1px solid var(--color-carbon)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   overflow: 'hidden',
                 }}
               >
-                <IconlyAnimation name="users-ai" size={26} alt="Event Director AI" />
+                <IconlyAnimation name="users-ai" size={24} alt="Event Director AI" />
               </div>
               <div>
                 <h3 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--text-primary)' }}>
@@ -453,8 +454,8 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
           <div
             style={{
               padding: 'var(--space-3)',
-              borderTop: '1px solid var(--border-subtle)',
-              background: 'rgba(14, 19, 31, 0.95)',
+              borderTop: '1px solid var(--color-carbon)',
+              background: 'var(--color-paper-white)',
             }}
           >
             <form

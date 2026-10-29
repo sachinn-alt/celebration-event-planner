@@ -76,53 +76,62 @@ export function App() {
   };
 
   return (
-    <div className="app-container bg-ambient-grid">
-      {/* Executive Header & HUD Deck */}
-      <Header
-        activeEvent={activeEvent}
-        allEvents={events}
-        onSelectEvent={handleSelectEvent}
-        onResetPresets={handleResetPresets}
-        onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
-        hasApiKey={hasApiKey}
-        onImportEvent={handleImportEvent}
-        onOpenCreateModal={() => setIsCreateModalOpen(true)}
-        onDeleteEvent={handleDeleteEvent}
-      />
-
-      {/* Module Navigation Tabs with Aceternity Sliding Pill */}
-      <nav className="nav-tabs-wrapper no-print" aria-label="Main Navigation">
-        <div className="nav-tabs">
-          {NAV_TABS.map((tab) => {
-            const isActive = activeTab === tab.key;
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.key}
-                type="button"
-                className={`nav-tab-btn ${isActive ? 'active' : ''}`}
-                onClick={() => setActiveTab(tab.key)}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTabPill"
-                    className="nav-tab-active-pill"
-                    transition={{ type: 'spring', damping: 26, stiffness: 380 }}
-                  />
-                )}
-                <span style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  {isActive ? (
-                    <IconlyAnimation name={tab.animation} size={18} />
-                  ) : (
-                    <Icon size={16} color="var(--text-secondary)" />
-                  )}
-                  <span>{tab.label}</span>
-                </span>
-              </button>
-            );
-          })}
+    <>
+      {/* Slush Marquee Scrolling Announcement Strip */}
+      <div className="slush-marquee no-print" aria-hidden="true">
+        <div className="slush-marquee-track">
+          <span>EVENTIQ CELEBRATION ATELIER ★ WEDDINGS ★ MILESTONE BIRTHDAYS ★ COMMUNITY GALAS ★ MATHEMATICAL PRECISION ★ REAL-TIME SOLVENCY ★ ZERO BUDGET DRIFT ★</span>
+          <span>EVENTIQ CELEBRATION ATELIER ★ WEDDINGS ★ MILESTONE BIRTHDAYS ★ COMMUNITY GALAS ★ MATHEMATICAL PRECISION ★ REAL-TIME SOLVENCY ★ ZERO BUDGET DRIFT ★</span>
         </div>
-      </nav>
+      </div>
+
+      <div className="app-container">
+        {/* Executive Header & HUD Deck */}
+        <Header
+          activeEvent={activeEvent}
+          allEvents={events}
+          onSelectEvent={handleSelectEvent}
+          onResetPresets={handleResetPresets}
+          onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
+          hasApiKey={hasApiKey}
+          onImportEvent={handleImportEvent}
+          onOpenCreateModal={() => setIsCreateModalOpen(true)}
+          onDeleteEvent={handleDeleteEvent}
+        />
+
+        {/* Module Navigation Tabs with Slush Pill Design */}
+        <nav className="nav-tabs-wrapper no-print" aria-label="Main Navigation">
+          <div className="nav-tabs">
+            {NAV_TABS.map((tab) => {
+              const isActive = activeTab === tab.key;
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  className={`nav-tab-btn ${isActive ? 'active' : ''}`}
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabPill"
+                      className="nav-tab-active-pill"
+                      transition={{ type: 'spring', damping: 26, stiffness: 380 }}
+                    />
+                  )}
+                  <span style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                    {isActive ? (
+                      <IconlyAnimation name={tab.animation} size={18} />
+                    ) : (
+                      <Icon size={16} color="var(--color-carbon)" />
+                    )}
+                    <span>{tab.label}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
 
       {/* Active Module View with Framer Motion Page Transition */}
       <main style={{ minHeight: '520px', position: 'relative' }}>
@@ -185,6 +194,7 @@ export function App() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 

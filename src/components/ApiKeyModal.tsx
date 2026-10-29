@@ -86,7 +86,7 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
       >
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Key size={20} color="var(--gold-400)" />
+            <Key size={20} color="var(--color-carbon)" />
             <h2 id="api-modal-title" className="modal-title">Google Gemini Key Vault</h2>
           </div>
           <button className="btn btn-ghost btn-icon" onClick={onClose} aria-label="Close modal">
@@ -106,7 +106,7 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
               href="https://aistudio.google.com/app/apikey"
               target="_blank"
               rel="noreferrer"
-              style={{ color: 'var(--gold-400)', display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontSize: 'var(--type-caption-xs)' }}
+              style={{ color: 'var(--color-voltage-violet)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontSize: 'var(--type-caption-xs)' }}
             >
               Get Free Gemini Key <ExternalLink size={12} />
             </a>

@@ -155,12 +155,12 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                   style={{
                     width: '36px',
                     height: '36px',
-                    borderRadius: 'var(--radius-md)',
-                    background: 'var(--gold-500)',
+                    borderRadius: 'var(--radius-full)',
+                    background: 'var(--color-sunburst)',
+                    border: '1px solid var(--color-carbon)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: 'var(--shadow-sm)',
                     overflow: 'hidden',
                   }}
                 >
@@ -200,9 +200,9 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                         whileTap={{ scale: 0.98 }}
                         style={{
                           padding: 'var(--space-3)',
-                          borderRadius: 'var(--radius-md)',
-                          background: isSelected ? arch.accent : 'rgba(255, 255, 255, 0.03)',
-                          border: isSelected ? `2px solid ${arch.color}` : '1px solid var(--border-glass)',
+                          borderRadius: 'var(--radius-lg)',
+                          background: isSelected ? arch.accent : 'var(--color-paper-white)',
+                          border: isSelected ? '2px solid var(--color-carbon)' : '1px solid var(--color-carbon)',
                           cursor: 'pointer',
                           transition: 'all 0.15s ease',
                           display: 'flex',

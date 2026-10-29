@@ -119,33 +119,34 @@ export const Header: React.FC<HeaderProps> = ({
             style={{
               width: '40px',
               height: '40px',
-              borderRadius: 'var(--radius-md)',
-              background: 'var(--gold-500)',
+              borderRadius: 'var(--radius-full)',
+              background: 'var(--color-sunburst)',
+              border: '1px solid var(--color-carbon)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: 'var(--shadow-sm)',
               overflow: 'hidden',
             }}
           >
-            <IconlyAnimation name="party" size={28} alt="EventiQ Haute Atelier Celebration" />
+            <IconlyAnimation name="party" size={26} alt="EventiQ Haute Atelier Celebration" />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: '1.45rem',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '1.6rem',
                   fontWeight: 700,
-                  letterSpacing: '0.02em',
-                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.01em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-carbon)',
                 }}
               >
                 EventiQ
               </span>
               <span className="badge badge-gold">Studio</span>
             </div>
-            <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)' }}>
+            <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', fontWeight: 600 }}>
               Celebration & Event Production Atelier
             </p>
           </div>
@@ -157,11 +158,11 @@ export const Header: React.FC<HeaderProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            background: 'rgba(15, 20, 34, 0.9)',
-            border: '1px solid var(--border-glass)',
+            background: 'var(--color-paper-white)',
+            border: '1px solid var(--color-carbon)',
             borderRadius: 'var(--radius-full)',
-            padding: '3px',
-            gap: '3px',
+            padding: '4px',
+            gap: '4px',
           }}
         >
           {allEvents.map((evt) => {
@@ -344,21 +345,21 @@ export const Header: React.FC<HeaderProps> = ({
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: 'var(--space-4)',
-            background: 'rgba(255, 255, 255, 0.03)',
+            background: 'var(--color-paper-white)',
             padding: 'var(--space-2) var(--space-4)',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-full)',
+            border: '1px solid var(--color-carbon)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)' }}>
-            <Calendar size={16} color="var(--gold-400)" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)', fontWeight: 600 }}>
+            <Calendar size={16} color="var(--color-carbon)" />
             <span>{activeEvent.date}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)' }}>
-            <MapPin size={16} color="var(--gold-400)" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)', fontWeight: 600 }}>
+            <MapPin size={16} color="var(--color-carbon)" />
             <span>{activeEvent.location}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)', fontWeight: 600 }}>
             <IconlyAnimation name="users-ai" size={16} alt="Guests" />
             <span>{activeEvent.guestCount} Guests</span>
           </div>
@@ -415,9 +416,10 @@ export const Header: React.FC<HeaderProps> = ({
             <div
               style={{
                 flex: 1,
-                height: '6px',
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '3px',
+                height: '8px',
+                background: 'var(--color-soft-mist)',
+                border: '1px solid var(--color-carbon)',
+                borderRadius: 'var(--radius-full)',
                 overflow: 'hidden',
               }}
             >
@@ -427,14 +429,14 @@ export const Header: React.FC<HeaderProps> = ({
                   height: '100%',
                   background:
                     analytics.percentSpent > 100
-                      ? 'var(--status-danger)'
+                      ? 'var(--color-ember)'
                       : analytics.percentSpent > 90
-                      ? 'var(--status-warning)'
-                      : 'var(--gold-400)',
+                      ? 'var(--color-sunburst)'
+                      : 'var(--color-mint-pop)',
                 }}
               />
             </div>
-            <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)' }}>
+            <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 700 }}>
               {analytics.percentSpent}%
             </span>
           </div>

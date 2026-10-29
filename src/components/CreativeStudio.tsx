@@ -122,11 +122,11 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
         <div
           style={{
             display: 'flex',
-            background: 'rgba(14, 19, 31, 0.8)',
-            border: '1px solid var(--border-glass)',
+            background: 'var(--color-paper-white)',
+            border: '1px solid var(--color-carbon)',
             borderRadius: 'var(--radius-full)',
-            padding: '3px',
-            gap: '2px',
+            padding: '4px',
+            gap: '4px',
           }}
         >
           <button

@@ -1,119 +1,118 @@
 /* ==========================================================================
-   EventiQ App-Level Component Styles
+   EventiQ App-Level Styles — Slush Design Reference
+   Inflatable Sticker Universe on Pastel Paper
    ========================================================================== */
 
+/* Slush Marquee Banner Component */
+.slush-marquee {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  background: var(--color-carbon);
+  color: var(--color-paper-white);
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.032em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-carbon);
+  user-select: none;
+}
+
+.slush-marquee-track {
+  display: inline-flex;
+  animation: slushMarqueeScroll 28s linear infinite;
+  gap: 32px;
+}
+
+.slush-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slushMarqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Navigation Tabs — Slush Pill Bar */
 .nav-tabs-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border-subtle);
+  justify-content: flex-start;
   margin-bottom: var(--space-6);
   overflow-x: auto;
-  gap: var(--space-2);
+  scrollbar-width: none;
+}
+
+.nav-tabs-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-tabs {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  background: var(--color-paper-white);
+  border: 1px solid var(--color-carbon);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  gap: 4px;
 }
 
 .nav-tab-btn {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-5);
+  padding: 8px 18px;
   font-family: var(--font-sans);
   font-size: var(--type-body-sm);
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-weight: 700;
+  letter-spacing: 0.032em;
+  text-transform: uppercase;
+  color: var(--color-carbon);
   background: transparent;
   border: none;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.15s ease;
   white-space: nowrap;
   position: relative;
+  min-height: 38px;
 }
 
 .nav-tab-btn:hover {
-  color: var(--text-primary);
+  background: var(--color-soft-mist);
 }
 
 .nav-tab-btn.active {
-  color: var(--gold-400);
+  color: var(--color-paper-white);
 }
 
 .nav-tab-active-pill {
   position: absolute;
   inset: 0;
-  background: rgba(245, 158, 11, 0.1);
-  border-bottom: 2px solid var(--gold-400);
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: var(--color-carbon);
+  border-radius: var(--radius-full);
   pointer-events: none;
 }
 
-/* Aceternity UI Shimmer Effect */
-.shimmer-btn {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(110deg, #F59E0B 0%, #FDE68A 50%, #F59E0B 100%);
-  background-size: 200% 100%;
-  animation: shimmerSweep 3.5s ease-in-out infinite;
-  color: #090C15 !important;
-  font-weight: 700 !important;
-  border: 1px solid rgba(253, 230, 138, 0.5) !important;
-}
-
-@keyframes shimmerSweep {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Spotlight Card Elevation */
-.spotlight-card {
-  position: relative;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.spotlight-card:hover {
-  border-color: rgba(245, 158, 11, 0.32);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(245, 158, 11, 0.08);
-}
-
-/* Ambient Backdrop Grid (Aceternity inspired) */
-.bg-ambient-grid {
-  background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.05) 0%, transparent 60%),
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
-  background-size: 100% 100%, 28px 28px;
-}
-
-.table-row-hover:hover {
-  background-color: rgba(255, 255, 255, 0.04);
-}
-
-.app-footer {
-  margin-top: auto;
-  padding-top: var(--space-12);
-  padding-bottom: var(--space-6);
-  border-top: 1px solid var(--border-subtle);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  font-size: var(--type-caption-xs);
-  color: var(--text-muted);
-}
-
+/* Slush Action Buttons & Archetype Switcher */
 .archetype-switcher {
+  display: flex;
+  align-items: center;
+  background: var(--color-paper-white) !important;
+  border: 1px solid var(--color-carbon) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 4px !important;
+  gap: 4px !important;
   max-width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 
@@ -121,10 +120,69 @@
   display: none;
 }
 
+.shimmer-btn {
+  background: var(--color-sunburst) !important;
+  color: var(--color-carbon) !important;
+  border: 1px solid var(--color-carbon) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+.shimmer-btn:hover {
+  background: #fadb24 !important;
+}
+
+/* Spotlight & Metric Cards (Paper with Hand-Cut Black Borders) */
+.spotlight-card {
+  background: var(--color-paper-white) !important;
+  border: 1px solid var(--color-carbon) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: none !important;
+  transition: transform 0.15s ease;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Table Rows */
+.table-row-hover:hover {
+  background-color: var(--color-sky-wash) !important;
+}
+
+/* Floating AI Director Button */
+.floating-action-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--color-carbon) !important;
+  color: var(--color-paper-white) !important;
+  border: 1px solid var(--color-carbon) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 12px 20px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.floating-action-btn:hover {
+  background: #222222 !important;
+  transform: scale(1.03);
+}
+
+/* Animated Stickers */
 .iconly-animation {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
 }
 
 .spotlight-card:hover .iconly-animation {
@@ -135,6 +193,23 @@
   transform: scale(1.1);
 }
 
+/* Footer Component */
+.app-footer {
+  margin-top: auto;
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-top: 1px solid var(--color-carbon);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--type-caption-xs);
+  font-weight: 600;
+  color: var(--color-carbon);
+}
+
+/* Responsive Rules */
 @media (max-width: 640px) {
   .hide-on-mobile {
     display: none !important;
@@ -145,12 +220,12 @@
   .archetype-switcher button {
     padding: 6px 10px !important;
     font-size: 0.72rem !important;
-    min-height: 40px;
+    min-height: 36px;
   }
   .nav-tab-btn {
-    padding: var(--space-2) var(--space-3) !important;
-    font-size: var(--type-caption-xs) !important;
-    min-height: 44px;
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    min-height: 36px;
   }
   .modal-content {
     padding: var(--space-4) !important;

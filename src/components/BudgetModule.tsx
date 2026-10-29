@@ -381,15 +381,16 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
         <div
           style={{
             padding: 'var(--space-3) var(--space-4)',
-            background: 'rgba(255, 255, 255, 0.03)',
-            borderBottom: '1px solid var(--border-subtle)',
+            background: 'var(--color-soft-mist)',
+            borderBottom: '1px solid var(--color-carbon)',
             display: 'grid',
             gridTemplateColumns: '2fr 1fr 1fr 1fr 100px',
             gap: 'var(--space-2)',
             fontSize: 'var(--type-caption-xs)',
-            color: 'var(--text-muted)',
+            color: 'var(--color-carbon)',
             textTransform: 'uppercase',
-            fontWeight: 600,
+            fontWeight: 700,
+            letterSpacing: '0.03em',
           }}
         >
           <span>Line Item / Category</span>
@@ -411,12 +412,12 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                 key={item.id}
                 style={{
                   padding: 'var(--space-3) var(--space-4)',
-                  borderBottom: '1px solid var(--border-subtle)',
+                  borderBottom: '1px solid var(--color-soft-mist)',
                   display: 'grid',
                   gridTemplateColumns: '2fr 1fr 1fr 1fr 100px',
                   alignItems: 'center',
                   gap: 'var(--space-2)',
-                  transition: 'background-color 0.2s ease',
+                  transition: 'background-color 0.15s ease',
                 }}
                 className="table-row-hover"
               >
