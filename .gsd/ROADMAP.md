@@ -38,3 +38,12 @@
 - [x] Specification documents: `plan.md`, `prd.md`, `trd.md`, `design.md`, `agent.md`, `llm.md`
 - [x] Repository footprint safe under 10 MB limit
 - [x] Dev server active on `http://localhost:5173/`
+
+### 🟢 Phase 7: Custom Atelier Engine & Motion Polish (Complete)
+- [x] "Create Custom Event" Wizard (`src/components/CreateEventModal.tsx`) with archetype auto-seeding
+- [x] Real-time benchmark allocation preview across Wedding, Birthday, and Gala archetypes
+- [x] Aceternity UI sliding pill navigation tabs (`layoutId="activeTabPill"`)
+- [x] Aceternity shimmer button and ambient grid pattern (`.shimmer-btn`, `.bg-ambient-grid`)
+- [x] Skiper UI & Framer Motion spring physics on modals, drawer, and HUD cards
+- [x] Vitest suite extended to 17/17 passing tests including custom event lifecycle
+- [x] Deployed live to production on Vercel at `https://eventiq-kappa.vercel.app/`

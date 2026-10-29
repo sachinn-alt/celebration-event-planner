@@ -11,7 +11,7 @@
 - **Vite Web App:** Operational (`npm run dev`) at `http://localhost:5173/`
 - **Build Status:** Verified passing (`dist/assets/index.js` ~108 kB gzipped, zero errors)
 - **Lint Status:** 0 warnings, 0 errors via Oxlint
-- **Test Status:** 100% passing (Vitest 16/16 tests passing across 4 test suites in <1.2s)
+- **Test Status:** 100% passing (Vitest 17/17 tests passing across 4 test suites in <1.0s)
 - **Git State:** `main` branch clean and ready
 - **Repo Footprint:** Safe under 10 MB limit
 
@@ -33,6 +33,7 @@
 | **Vendor Pipeline CRM** | `src/components/VendorModule.tsx` | 5-stage Kanban, scorecard, AI interview guides |
 | **Creative Studio** | `src/components/CreativeStudio.tsx` | Palette harmonizer, invite drafter, speech ghostwriter |
 | **AI Copilot Drawer** | `src/components/AiCopilot.tsx` | Proactive risk detection & contextual prompt chips |
+| **Create Event Atelier Modal** | `src/components/CreateEventModal.tsx` | Archetype auto-seeding with benchmark preview & confetti |
 | **Key Vault Modal** | `src/components/ApiKeyModal.tsx` | Secure password-masked Gemini API credentials |
 | **Unit Tests** | `src/tests/` | 16/16 tests passing (storage, budget, timeline, aiService) |
 | **Deployment Manifests** | `vercel.json`, `netlify.toml`, `public/_redirects`, `.github/workflows/ci.yml` | Complete & verified for 1-click static deployment |
