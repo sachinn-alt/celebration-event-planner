@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   Palette,
   FileText,
@@ -200,9 +201,9 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
               }}
             >
               {event.creative.palette.map((swatch, idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className="glass-card glass-card-interactive"
+                  className="glass-card glass-card-interactive spotlight-card"
                   style={{
                     padding: 'var(--space-3)',
                     cursor: 'pointer',
@@ -212,6 +213,8 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                   }}
                   onClick={() => handleCopyHex(swatch.hex)}
                   title="Click to copy HEX code"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <div
                     style={{
@@ -242,7 +245,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                     </div>
                     <code style={{ fontSize: '0.75rem', color: 'var(--gold-400)' }}>{swatch.hex}</code>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   Plus,
   Trash2,
@@ -503,22 +504,38 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
         )}
       </div>
 
-      {/* Add / Edit Expense Item Modal */}
-      {isModalOpen && (
-        <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3 className="modal-title">
-                {editingItem ? 'Edit Expense Item' : 'Add New Expense Item'}
-              </h3>
-              <button
-                type="button"
-                className="btn btn-ghost btn-icon"
-                onClick={() => setIsModalOpen(false)}
-              >
-                <X size={18} />
-              </button>
-            </div>
+      {/* Add / Edit Expense Item Modal with Skiper Spring Motion */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <motion.div
+              className="modal-content"
+              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h3 className="modal-title">
+                  {editingItem ? 'Edit Expense Item' : 'Add New Expense Item'}
+                </h3>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-icon"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  <X size={18} />
+                </button>
+              </div>
 
             <form onSubmit={handleSaveItem}>
               <div className="form-group">
@@ -619,9 +636,11 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+    </AnimatePresence>
+  );
     </div>
   );
 };

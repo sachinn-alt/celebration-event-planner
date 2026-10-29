@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   Sparkles,
   Bot,
@@ -106,53 +107,68 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
 
   return (
     <>
-      {/* Floating Action Button (FAB) in bottom right */}
-      {!isOpen && (
-        <button
-          type="button"
-          className="btn btn-primary ai-fab"
-          style={{
-            position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            borderRadius: 'var(--radius-full)',
-            padding: '10px 18px',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.5)',
-            zIndex: 90,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-          onClick={onToggle}
-          aria-label="Open Planning Director Advisor"
-        >
-          <Sparkles size={16} />
-          <span style={{ fontWeight: 600 }}>Director</span>
-          {criticalCount > 0 && (
-            <span
-              style={{
-                background: '#dc2626',
-                color: '#fff',
-                borderRadius: '50%',
-                width: '20px',
-                height: '20px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 'var(--type-caption-xs)',
-                fontWeight: 700,
-                marginLeft: '4px',
-              }}
-            >
-              {criticalCount}
-            </span>
-          )}
-        </button>
-      )}
+      {/* Floating Action Button (FAB) in bottom right with Motion */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            type="button"
+            className="btn btn-primary ai-fab"
+            style={{
+              position: 'fixed',
+              bottom: '24px',
+              right: '24px',
+              borderRadius: 'var(--radius-full)',
+              padding: '10px 18px',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.5)',
+              zIndex: 90,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+            onClick={onToggle}
+            aria-label="Open Planning Director Advisor"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Sparkles size={16} />
+            <span style={{ fontWeight: 600 }}>Director</span>
+            {criticalCount > 0 && (
+              <span
+                style={{
+                  background: '#dc2626',
+                  color: '#fff',
+                  borderRadius: '50%',
+                  width: '20px',
+                  height: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 'var(--type-caption-xs)',
+                  fontWeight: 700,
+                  marginLeft: '4px',
+                }}
+              >
+                {criticalCount}
+              </span>
+            )}
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-      {/* Slide-in Obsidian Glass Drawer */}
-      {isOpen && (
-        <aside className="drawer-panel" aria-label="AI Event Director Assistant">
+      {/* Slide-in Obsidian Glass Drawer with Skiper / Framer Motion Physics */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.aside
+            className="drawer-panel"
+            aria-label="AI Event Director Assistant"
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+          >
           {/* Drawer Header */}
           <div
             style={{
@@ -466,8 +482,9 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
               </button>
             </form>
           </div>
-        </aside>
+        </motion.aside>
       )}
+    </AnimatePresence>
     </>
   );
 };

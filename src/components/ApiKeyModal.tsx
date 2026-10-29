@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Key, Eye, EyeOff, ShieldCheck, Check, AlertCircle, ExternalLink, X } from 'lucide-react';
 import { StorageService } from '../services/storage';
 
@@ -65,8 +66,24 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="api-modal-title">
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <motion.div
+      className="modal-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="api-modal-title"
+    >
+      <motion.div
+        className="modal-content"
+        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 12 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Key size={20} color="var(--gold-400)" />
@@ -168,12 +185,15 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ isOpen, onClose, onKeySaved }) => {
-  if (!isOpen) return null;
-  return <ApiKeyModalDialog onClose={onClose} onKeySaved={onKeySaved} />;
+  return (
+    <AnimatePresence>
+      {isOpen && <ApiKeyModalDialog onClose={onClose} onKeySaved={onKeySaved} />}
+    </AnimatePresence>
+  );
 };

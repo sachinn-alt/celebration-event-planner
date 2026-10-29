@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   Plus,
   Trash2,
@@ -452,84 +453,117 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
         })}
       </div>
 
-      {/* AI Interview Guides Modal */}
-      {activeInterviewGuide && (
-        <div className="modal-backdrop" onClick={() => setActiveInterviewGuide(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <HelpCircle size={20} color="var(--gold-400)" />
-                <h3 className="modal-title">AI Vetting Guide: {activeInterviewGuide.name}</h3>
-              </div>
-              <button
-                type="button"
-                className="btn btn-ghost btn-icon"
-                onClick={() => setActiveInterviewGuide(null)}
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            <p style={{ fontSize: 'var(--type-body-sm)', marginBottom: 'var(--space-4)' }}>
-              Tailored interview and negotiation questions for <strong>{activeInterviewGuide.category.toUpperCase()}</strong> vendors. 
-              Copy any question to your email or interview notes:
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-              {activeInterviewGuide.aiSuggestedQuestions.map((q, idx) => (
-                <div
-                  key={idx}
-                  className="glass-card"
-                  style={{
-                    padding: 'var(--space-3)',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: 'var(--space-3)',
-                  }}
-                >
-                  <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--text-primary)', flex: 1 }}>
-                    "{q}"
-                  </p>
-                  <button
-                    type="button"
-                    className="btn btn-ghost btn-sm"
-                    onClick={() => copyQuestion(q, idx)}
-                    title="Copy question text"
-                  >
-                    {copiedQuestionIdx === idx ? <Check size={14} color="var(--status-success)" /> : <Copy size={14} />}
-                  </button>
+      {/* AI Interview Guides Modal with Spring Motion */}
+      <AnimatePresence>
+        {activeInterviewGuide && (
+          <motion.div
+            className="modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveInterviewGuide(null)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <motion.div
+              className="modal-content"
+              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <HelpCircle size={20} color="var(--gold-400)" />
+                  <h3 className="modal-title">AI Vetting Guide: {activeInterviewGuide.name}</h3>
                 </div>
-              ))}
-            </div>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-icon"
+                  onClick={() => setActiveInterviewGuide(null)}
+                >
+                  <X size={18} />
+                </button>
+              </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-4)' }}>
-              <button
-                type="button"
-                className="btn btn-primary btn-sm"
-                onClick={() => setActiveInterviewGuide(null)}
-              >
-                Done
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+              <p style={{ fontSize: 'var(--type-body-sm)', marginBottom: 'var(--space-4)' }}>
+                Tailored interview and negotiation questions for <strong>{activeInterviewGuide.category.toUpperCase()}</strong> vendors. 
+                Copy any question to your email or interview notes:
+              </p>
 
-      {/* Add / Edit Vendor Modal */}
-      {isModalOpen && (
-        <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3 className="modal-title">{editingVendor ? 'Edit Vendor' : 'Add New Vendor'}</h3>
-              <button
-                type="button"
-                className="btn btn-ghost btn-icon"
-                onClick={() => setIsModalOpen(false)}
-              >
-                <X size={18} />
-              </button>
-            </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+                {activeInterviewGuide.aiSuggestedQuestions.map((q, idx) => (
+                  <div
+                    key={idx}
+                    className="glass-card"
+                    style={{
+                      padding: 'var(--space-3)',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: 'var(--space-3)',
+                    }}
+                  >
+                    <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--text-primary)', flex: 1 }}>
+                      "{q}"
+                    </p>
+                    <button
+                      type="button"
+                      className="btn btn-ghost btn-sm"
+                      onClick={() => copyQuestion(q, idx)}
+                      title="Copy question text"
+                    >
+                      {copiedQuestionIdx === idx ? <Check size={14} color="var(--status-success)" /> : <Copy size={14} />}
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-4)' }}>
+                <button
+                  type="button"
+                  className="btn btn-primary btn-sm"
+                  onClick={() => setActiveInterviewGuide(null)}
+                >
+                  Done
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Add / Edit Vendor Modal with Skiper Spring Motion */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <motion.div
+              className="modal-content"
+              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h3 className="modal-title">{editingVendor ? 'Edit Vendor' : 'Add New Vendor'}</h3>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-icon"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  <X size={18} />
+                </button>
+              </div>
 
             <form onSubmit={handleSaveVendor}>
               <div className="form-group">
@@ -691,9 +725,11 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+    </AnimatePresence>
+  );
     </div>
   );
 };

@@ -29,21 +29,67 @@
   color: var(--text-secondary);
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   white-space: nowrap;
+  position: relative;
 }
 
 .nav-tab-btn:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.03);
 }
 
 .nav-tab-btn.active {
   color: var(--gold-400);
-  border-bottom-color: var(--gold-400);
-  background: rgba(245, 158, 11, 0.05);
+}
+
+.nav-tab-active-pill {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 158, 11, 0.1);
+  border-bottom: 2px solid var(--gold-400);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  pointer-events: none;
+}
+
+/* Aceternity UI Shimmer Effect */
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(110deg, #F59E0B 0%, #FDE68A 50%, #F59E0B 100%);
+  background-size: 200% 100%;
+  animation: shimmerSweep 3.5s ease-in-out infinite;
+  color: #090C15 !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(253, 230, 138, 0.5) !important;
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Spotlight Card Elevation */
+.spotlight-card {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.spotlight-card:hover {
+  border-color: rgba(245, 158, 11, 0.32);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(245, 158, 11, 0.08);
+}
+
+/* Ambient Backdrop Grid (Aceternity inspired) */
+.bg-ambient-grid {
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.05) 0%, transparent 60%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
+  background-size: 100% 100%, 28px 28px;
 }
 
 .table-row-hover:hover {

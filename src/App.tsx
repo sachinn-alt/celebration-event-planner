@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { DollarSign, Clock, Users, Sparkles, Heart } from 'lucide-react';
 import type { EventPlan } from './types/event';
 import { StorageService } from './services/storage';
@@ -9,9 +10,17 @@ import { VendorModule } from './components/VendorModule';
 import { CreativeStudio } from './components/CreativeStudio';
 import { AiCopilot } from './components/AiCopilot';
 import { ApiKeyModal } from './components/ApiKeyModal';
+import { CreateEventModal } from './components/CreateEventModal';
 import './App.css';
 
 type ActiveTab = 'budget' | 'timeline' | 'vendors' | 'creative';
+
+const NAV_TABS = [
+  { key: 'budget' as ActiveTab, label: 'Budget & Contingency', icon: DollarSign },
+  { key: 'timeline' as ActiveTab, label: 'Timeline & Run-of-Show', icon: Clock },
+  { key: 'vendors' as ActiveTab, label: 'Vendor Pipeline CRM', icon: Users },
+  { key: 'creative' as ActiveTab, label: 'Creative Atelier', icon: Sparkles },
+];
 
 export function App() {
   const [events, setEvents] = useState<EventPlan[]>(() => StorageService.getEvents());
@@ -19,6 +28,7 @@ export function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('budget');
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [hasApiKey, setHasApiKey] = useState<boolean>(() => Boolean(StorageService.getApiKey()));
 
   const activeEvent = events.find((e) => e.id === activeEventId) || events[0];
@@ -34,6 +44,18 @@ export function App() {
   const handleUpdateEvent = (updated: EventPlan) => {
     const updatedEvents = StorageService.updateEvent(updated);
     setEvents([...updatedEvents]);
+  };
+
+  const handleEventCreated = (newEvent: EventPlan) => {
+    const updatedEvents = StorageService.updateEvent(newEvent);
+    setEvents([...updatedEvents]);
+    setActiveEventId(newEvent.id);
+  };
+
+  const handleDeleteEvent = (id: string) => {
+    const remainingEvents = StorageService.deleteEvent(id);
+    setEvents([...remainingEvents]);
+    setActiveEventId(StorageService.getActiveEventId());
   };
 
   const handleResetPresets = () => {
@@ -53,7 +75,7 @@ export function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container bg-ambient-grid">
       {/* Executive Header & HUD Deck */}
       <Header
         activeEvent={activeEvent}
@@ -63,60 +85,64 @@ export function App() {
         onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
         hasApiKey={hasApiKey}
         onImportEvent={handleImportEvent}
+        onOpenCreateModal={() => setIsCreateModalOpen(true)}
+        onDeleteEvent={handleDeleteEvent}
       />
 
-      {/* Module Navigation Tabs */}
+      {/* Module Navigation Tabs with Aceternity Sliding Pill */}
       <nav className="nav-tabs-wrapper no-print" aria-label="Main Navigation">
         <div className="nav-tabs">
-          <button
-            type="button"
-            className={`nav-tab-btn ${activeTab === 'budget' ? 'active' : ''}`}
-            onClick={() => setActiveTab('budget')}
-          >
-            <DollarSign size={16} />
-            <span>Budget & Contingency</span>
-          </button>
-          <button
-            type="button"
-            className={`nav-tab-btn ${activeTab === 'timeline' ? 'active' : ''}`}
-            onClick={() => setActiveTab('timeline')}
-          >
-            <Clock size={16} />
-            <span>Timeline & Run-of-Show</span>
-          </button>
-          <button
-            type="button"
-            className={`nav-tab-btn ${activeTab === 'vendors' ? 'active' : ''}`}
-            onClick={() => setActiveTab('vendors')}
-          >
-            <Users size={16} />
-            <span>Vendor Pipeline CRM</span>
-          </button>
-          <button
-            type="button"
-            className={`nav-tab-btn ${activeTab === 'creative' ? 'active' : ''}`}
-            onClick={() => setActiveTab('creative')}
-          >
-            <Sparkles size={16} />
-            <span>Creative Atelier</span>
-          </button>
+          {NAV_TABS.map((tab) => {
+            const isActive = activeTab === tab.key;
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                className={`nav-tab-btn ${isActive ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab.key)}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabPill"
+                    className="nav-tab-active-pill"
+                    transition={{ type: 'spring', damping: 26, stiffness: 380 }}
+                  />
+                )}
+                <span style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <Icon size={16} color={isActive ? 'var(--gold-400)' : 'var(--text-secondary)'} />
+                  <span>{tab.label}</span>
+                </span>
+              </button>
+            );
+          })}
         </div>
       </nav>
 
-      {/* Active Module View */}
-      <main style={{ minHeight: '500px' }}>
-        {activeTab === 'budget' && (
-          <BudgetModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-        )}
-        {activeTab === 'timeline' && (
-          <TimelineModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-        )}
-        {activeTab === 'vendors' && (
-          <VendorModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-        )}
-        {activeTab === 'creative' && (
-          <CreativeStudio event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-        )}
+      {/* Active Module View with Framer Motion Page Transition */}
+      <main style={{ minHeight: '520px', position: 'relative' }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${activeEvent.id}-${activeTab}`}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            {activeTab === 'budget' && (
+              <BudgetModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+            )}
+            {activeTab === 'timeline' && (
+              <TimelineModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+            )}
+            {activeTab === 'vendors' && (
+              <VendorModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+            )}
+            {activeTab === 'creative' && (
+              <CreativeStudio event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Persistent AI Event Director Drawer & Copilot */}
@@ -127,6 +153,13 @@ export function App() {
         onToggle={() => setIsCopilotOpen(!isCopilotOpen)}
         onOpenKeyVault={() => setIsApiKeyModalOpen(true)}
         hasApiKey={hasApiKey}
+      />
+
+      {/* Create Event Atelier Modal */}
+      <CreateEventModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onEventCreated={handleEventCreated}
       />
 
       {/* Google Gemini Key Vault Modal */}

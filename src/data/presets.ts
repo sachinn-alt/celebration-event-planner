@@ -760,3 +760,316 @@ export const PRESET_EVENTS: EventPlan[] = [
     },
   },
 ];
+
+export interface CreateCustomEventParams {
+  title: string;
+  type: 'wedding' | 'birthday' | 'community';
+  date: string;
+  location: string;
+  guestCount: number;
+  totalBudget: number;
+  currency: string;
+  contingencyPercent?: number;
+  vibe?: string;
+}
+
+export function createCustomEventPlan(params: CreateCustomEventParams): EventPlan {
+  const {
+    title,
+    type,
+    date,
+    location,
+    guestCount = 100,
+    totalBudget = 25000,
+    currency = '$',
+    contingencyPercent = 10,
+    vibe = 'Celebratory, bespoke, and memorable',
+  } = params;
+
+  const id = `custom-${Date.now()}`;
+  const total = Math.max(1000, totalBudget);
+
+  const venueCost = Math.round(total * (type === 'wedding' ? 0.35 : type === 'birthday' ? 0.28 : 0.32));
+  const cateringCost = Math.round(total * (type === 'wedding' ? 0.28 : type === 'birthday' ? 0.30 : 0.25));
+  const photoCost = Math.round(total * (type === 'wedding' ? 0.11 : type === 'birthday' ? 0.10 : 0.08));
+  const musicCost = Math.round(total * (type === 'wedding' ? 0.08 : type === 'birthday' ? 0.14 : 0.15));
+  const decorCost = Math.round(total * (type === 'wedding' ? 0.09 : type === 'birthday' ? 0.08 : 0.08));
+
+  const items = [
+    {
+      id: `${id}-b-1`,
+      category: 'venue' as const,
+      name: `${type === 'wedding' ? 'Ceremony & Reception Venue' : type === 'birthday' ? 'Private Lounge & Terrace' : 'Auditorium / Civic Hall'} Rental`,
+      estimatedCost: venueCost,
+      actualCost: venueCost,
+      status: 'quoted' as const,
+      notes: `Secured for ${location}. Inclusions: tables, seating & sound system.`,
+    },
+    {
+      id: `${id}-b-2`,
+      category: 'catering' as const,
+      name: `${type === 'wedding' ? 'Plated Dinner & Sommelier Wine Pairing' : type === 'birthday' ? 'Gourmet Canapés & Craft Cocktails' : 'Banquet Catering & Beverage Stations'}`,
+      estimatedCost: cateringCost,
+      actualCost: Math.round(cateringCost * 0.95),
+      status: 'estimated' as const,
+      notes: `Headcount estimated for ${guestCount} attendees.`,
+    },
+    {
+      id: `${id}-b-3`,
+      category: 'photo_video' as const,
+      name: `${type === 'wedding' ? 'Full-Day Photography & Curated Album' : 'Event Photography & Candid Moments'}`,
+      estimatedCost: photoCost,
+      actualCost: photoCost,
+      status: 'quoted' as const,
+      notes: 'Includes high-res digital gallery and teaser previews.',
+    },
+    {
+      id: `${id}-b-4`,
+      category: 'music_entertainment' as const,
+      name: `${type === 'wedding' ? 'Ceremony Acoustic Duo & Reception DJ' : type === 'birthday' ? 'Live DJ & Dynamic Stage Lighting' : 'AV Production, Mic Array & Performer Sound'}`,
+      estimatedCost: musicCost,
+      actualCost: musicCost,
+      status: 'estimated' as const,
+      notes: 'Wireless microphones & soundcheck included.',
+    },
+    {
+      id: `${id}-b-5`,
+      category: 'decor_florals' as const,
+      name: `${type === 'wedding' ? 'Ceremony Arch, Florals & Ambient Lighting' : 'Custom Backdrops, Balloon Installations & Mood Lighting'}`,
+      estimatedCost: decorCost,
+      actualCost: decorCost,
+      status: 'estimated' as const,
+      notes: `Curated to match ${vibe}.`,
+    },
+  ];
+
+  return {
+    id,
+    type,
+    title,
+    date,
+    location,
+    guestCount,
+    vibe,
+    lastModified: new Date().toISOString(),
+    aiContextNotes: [
+      `Custom celebration atelier created on ${new Date().toLocaleDateString()}.`,
+      `Archetype: ${type.toUpperCase()}, Guest Count: ${guestCount}, Total Budget: ${currency}${total.toLocaleString()}.`,
+      `Contingency Shield locked at ${contingencyPercent}%.`,
+    ],
+    budget: {
+      totalBudget: total,
+      currency,
+      contingencyPercent,
+      items,
+    },
+    timeline: [
+      {
+        id: `${id}-t-1`,
+        phase: 'macro_months',
+        timeframe: '6–12 Months Out',
+        title: 'Lock Primary Venue & Master Date',
+        description: `Confirm reservation deposit at ${location} and lock celebration schedule.`,
+        category: 'venue',
+        completed: true,
+        completedAt: new Date().toISOString(),
+        priority: 'critical',
+      },
+      {
+        id: `${id}-t-2`,
+        phase: 'macro_months',
+        timeframe: '6–12 Months Out',
+        title: 'Frame Guest List & Send Save-the-Dates',
+        description: `Compile addresses for ~${guestCount} guests and dispatch announcements.`,
+        category: 'general',
+        completed: false,
+        priority: 'critical',
+      },
+      {
+        id: `${id}-t-3`,
+        phase: 'macro_weeks',
+        timeframe: '2–8 Weeks Out',
+        title: 'Catering Tasting & Dietary Headcounts',
+        description: 'Finalize menu selections and collect dietary preferences.',
+        category: 'catering',
+        completed: false,
+        priority: 'normal',
+      },
+      {
+        id: `${id}-t-4`,
+        phase: 'countdown_days',
+        timeframe: '1–7 Days Out',
+        title: 'Final Vendor Confirmation Calls & Cue Sheet',
+        description: 'Verify arrival times, parking access, and master timeline.',
+        category: 'general',
+        completed: false,
+        priority: 'critical',
+      },
+      {
+        id: `${id}-t-5`,
+        phase: 'day_of',
+        timeframe: '10:00 - 12:00',
+        title: 'Vendor Load-In & Audio/Visual Soundcheck',
+        description: 'Stage team, caterers, and musicians arrive for initial setup.',
+        category: 'general',
+        completed: false,
+        priority: 'critical',
+      },
+      {
+        id: `${id}-t-6`,
+        phase: 'day_of',
+        timeframe: '14:00 - 15:30',
+        title: 'Core VIP Arrival & Portrait Session',
+        description: 'Private moments and key group portraits before guest arrival.',
+        category: 'photo_video',
+        completed: false,
+        priority: 'normal',
+      },
+      {
+        id: `${id}-t-7`,
+        phase: 'day_of',
+        timeframe: '16:00 - 17:00',
+        title: 'Guest Arrival & Welcome Refreshments',
+        description: 'Doors open, ambient music playing, welcome beverage service.',
+        category: 'catering',
+        completed: false,
+        priority: 'normal',
+      },
+      {
+        id: `${id}-t-8`,
+        phase: 'day_of',
+        timeframe: '17:00 - 18:00',
+        title: `${type === 'wedding' ? 'Main Ceremony' : type === 'birthday' ? 'Official Welcome & Birthday Kickoff' : 'Opening Plenary & Welcome Keynotes'}`,
+        description: 'Central milestone of the celebration.',
+        category: 'general',
+        completed: false,
+        priority: 'critical',
+      },
+      {
+        id: `${id}-t-9`,
+        phase: 'day_of',
+        timeframe: '18:00 - 20:00',
+        title: 'Celebration Dinner & Toasts',
+        description: 'Main meal service accompanied by toasts and keynote speeches.',
+        category: 'catering',
+        completed: false,
+        priority: 'critical',
+      },
+      {
+        id: `${id}-t-10`,
+        phase: 'day_of',
+        timeframe: '20:00 - 23:00',
+        title: 'Party, Dancing & Evening Entertainment',
+        description: 'Open dance floor, dessert bar, and interactive celebration.',
+        category: 'music_entertainment',
+        completed: false,
+        priority: 'normal',
+      },
+    ],
+    vendors: [
+      {
+        id: `${id}-v-1`,
+        name: `${location} Management`,
+        category: 'venue',
+        contactPerson: 'Event Director',
+        status: 'quote_received',
+        quotedAmount: venueCost,
+        depositPaid: 0,
+        rating: 5,
+        notes: 'Coordinates facility curfew and load-in permits.',
+        aiSuggestedQuestions: [
+          'What is your rain or weather backup plan and notice window?',
+          'What are the exact load-in and cleanup curfew hours for vendors?',
+        ],
+      },
+      {
+        id: `${id}-v-2`,
+        name: 'Artisan Culinary Group',
+        category: 'catering',
+        contactPerson: 'Lead Banquet Chef',
+        status: 'contacted',
+        quotedAmount: cateringCost,
+        depositPaid: 0,
+        rating: 5,
+        notes: 'Dietary allergen management and bar service package.',
+        aiSuggestedQuestions: [
+          'How do you manage severe allergies and dietary split on event day?',
+          'What is your staff-to-guest ratio for dinner service?',
+        ],
+      },
+      {
+        id: `${id}-v-3`,
+        name: 'Lumina Visual Media',
+        category: 'photo_video',
+        status: 'wishlist',
+        quotedAmount: photoCost,
+        depositPaid: 0,
+        rating: 5,
+        notes: 'Editorial style photography.',
+        aiSuggestedQuestions: [
+          'What is your turnaround time for curated teaser previews?',
+          'Do you bring backup camera bodies and dual memory card slots?',
+        ],
+      },
+    ],
+    creative: {
+      themeName: `${title} Atelier`,
+      tagline: vibe,
+      moodDescription: `Refined palette and bespoke styling custom-tailored for ${title} (${vibe}).`,
+      palette: [
+        { name: 'Champagne Gold', hex: '#E6C280', role: 'primary' },
+        { name: 'Deep Obsidian', hex: '#0F1422', role: 'secondary' },
+        { name: 'Rose Terra', hex: '#D48C70', role: 'accent' },
+        { name: 'Warm Cream', hex: '#FDFBF7', role: 'neutral' },
+        { name: 'Emerald Sage', hex: '#70B998', role: 'accent' },
+      ],
+      invitationDrafts: [
+        {
+          id: `${id}-inv-1`,
+          style: 'classic_formal',
+          headline: `Join Us to Celebrate ${title}`,
+          body: `We warmly invite you to share in the joy of ${title} on ${date} at ${location}.`,
+          rsvpNote: 'Kindly reply by one month prior.',
+        },
+        {
+          id: `${id}-inv-2`,
+          style: 'modern_playful',
+          headline: `Save the Date! ${title}`,
+          body: `An unforgettable celebration is brewing! Meet us at ${location} on ${date} for an incredible evening.`,
+          rsvpNote: 'RSVP online to lock your spot!',
+        },
+      ],
+      speechDrafts: [
+        {
+          id: `${id}-sp-1`,
+          role: type === 'wedding' ? 'Maid of Honor' : type === 'birthday' ? 'Best Friend / Host' : 'Lead Organizer',
+          title: `A Toast to ${title}`,
+          tone: 'emotional',
+          speakingTimeMin: 3,
+          content: `To everyone gathered here tonight at ${location}: looking around this room, you can feel the incredible love and energy celebrating ${title}... [Pause for applause] Let's raise our glasses to many more memories together!`,
+          deliveryTips: [
+            'Make warm eye contact with the guest of honor.',
+            'Smile and raise your glass high at the conclusion.',
+          ],
+        },
+      ],
+      activities: [
+        {
+          id: `${id}-act-1`,
+          title: 'Guest Memory Capsule & Audio Guestbook',
+          category: 'crowd_interactive',
+          description: 'Guests record short voice notes and slip written memories into a vintage keepsake chest.',
+          durationMin: 60,
+        },
+      ],
+      signatureDrinks: [
+        {
+          name: 'The Golden Gala Fizz',
+          type: 'cocktail',
+          description: 'Sparkling Prosecco, elderflower liqueur, fresh lemon twist, and a gold leaf garnish.',
+          ingredients: ['Prosecco Superiore', 'St-Germain Elderflower', 'Meyer Lemon Cordial', 'Gold Flake'],
+        },
+      ],
+    },
+  };
+}

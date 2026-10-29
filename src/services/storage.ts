@@ -122,6 +122,17 @@ export class StorageService {
     return events;
   }
 
+  static deleteEvent(id: string): EventPlan[] {
+    let events = this.getEvents();
+    if (events.length <= 1) return events;
+    events = events.filter((e) => e.id !== id);
+    this.saveEvents(events);
+    if (this.getActiveEventId() === id) {
+      this.setActiveEventId(events[0].id);
+    }
+    return events;
+  }
+
   static resetToPresets(): EventPlan[] {
     this.saveEvents(PRESET_EVENTS);
     this.setActiveEventId(PRESET_EVENTS[0].id);

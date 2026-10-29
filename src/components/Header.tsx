@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { motion } from 'motion/react';
 import {
   Sparkles,
   Calendar,
@@ -13,6 +14,8 @@ import {
   Clock,
   DollarSign,
   TrendingUp,
+  Plus,
+  Trash2,
 } from 'lucide-react';
 import type { EventPlan, EventType } from '../types/event';
 import { StorageService } from '../services/storage';
@@ -25,6 +28,8 @@ interface HeaderProps {
   onOpenApiKeyModal: () => void;
   hasApiKey: boolean;
   onImportEvent: (imported: EventPlan) => void;
+  onOpenCreateModal: () => void;
+  onDeleteEvent?: (id: string) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -35,6 +40,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenApiKeyModal,
   hasApiKey,
   onImportEvent,
+  onOpenCreateModal,
+  onDeleteEvent,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -147,7 +154,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Archetype Quick Switcher */}
+        {/* Archetype Quick Switcher & New Event Trigger */}
         <div
           className="no-print archetype-switcher"
           style={{
@@ -157,30 +164,85 @@ export const Header: React.FC<HeaderProps> = ({
             border: '1px solid var(--border-glass)',
             borderRadius: 'var(--radius-full)',
             padding: '3px',
-            gap: '2px',
+            gap: '3px',
           }}
         >
           {allEvents.map((evt) => {
             const isActive = evt.id === activeEvent.id;
+            const isCustom = !['preset-wedding-autumn', 'preset-birthday-40th', 'preset-community-gala'].includes(evt.id);
+            const label = isCustom
+              ? evt.title.length > 16
+                ? `${evt.title.slice(0, 14)}…`
+                : evt.title
+              : evt.type === 'wedding'
+              ? 'Wedding'
+              : evt.type === 'birthday'
+              ? 'Milestone Birthday'
+              : 'Community Gala';
+
             return (
-              <button
-                key={evt.id}
-                type="button"
-                className={`btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`}
-                style={{
-                  borderRadius: 'var(--radius-full)',
-                  padding: '6px 14px',
-                  fontSize: 'var(--type-caption-xs)',
-                  fontWeight: 600,
-                }}
-                onClick={() => onSelectEvent(evt.id)}
-              >
-                {evt.type === 'wedding' && 'Wedding'}
-                {evt.type === 'birthday' && 'Milestone Birthday'}
-                {evt.type === 'community' && 'Community Gala'}
-              </button>
+              <div key={evt.id} style={{ display: 'inline-flex', alignItems: 'center', position: 'relative' }}>
+                <motion.button
+                  type="button"
+                  className={`btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`}
+                  style={{
+                    borderRadius: 'var(--radius-full)',
+                    padding: isCustom ? '6px 24px 6px 12px' : '6px 14px',
+                    fontSize: 'var(--type-caption-xs)',
+                    fontWeight: 600,
+                  }}
+                  onClick={() => onSelectEvent(evt.id)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {label}
+                </motion.button>
+                {isCustom && onDeleteEvent && allEvents.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (window.confirm(`Delete custom event "${evt.title}"?`)) {
+                        onDeleteEvent(evt.id);
+                      }
+                    }}
+                    style={{
+                      position: 'absolute',
+                      right: '6px',
+                      background: 'transparent',
+                      border: 'none',
+                      color: isActive ? 'var(--text-inverse)' : 'var(--text-muted)',
+                      cursor: 'pointer',
+                      padding: '2px',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    title="Delete custom celebration"
+                  >
+                    <Trash2 size={11} />
+                  </button>
+                )}
+              </div>
             );
           })}
+
+          <motion.button
+            type="button"
+            className="btn btn-sm shimmer-btn"
+            style={{
+              borderRadius: 'var(--radius-full)',
+              padding: '6px 13px',
+              fontSize: 'var(--type-caption-xs)',
+              gap: '4px',
+            }}
+            onClick={onOpenCreateModal}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            title="Create Custom Celebration Atelier"
+          >
+            <Plus size={13} />
+            <span>New</span>
+          </motion.button>
         </div>
 
         {/* Global Toolbar: Key Vault, Import, Export, Print, Reset */}
@@ -315,7 +377,11 @@ export const Header: React.FC<HeaderProps> = ({
         }}
       >
         {/* Metric 1: Total Budget */}
-        <div className="glass-card glass-card-sm" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <motion.div
+          className="glass-card glass-card-sm spotlight-card"
+          style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
+          whileHover={{ y: -3, transition: { duration: 0.15 } }}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Total Budget
@@ -330,10 +396,14 @@ export const Header: React.FC<HeaderProps> = ({
             Per guest: {activeEvent.budget.currency}
             {analytics.perGuestSpend.toLocaleString()}
           </span>
-        </div>
+        </motion.div>
 
         {/* Metric 2: Allocated Spend */}
-        <div className="glass-card glass-card-sm" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <motion.div
+          className="glass-card glass-card-sm spotlight-card"
+          style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
+          whileHover={{ y: -3, transition: { duration: 0.15 } }}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Allocated Spend
@@ -371,10 +441,14 @@ export const Header: React.FC<HeaderProps> = ({
               {analytics.percentSpent}%
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Metric 3: Solvency Remaining */}
-        <div className="glass-card glass-card-sm" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <motion.div
+          className="glass-card glass-card-sm spotlight-card"
+          style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
+          whileHover={{ y: -3, transition: { duration: 0.15 } }}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Available Buffer
@@ -396,10 +470,14 @@ export const Header: React.FC<HeaderProps> = ({
           <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)' }}>
             {analytics.remaining >= 0 ? 'Unallocated capacity' : 'Requires line item reduction'}
           </span>
-        </div>
+        </motion.div>
 
         {/* Metric 4: Contingency Shield */}
-        <div className="glass-card glass-card-sm" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <motion.div
+          className="glass-card glass-card-sm spotlight-card"
+          style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
+          whileHover={{ y: -3, transition: { duration: 0.15 } }}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Contingency Shield
@@ -413,10 +491,14 @@ export const Header: React.FC<HeaderProps> = ({
           <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)' }}>
             {activeEvent.budget.contingencyPercent}% locked emergency pool
           </span>
-        </div>
+        </motion.div>
 
         {/* Metric 5: Countdown & Milestone Horizon */}
-        <div className="glass-card glass-card-sm" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <motion.div
+          className="glass-card glass-card-sm spotlight-card"
+          style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
+          whileHover={{ y: -3, transition: { duration: 0.15 } }}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Countdown
@@ -429,7 +511,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-secondary)' }}>
             {timelineAnalytics.completed} of {timelineAnalytics.total} milestones ({timelineAnalytics.percent}%)
           </span>
-        </div>
+        </motion.div>
       </div>
     </header>
   );

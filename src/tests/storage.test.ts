@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { StorageService } from '../services/storage';
-import { PRESET_EVENTS } from '../data/presets';
+import { PRESET_EVENTS, createCustomEventPlan } from '../data/presets';
 
 describe('StorageService and Budget Analytics', () => {
   beforeEach(() => {
@@ -36,5 +36,36 @@ describe('StorageService and Budget Analytics', () => {
       Math.round((timelineAnalytics.completed / timelineAnalytics.total) * 100)
     );
     expect(timelineAnalytics.dayOfCues.length).toBeGreaterThan(0);
+  });
+
+  it('should create custom event plan with proper archetype benchmark scaling', () => {
+    const custom = createCustomEventPlan({
+      title: "Maya & Ethan's Coastal Wedding",
+      type: 'wedding',
+      date: '2027-06-20',
+      location: 'Big Sur, CA',
+      guestCount: 150,
+      totalBudget: 50000,
+      currency: '$',
+      contingencyPercent: 12,
+      vibe: 'Ocean breeze & acoustic strings',
+    });
+
+    expect(custom.id).toContain('custom-');
+    expect(custom.title).toBe("Maya & Ethan's Coastal Wedding");
+    expect(custom.budget.totalBudget).toBe(50000);
+    expect(custom.budget.contingencyPercent).toBe(12);
+    expect(custom.budget.items.length).toBeGreaterThanOrEqual(5);
+    expect(custom.timeline.length).toBeGreaterThanOrEqual(8);
+    expect(custom.vendors.length).toBeGreaterThanOrEqual(3);
+    expect(custom.creative.palette.length).toBe(5);
+
+    // Save and retrieve
+    const updatedEvents = StorageService.updateEvent(custom);
+    expect(updatedEvents.find((e) => e.id === custom.id)).toBeDefined();
+
+    // Delete custom event
+    const afterDelete = StorageService.deleteEvent(custom.id);
+    expect(afterDelete.find((e) => e.id === custom.id)).toBeUndefined();
   });
 });
