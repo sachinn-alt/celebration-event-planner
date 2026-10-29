@@ -14,6 +14,7 @@ import { CreateEventModal } from './components/CreateEventModal';
 import { IconlyAnimation } from './components/IconlyAnimation';
 import { LandingHero } from './components/LandingHero';
 import { Footer } from './components/Footer';
+import FluxLines from './components/FluxLines';
 import './App.css';
 
 type ActiveTab = 'budget' | 'timeline' | 'vendors' | 'creative';
@@ -88,8 +89,35 @@ export function App() {
 
   return (
     <>
+      {/* React Bits: Animated Magnetic FluxLines Background */}
+      <div
+        className="flux-lines-background no-print"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          overflow: 'hidden',
+        }}
+        aria-hidden="true"
+      >
+        <FluxLines
+          colors={['#4da2ff', '#55db9c', '#ffd731', '#e9ccff', '#fb4903']}
+          lightMode={true}
+          transparent={true}
+          opacity={0.45}
+          speed={0.35}
+          scale={1.3}
+          lineWidth={1.2}
+          mouseInteraction={true}
+          mouseStrength={1.2}
+          mouseRadius={0.35}
+          clickSwirl={true}
+        />
+      </div>
+
       {/* Slush Marquee Scrolling Announcement Strip */}
-      <div className="slush-marquee no-print" aria-hidden="true">
+      <div className="slush-marquee no-print" aria-hidden="true" style={{ position: 'relative', zIndex: 10 }}>
         <div className="slush-marquee-track">
           <span>EVENTIQ CELEBRATION ATELIER ★ WEDDINGS ★ MILESTONE BIRTHDAYS ★ COMMUNITY GALAS ★ MATHEMATICAL PRECISION ★ REAL-TIME SOLVENCY ★ ZERO BUDGET DRIFT ★</span>
           <span>EVENTIQ CELEBRATION ATELIER ★ WEDDINGS ★ MILESTONE BIRTHDAYS ★ COMMUNITY GALAS ★ MATHEMATICAL PRECISION ★ REAL-TIME SOLVENCY ★ ZERO BUDGET DRIFT ★</span>
