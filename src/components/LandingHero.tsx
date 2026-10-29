@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Heart, ShieldCheck, CheckCircle2, Key } from 'lucide-react';
+import { ArrowRight, Sparkles, Heart, ShieldCheck, CheckCircle2, Star } from 'lucide-react';
 import { IconlyAnimation, type IconlyAnimationName } from './IconlyAnimation';
 import type { EventPlan, EventType } from '../types/event';
 
@@ -8,10 +8,6 @@ interface LandingHeroProps {
   onEnterApp: () => void;
   onSelectArchetype: (type: EventType) => void;
   allEvents: EventPlan[];
-  onOpenApiKeyModal?: () => void;
-  hasApiKey?: boolean;
-  onToggleFx?: () => void;
-  isFxEnabled?: boolean;
 }
 
 interface FloatingSticker {
@@ -26,9 +22,26 @@ interface FloatingSticker {
   delay: number;
 }
 
+const GithubIcon: React.FC<{ size?: number; className?: string }> = ({ size = 15, className }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+    />
+  </svg>
+);
+
 const FLOATING_STICKERS: FloatingSticker[] = [
-  { name: 'party', label: 'Celebration', bg: 'var(--color-sunburst)', rotation: -10, top: '10%', left: '3%', delay: 0 },
-  { name: 'dollar-up', label: 'Budget Shield', bg: 'var(--color-sky-wash)', rotation: 12, top: '9%', right: '4%', delay: 0.1 },
+  { name: 'party', label: 'Celebration', bg: 'var(--color-sunburst)', rotation: -10, top: '12%', left: '3%', delay: 0 },
+  { name: 'dollar-up', label: 'Budget Shield', bg: 'var(--color-sky-wash)', rotation: 12, top: '11%', right: '4%', delay: 0.1 },
   { name: 'users-ai', label: 'AI Director', bg: 'var(--color-lavender)', rotation: -8, bottom: '26%', left: '2%', delay: 0.2 },
   { name: 'heart', label: 'Vows & Love', bg: 'var(--color-lavender)', rotation: 14, bottom: '22%', right: '3%', delay: 0.3 },
   { name: 'star-medal', label: 'Milestones', bg: 'var(--color-mint-pop)', rotation: -12, top: '48%', right: '2%', delay: 0.15 },
@@ -39,10 +52,6 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
   onEnterApp,
   onSelectArchetype,
   allEvents,
-  onOpenApiKeyModal,
-  hasApiKey = false,
-  onToggleFx,
-  isFxEnabled = true,
 }) => {
   const weddingEvent = allEvents.find((e) => e.type === 'wedding');
   const birthdayEvent = allEvents.find((e) => e.type === 'birthday');
@@ -50,55 +59,78 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
 
   return (
     <div className="landing-hero-container">
-      {/* Landing Navigation Top Deck */}
-      <header className="landing-top-deck">
-        <div className="landing-deck-brand">
-          <div className="landing-deck-logo">
-            <IconlyAnimation name="party" size={26} alt="EventiQ" />
+      {/* Dynamic Island Floating Pill Navbar (Supaste Reference) */}
+      <nav className="supaste-island-navbar" aria-label="Landing Navigation">
+        {/* Brand Identity */}
+        <div
+          className="island-brand"
+          onClick={onEnterApp}
+          title="Enter EventiQ Studio Atelier"
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="island-logo-box">
+            <IconlyAnimation name="party" size={18} alt="EventiQ" />
           </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="landing-deck-title">EventiQ</span>
-              <span className="badge badge-gold">Haute Atelier</span>
-            </div>
-            <p className="landing-deck-subtitle">Intelligent Celebration Architecture</p>
-          </div>
+          <span className="island-brand-name">EventiQ</span>
         </div>
 
-        <div className="landing-deck-actions">
-          {onToggleFx && (
-            <button
-              type="button"
-              className="btn btn-secondary landing-deck-key-btn"
-              onClick={onToggleFx}
-              title={isFxEnabled ? 'Switch to Eco Mode (Disables background shader for maximum battery & speed)' : 'Enable Ambient Flux FX'}
-            >
-              <span>{isFxEnabled ? '⚡ FX: ON' : '🌱 ECO'}</span>
-            </button>
-          )}
-
-          {onOpenApiKeyModal && (
-            <button
-              type="button"
-              className="btn btn-secondary landing-deck-key-btn"
-              onClick={onOpenApiKeyModal}
-              title={hasApiKey ? 'Google Gemini API Active' : 'Configure Gemini API Key'}
-            >
-              <Key size={14} />
-              <span>{hasApiKey ? 'Gemini AI Active' : 'API Key Vault'}</span>
-            </button>
-          )}
-
+        {/* Center Navigation Links */}
+        <div className="island-nav-links">
           <button
             type="button"
-            className="btn btn-primary landing-deck-cta-btn"
+            className="island-nav-link"
+            onClick={() => onSelectArchetype('wedding')}
+          >
+            Weddings
+          </button>
+          <button
+            type="button"
+            className="island-nav-link"
+            onClick={() => onSelectArchetype('birthday')}
+          >
+            Milestones
+          </button>
+          <button
+            type="button"
+            className="island-nav-link"
+            onClick={() => onSelectArchetype('community')}
+          >
+            Galas
+          </button>
+          <button
+            type="button"
+            className="island-nav-link"
             onClick={onEnterApp}
           >
-            <span>Enter Studio</span>
-            <ArrowRight size={15} />
+            Studio
           </button>
         </div>
-      </header>
+
+        {/* Right Action Cluster: GitHub & Star Repo Button */}
+        <div className="island-actions">
+          <a
+            href="https://github.com/sachinn-alt/celebration-event-planner"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="island-github-link"
+            title="View sachinn-alt on GitHub"
+          >
+            <GithubIcon size={16} />
+            <span className="hide-on-mobile">GitHub</span>
+          </a>
+
+          <a
+            href="https://github.com/sachinn-alt/celebration-event-planner"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="island-star-btn"
+            title="Star celebration-event-planner on GitHub"
+          >
+            <Star size={13} fill="#ffd731" color="#000000" />
+            <span>Star Repo</span>
+          </a>
+        </div>
+      </nav>
 
       {/* Floating Interactive Animated Sticker Field (Draggable & Responsive) */}
       <div className="landing-sticker-field">

@@ -371,76 +371,133 @@
   justify-content: space-between;
 }
 
-.landing-top-deck {
+/* ==========================================================================
+   Supaste-Inspired Floating Dynamic Island Pill Navbar
+   ========================================================================== */
+.supaste-island-navbar {
+  margin: 0 auto 36px;
+  width: max-content;
+  max-width: 96%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 12px 24px;
-  background: var(--color-paper-white);
-  border: 1px solid var(--color-carbon);
+  gap: 24px;
+  background: #000000;
+  color: #ffffff;
+  padding: 6px 8px 6px 14px;
   border-radius: var(--radius-full);
-  margin-bottom: 28px;
-  position: relative;
-  z-index: 20;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 }
 
-.landing-deck-brand {
+.supaste-island-navbar:hover {
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.5);
+}
+
+.island-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  user-select: none;
 }
 
-.landing-deck-logo {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-full);
+.island-logo-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
   background: var(--color-sunburst);
-  border: 1px solid var(--color-carbon);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-.landing-deck-title {
+.island-brand-name {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 15px;
   font-weight: 800;
   letter-spacing: -0.01em;
+  color: #ffffff;
   text-transform: uppercase;
-  color: var(--color-carbon);
   line-height: 1;
 }
 
-.landing-deck-subtitle {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin: 2px 0 0;
-}
-
-.landing-deck-actions {
+.island-nav-links {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
-.landing-deck-key-btn {
-  border-radius: var(--radius-full) !important;
-  padding: 7px 16px !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
+.island-nav-link {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.76);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: color 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
 }
 
-.landing-deck-cta-btn {
-  border-radius: var(--radius-full) !important;
-  padding: 9px 20px !important;
-  font-size: 13px !important;
-  font-weight: 800 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.03em !important;
+.island-nav-link:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.island-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.island-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+}
+
+.island-github-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.island-star-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #000000 !important;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.island-star-btn:hover {
+  background: var(--color-sunburst);
+  transform: scale(1.04);
 }
 
 .landing-sticker-field {
@@ -693,9 +750,15 @@
   .landing-hero-container {
     padding: 16px 16px 40px;
   }
-  .landing-top-deck {
-    border-radius: var(--radius-lg);
-    padding: 12px 16px;
+  .supaste-island-navbar {
+    width: calc(100% - 16px);
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 6px 5px 10px;
+    top: 8px;
+  }
+  .island-nav-links {
+    display: none;
   }
   .landing-cta-cluster {
     flex-direction: column;

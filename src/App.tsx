@@ -164,10 +164,6 @@ export function App() {
               onEnterApp={() => setViewMode('studio')}
               onSelectArchetype={handleSelectArchetype}
               allEvents={events}
-              onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
-              hasApiKey={hasApiKey}
-              onToggleFx={handleToggleFx}
-              isFxEnabled={isFxEnabled}
             />
             <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
               <Footer
