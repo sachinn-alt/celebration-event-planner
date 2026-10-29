@@ -13,6 +13,7 @@ import { ApiKeyModal } from './components/ApiKeyModal';
 import { CreateEventModal } from './components/CreateEventModal';
 import { IconlyAnimation } from './components/IconlyAnimation';
 import { LandingHero } from './components/LandingHero';
+import { Footer } from './components/Footer';
 import './App.css';
 
 type ActiveTab = 'budget' | 'timeline' | 'vendors' | 'creative';
@@ -111,6 +112,12 @@ export function App() {
               onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
               hasApiKey={hasApiKey}
             />
+            <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+              <Footer
+                onSelectArchetype={handleSelectArchetype}
+                onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
+              />
+            </div>
           </motion.div>
         ) : (
           <motion.div
@@ -205,16 +212,11 @@ export function App() {
               hasApiKey={hasApiKey}
             />
 
-            {/* Footer */}
-            <footer className="app-footer">
-              <div>
-                <strong>EventiQ Haute Atelier</strong> — Production-grade celebration planning for Weddings, Milestone Birthdays, and Community Galas.
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span>Crafted with mathematical precision & aesthetic care</span>
-                <IconlyAnimation name="heart" size={16} alt="Crafted with care" />
-              </div>
-            </footer>
+            {/* Neo-Brutalist Statement Footer */}
+            <Footer
+              onSelectArchetype={handleSelectArchetype}
+              onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
+            />
           </motion.div>
         )}
       </AnimatePresence>

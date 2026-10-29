@@ -210,6 +210,154 @@
 }
 
 /* ==========================================================================
+   Neo-Brutalist Statement Footer (Yellow Block / Jackphat Style)
+   ========================================================================== */
+.brutalist-footer-wrapper {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-6);
+  width: 100%;
+}
+
+.brutalist-footer-card {
+  background: var(--color-sunburst);
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0px #000000;
+  border-radius: 0px;
+  padding: 44px 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.brutalist-footer-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 11vw, 136px);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #000000;
+  user-select: none;
+  cursor: pointer;
+  margin-bottom: 32px;
+  transition: transform 0.15s ease;
+}
+
+.brutalist-footer-title:hover {
+  transform: translateY(-2px);
+}
+
+.brutalist-footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.brutalist-footer-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.brutalist-footer-link {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #000000;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  transition: transform 0.12s ease;
+}
+
+.brutalist-footer-link:hover {
+  transform: translateX(4px);
+}
+
+.brutalist-footer-link.static {
+  cursor: default;
+}
+
+.brutalist-footer-link.static:hover {
+  transform: none;
+}
+
+.brutalist-footer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  text-align: right;
+}
+
+.brutalist-scroll-top-btn {
+  background: var(--color-mint-pop);
+  color: #000000;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.brutalist-scroll-top-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000;
+  background: #4cd494;
+}
+
+.brutalist-scroll-top-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px #000000;
+}
+
+.brutalist-colophon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1.4;
+}
+
+.brutalist-colophon-line {
+  color: #000000;
+}
+
+.brutalist-colophon-signature {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #000000;
+  transition: opacity 0.15s ease;
+}
+
+.brutalist-colophon-signature:hover {
+  opacity: 0.8;
+}
+
+/* ==========================================================================
    Slush Landing Page — Sculptural Typography & Interactive Sticker Universe
    ========================================================================== */
 .landing-hero-container {
@@ -548,6 +696,29 @@
   .landing-secondary-cta {
     width: 100%;
     justify-content: center;
+  }
+  .brutalist-footer-card {
+    padding: 28px 20px 24px;
+    box-shadow: 4px 4px 0px #000000;
+    border-width: 2.5px;
+  }
+  .brutalist-footer-title {
+    font-size: clamp(38px, 12vw, 68px);
+    margin-bottom: 24px;
+  }
+  .brutalist-footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .brutalist-footer-meta {
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+  }
+  .brutalist-scroll-top-btn {
+    width: 100%;
+    text-align: center;
   }
 }
 
