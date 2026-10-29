@@ -247,7 +247,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                         {swatch.role}
                       </div>
                     </div>
-                    <code style={{ fontSize: '0.75rem', color: 'var(--gold-400)' }}>{swatch.hex}</code>
+                    <code style={{ fontSize: '0.75rem', color: 'var(--color-carbon)', background: 'var(--color-soft-mist)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--color-carbon)', fontWeight: 700 }}>{swatch.hex}</code>
                   </div>
                 </motion.div>
               ))}
@@ -293,7 +293,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                       title="Copy invitation text"
                     >
                       {copiedInviteId === draft.id ? (
-                        <span style={{ color: 'var(--status-success)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        <span style={{ color: 'var(--color-carbon)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                           <Check size={14} /> Copied
                         </span>
                       ) : (
@@ -323,10 +323,11 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
 
                 <div
                   style={{
-                    borderTop: '1px solid var(--border-subtle)',
+                    borderTop: '1px solid var(--color-carbon)',
                     paddingTop: '8px',
                     fontSize: 'var(--type-caption-xs)',
-                    color: 'var(--gold-400)',
+                    color: 'var(--color-carbon)',
+                    fontWeight: 600,
                   }}
                 >
                   <strong>RSVP Note:</strong> {draft.rsvpNote}
@@ -341,8 +342,8 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
       {activeTab === 'speeches' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
           {/* Interactive Generator Box */}
-          <div className="glass-card" style={{ border: '1px solid var(--gold-glow)' }}>
-            <h3 style={{ fontSize: 'var(--type-heading-md)', marginBottom: 'var(--space-3)', color: 'var(--gold-400)' }}>
+          <div className="glass-card" style={{ border: '1px solid var(--color-carbon)', background: 'var(--color-paper-white)' }}>
+            <h3 style={{ fontSize: 'var(--type-heading-md)', marginBottom: 'var(--space-3)', color: 'var(--color-carbon)' }}>
               Ghostwrite a Bespoke Speech or Toast
             </h3>
             <form onSubmit={handleGenerateSpeech}>
@@ -449,20 +450,21 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                   </button>
                 </div>
 
-                <h4 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--text-primary)' }}>
+                <h4 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--color-carbon)' }}>
                   {draft.title}
                 </h4>
 
                 <div
                   style={{
-                    background: 'rgba(14, 19, 31, 0.7)',
+                    background: 'var(--color-sky-wash)',
                     padding: 'var(--space-4)',
                     borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border-subtle)',
+                    border: '1px solid var(--color-carbon)',
                     whiteSpace: 'pre-line',
                     fontSize: 'var(--type-body-sm)',
                     lineHeight: '1.7',
-                    color: 'var(--text-primary)',
+                    color: 'var(--color-carbon)',
+                    fontWeight: 500,
                   }}
                 >
                   {draft.content}
@@ -472,16 +474,16 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                 {draft.deliveryTips && draft.deliveryTips.length > 0 && (
                   <div
                     style={{
-                      background: 'rgba(245, 158, 11, 0.05)',
+                      background: 'var(--color-sunburst)',
                       padding: 'var(--space-3)',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid rgba(245, 158, 11, 0.2)',
+                      border: '1px solid var(--color-carbon)',
                     }}
                   >
-                    <span style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 700, color: 'var(--gold-400)' }}>
+                    <span style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 800, color: 'var(--color-carbon)' }}>
                       PRO DELIVERY CUES:
                     </span>
-                    <ul style={{ paddingLeft: '18px', marginTop: '4px', fontSize: 'var(--type-caption-xs)', color: 'var(--text-secondary)' }}>
+                    <ul style={{ paddingLeft: '18px', marginTop: '4px', fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 600 }}>
                       {draft.deliveryTips.map((tip, idx) => (
                         <li key={idx}>{tip}</li>
                       ))}
@@ -499,8 +501,8 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-5)' }}>
           {/* Signature Drinks */}
           <div>
-            <h3 style={{ fontSize: 'var(--type-heading-md)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Wine size={18} color="var(--gold-400)" />
+            <h3 style={{ fontSize: 'var(--type-heading-md)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-carbon)' }}>
+              <Wine size={18} color="var(--color-carbon)" />
               <span>Signature Themed Cocktails & Mocktails</span>
             </h3>
 

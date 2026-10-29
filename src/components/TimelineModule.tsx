@@ -243,22 +243,23 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
         <div
           className="glass-card"
           style={{
-            borderColor: 'rgba(239, 68, 68, 0.4)',
-            background: 'rgba(220, 38, 38, 0.1)',
+            borderColor: 'var(--color-carbon)',
+            background: 'var(--color-sunburst)',
+            border: '2px solid var(--color-carbon)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-3)' }}>
-            <AlertTriangle size={22} color="var(--status-danger)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <AlertTriangle size={22} color="var(--color-carbon)" style={{ flexShrink: 0, marginTop: '2px' }} />
             <div>
-              <h3 style={{ fontSize: 'var(--type-heading-md)', color: '#fca5a5', marginBottom: '4px' }}>
+              <h3 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--color-carbon)', marginBottom: '4px' }}>
                 {conflicts.length} Schedule Friction Points Detected
               </h3>
               {conflicts.map((c, i) => (
                 <div key={i} style={{ marginBottom: '8px' }}>
-                  <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--text-primary)' }}>
+                  <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--color-carbon)', fontWeight: 700 }}>
                     • {c.message}
                   </p>
-                  <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--gold-400)', marginLeft: '12px' }}>
+                  <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 700, marginLeft: '12px' }}>
                     💡 Suggested Fix: {c.suggestion}
                   </p>
                 </div>
@@ -358,9 +359,9 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                   aria-label={milestone.completed ? 'Mark incomplete' : 'Mark completed'}
                 >
                   {milestone.completed ? (
-                    <CheckCircle2 size={22} color="var(--status-success)" />
+                    <CheckCircle2 size={22} color="var(--color-carbon)" fill="var(--color-mint-pop)" />
                   ) : (
-                    <Circle size={22} color="var(--text-muted)" />
+                    <Circle size={22} color="var(--color-carbon)" />
                   )}
                 </button>
 
@@ -368,8 +369,8 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
                     <span
                       style={{
-                        fontWeight: 600,
-                        color: 'var(--text-primary)',
+                        fontWeight: 700,
+                        color: 'var(--color-carbon)',
                         fontSize: 'var(--type-body-base)',
                         textDecoration: milestone.completed ? 'line-through' : 'none',
                       }}

@@ -207,7 +207,8 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
           style={{
             height: '14px',
             width: '100%',
-            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            backgroundColor: 'var(--color-soft-mist)',
+            border: '1px solid var(--color-carbon)',
             borderRadius: 'var(--radius-full)',
             overflow: 'hidden',
             display: 'flex',
@@ -288,21 +289,22 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
             style={{
               width: '40px',
               height: '40px',
-              borderRadius: 'var(--radius-md)',
-              background: 'rgba(74, 222, 128, 0.15)',
+              borderRadius: 'var(--radius-full)',
+              background: 'var(--color-mint-pop)',
+              border: '1px solid var(--color-carbon)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <ShieldCheck size={22} color="var(--cat-contingency)" />
+            <ShieldCheck size={22} color="var(--color-carbon)" />
           </div>
           <div>
-            <h3 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--text-primary)' }}>
+            <h3 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--color-carbon)' }}>
               Contingency Shield ({event.budget.contingencyPercent}%) — {event.budget.currency}
               {analytics.contingencyReserved.toLocaleString()}
             </h3>
-            <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--text-secondary)' }}>
+            <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--text-secondary)', fontWeight: 500 }}>
               Dedicated emergency reserve protecting against surprise vendor fees, overtime, and weather adjustments.
             </p>
           </div>

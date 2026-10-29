@@ -255,8 +255,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onOpenApiKeyModal}
             title={hasApiKey ? 'Google Gemini 1.5 Flash Connected' : 'Running Offline Heuristic Engine'}
           >
-            <Key size={14} color={hasApiKey ? 'var(--status-success)' : 'var(--gold-400)'} />
-            <span>{hasApiKey ? 'Gemini 1.5 Active' : 'Offline Engine'}</span>
+            <Key size={14} color="var(--color-carbon)" />
+            <span style={{ color: 'var(--color-carbon)', fontWeight: 700 }}>{hasApiKey ? 'Gemini 1.5 Active' : 'Offline Engine'}</span>
           </button>
 
           <button

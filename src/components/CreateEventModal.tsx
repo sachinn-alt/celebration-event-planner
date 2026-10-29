@@ -260,7 +260,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label className="form-label" htmlFor="new-event-date">
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Calendar size={13} color="var(--gold-400)" /> Event Date
+                      <Calendar size={13} color="var(--color-carbon)" /> Event Date
                     </span>
                   </label>
                   <input
@@ -275,7 +275,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label className="form-label" htmlFor="new-event-location">
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <MapPin size={13} color="var(--gold-400)" /> Venue / City
+                      <MapPin size={13} color="var(--color-carbon)" /> Venue / City
                     </span>
                   </label>
                   <input
@@ -313,7 +313,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label className="form-label" htmlFor="new-event-budget">
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <DollarSign size={13} color="var(--gold-400)" /> Total Budget
+                      <DollarSign size={13} color="var(--color-carbon)" /> Total Budget
                     </span>
                   </label>
                   <input
@@ -329,7 +329,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label className="form-label" htmlFor="new-event-guests">
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Users size={13} color="var(--gold-400)" /> Guests
+                      <Users size={13} color="var(--color-carbon)" /> Guests
                     </span>
                   </label>
                   <input
@@ -360,37 +360,37 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
               {/* Real-time Benchmark Breakdown HUD Preview */}
               <div
                 style={{
-                  background: 'rgba(15, 20, 34, 0.8)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-md)',
+                  background: 'var(--color-sky-wash)',
+                  border: '1px solid var(--color-carbon)',
+                  borderRadius: 'var(--radius-lg)',
                   padding: 'var(--space-3)',
                   marginTop: 'var(--space-2)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Auto-Calculated Allocation Plan
                   </span>
-                  <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--gold-400)' }}>
+                  <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 700 }}>
                     ~{currency}{Math.round(totalBudget / Math.max(1, guestCount))} per guest
                   </span>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 'var(--space-2)', fontSize: 'var(--type-caption-xs)' }}>
                   <div>
-                    <span style={{ color: 'var(--text-muted)' }}>Venue:</span>{' '}
-                    <strong style={{ color: 'var(--text-primary)' }}>{currency}{previewBenchmarks.venue.toLocaleString()}</strong>
+                    <span style={{ color: '#333333', fontWeight: 600 }}>Venue:</span>{' '}
+                    <strong style={{ color: 'var(--color-carbon)' }}>{currency}{previewBenchmarks.venue.toLocaleString()}</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--text-muted)' }}>Catering:</span>{' '}
-                    <strong style={{ color: 'var(--text-primary)' }}>{currency}{previewBenchmarks.catering.toLocaleString()}</strong>
+                    <span style={{ color: '#333333', fontWeight: 600 }}>Catering:</span>{' '}
+                    <strong style={{ color: 'var(--color-carbon)' }}>{currency}{previewBenchmarks.catering.toLocaleString()}</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--text-muted)' }}>Photo/AV:</span>{' '}
-                    <strong style={{ color: 'var(--text-primary)' }}>{currency}{(previewBenchmarks.photo + previewBenchmarks.music).toLocaleString()}</strong>
+                    <span style={{ color: '#333333', fontWeight: 600 }}>Photo/AV:</span>{' '}
+                    <strong style={{ color: 'var(--color-carbon)' }}>{currency}{(previewBenchmarks.photo + previewBenchmarks.music).toLocaleString()}</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--status-success)' }}>Shield:</span>{' '}
-                    <strong style={{ color: 'var(--status-success)' }}>{currency}{previewBenchmarks.contingency.toLocaleString()}</strong>
+                    <span style={{ color: '#057a44', fontWeight: 700 }}>Shield:</span>{' '}
+                    <strong style={{ color: '#057a44', fontWeight: 800 }}>{currency}{previewBenchmarks.contingency.toLocaleString()}</strong>
                   </div>
                 </div>
               </div>

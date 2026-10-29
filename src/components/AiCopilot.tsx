@@ -209,7 +209,8 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                     padding: 0,
                     cursor: 'pointer',
                     fontSize: 'var(--type-caption-xs)',
-                    color: hasApiKey ? 'var(--status-success)' : 'var(--gold-400)',
+                    color: hasApiKey ? '#057a44' : 'var(--color-voltage-violet)',
+                    fontWeight: 700,
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
@@ -373,8 +374,8 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                     onClick={() => handleAskDirector(chip)}
                     disabled={isLoading}
                   >
-                    <ChevronRight size={14} color="var(--gold-400)" style={{ flexShrink: 0 }} />
-                    <span>{chip}</span>
+                    <ChevronRight size={14} color="var(--color-carbon)" style={{ flexShrink: 0 }} />
+                    <span style={{ color: 'var(--color-carbon)', fontWeight: 600 }}>{chip}</span>
                   </button>
                 ))}
               </div>
@@ -386,16 +387,16 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                 style={{
                   padding: 'var(--space-4)',
                   borderRadius: 'var(--radius-lg)',
-                  background: 'rgba(245, 158, 11, 0.05)',
-                  border: '1px solid rgba(245, 158, 11, 0.25)',
+                  background: 'var(--color-sky-wash)',
+                  border: '1px solid var(--color-carbon)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 'var(--space-3)',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Sparkles size={16} color="var(--gold-400)" />
-                  <span style={{ fontWeight: 700, fontSize: 'var(--type-body-sm)', color: 'var(--gold-400)' }}>
+                  <Sparkles size={16} color="var(--color-carbon)" />
+                  <span style={{ fontWeight: 800, fontSize: 'var(--type-body-sm)', color: 'var(--color-carbon)', textTransform: 'uppercase' }}>
                     Director Recommendation
                   </span>
                 </div>
@@ -404,7 +405,8 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                   style={{
                     fontSize: 'var(--type-body-sm)',
                     lineHeight: '1.6',
-                    color: 'var(--text-primary)',
+                    color: 'var(--color-carbon)',
+                    fontWeight: 500,
                   }}
                 >
                   {latestResponse.strategicAdvice}
@@ -414,14 +416,14 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                 {latestResponse.draftContent && (
                   <div
                     style={{
-                      background: 'rgba(14, 19, 31, 0.85)',
+                      background: 'var(--color-paper-white)',
                       padding: 'var(--space-3)',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--border-subtle)',
+                      border: '1px solid var(--color-carbon)',
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                      <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--gold-400)', fontWeight: 600 }}>
+                      <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 800, textTransform: 'uppercase' }}>
                         Synthesized Content Draft
                       </span>
                       <button
@@ -430,7 +432,7 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                         style={{ padding: '2px 6px', fontSize: 'var(--type-caption-xs)' }}
                         onClick={() => handleCopyDraft(latestResponse.draftContent || '')}
                       >
-                        {copiedDraft ? <Check size={12} color="var(--status-success)" /> : <Copy size={12} />}
+                        {copiedDraft ? <Check size={12} color="var(--color-carbon)" /> : <Copy size={12} />}
                         <span>{copiedDraft ? 'Copied' : 'Copy'}</span>
                       </button>
                     </div>
@@ -439,7 +441,8 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                         fontSize: 'var(--type-caption-xs)',
                         whiteSpace: 'pre-line',
                         lineHeight: '1.6',
-                        color: 'var(--text-secondary)',
+                        color: 'var(--color-carbon)',
+                        fontWeight: 500,
                       }}
                     >
                       {latestResponse.draftContent}

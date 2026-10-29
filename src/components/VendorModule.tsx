@@ -286,8 +286,8 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
             <div
               key={stage.key}
               style={{
-                background: 'rgba(14, 19, 31, 0.65)',
-                border: '1px solid var(--border-glass)',
+                background: 'var(--color-paper-white)',
+                border: '1px solid var(--color-carbon)',
                 borderRadius: 'var(--radius-lg)',
                 padding: 'var(--space-3)',
                 display: 'flex',
@@ -306,10 +306,20 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                   borderBottom: `2px solid ${stage.color}`,
                 }}
               >
-                <span style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 700, color: 'var(--text-primary)' }}>
+                <span style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 800, color: 'var(--color-carbon)', textTransform: 'uppercase', letterSpacing: '0.02em' }}>
                   {stage.label}
                 </span>
-                <span className="badge badge-muted">{stageVendors.length}</span>
+                <span
+                  className="badge"
+                  style={{
+                    background: stage.color,
+                    color: stage.key === 'deposit_paid' ? '#ffffff' : '#000000',
+                    border: '1px solid var(--color-carbon)',
+                    fontWeight: 700,
+                  }}
+                >
+                  {stageVendors.length}
+                </span>
               </div>
 
               {/* Vendor Cards in Column */}
@@ -321,6 +331,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                       textAlign: 'center',
                       color: 'var(--text-muted)',
                       fontSize: 'var(--type-caption-xs)',
+                      fontWeight: 600,
                     }}
                   >
                     No vendors in this stage
@@ -332,22 +343,31 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                       <div
                         key={vendor.id}
                         className="glass-card glass-card-interactive"
-                        style={{ padding: 'var(--space-3)', display: 'flex', flexDirection: 'column', gap: '8px' }}
+                        style={{
+                          padding: 'var(--space-3)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '8px',
+                          background: 'var(--color-paper-white)',
+                          border: '1px solid var(--color-carbon)',
+                        }}
                       >
                         {/* Top: Category & Rating */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <span
                             className="badge"
                             style={{
-                              background: 'rgba(255, 255, 255, 0.06)',
-                              color: cat?.color || 'var(--gold-400)',
+                              background: 'var(--color-soft-mist)',
+                              color: 'var(--color-carbon)',
+                              border: '1px solid var(--color-carbon)',
+                              fontWeight: 700,
                             }}
                           >
                             {cat?.label || vendor.category}
                           </span>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-                            <Star size={12} fill="#F59E0B" color="#F59E0B" />
-                            <span style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 600 }}>
+                            <Star size={13} fill="#000000" color="#000000" />
+                            <span style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 800, color: 'var(--color-carbon)' }}>
                               {vendor.rating || 5}
                             </span>
                           </div>
@@ -355,11 +375,11 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
 
                         {/* Vendor Name */}
                         <div>
-                          <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: 'var(--type-body-sm)' }}>
+                          <div style={{ fontWeight: 800, color: 'var(--color-carbon)', fontSize: 'var(--type-body-sm)' }}>
                             {vendor.name}
                           </div>
                           {vendor.contactPerson && (
-                            <div style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-secondary)' }}>
+                            <div style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-secondary)', fontWeight: 500, marginTop: '2px' }}>
                               Contact: {vendor.contactPerson}
                             </div>
                           )}
@@ -370,22 +390,23 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                           style={{
                             display: 'flex',
                             justifyContent: 'space-between',
-                            background: 'rgba(255, 255, 255, 0.03)',
-                            padding: '4px 8px',
-                            borderRadius: 'var(--radius-sm)',
+                            background: 'var(--color-sky-wash)',
+                            border: '1px solid var(--color-carbon)',
+                            padding: '6px 10px',
+                            borderRadius: '8px',
                             fontSize: 'var(--type-caption-xs)',
                           }}
                         >
                           <div>
-                            <span style={{ color: 'var(--text-muted)' }}>Quoted: </span>
-                            <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                            <span style={{ color: '#333333', fontWeight: 600 }}>Quoted: </span>
+                            <span style={{ fontWeight: 800, color: 'var(--color-carbon)' }}>
                               {event.budget.currency}
                               {vendor.quotedAmount.toLocaleString()}
                             </span>
                           </div>
                           <div>
-                            <span style={{ color: 'var(--text-muted)' }}>Deposit: </span>
-                            <span style={{ fontWeight: 600, color: 'var(--status-success)' }}>
+                            <span style={{ color: '#333333', fontWeight: 600 }}>Deposit: </span>
+                            <span style={{ fontWeight: 800, color: '#065f46' }}>
                               {event.budget.currency}
                               {vendor.depositPaid.toLocaleString()}
                             </span>
@@ -395,8 +416,8 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                         {/* AI Interview Questions Button */}
                         <button
                           type="button"
-                          className="btn btn-ghost btn-sm"
-                          style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--type-caption-xs)', color: 'var(--gold-400)' }}
+                          className="btn btn-sm shimmer-btn"
+                          style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--type-caption-xs)' }}
                           onClick={() => setActiveInterviewGuide(vendor)}
                         >
                           <HelpCircle size={14} />
@@ -409,16 +430,16 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            borderTop: '1px solid var(--border-subtle)',
+                            borderTop: '1px solid var(--color-carbon)',
                             paddingTop: '6px',
                             marginTop: '2px',
                           }}
                         >
-                          <div style={{ display: 'flex', gap: '2px' }}>
+                          <div style={{ display: 'flex', gap: '4px' }}>
                             <button
                               type="button"
                               className="btn btn-ghost btn-sm"
-                              style={{ padding: '4px' }}
+                              style={{ padding: '4px 8px' }}
                               onClick={() => openEditModal(vendor)}
                               aria-label="Edit vendor"
                             >
@@ -426,8 +447,8 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                             </button>
                             <button
                               type="button"
-                              className="btn btn-ghost btn-sm"
-                              style={{ padding: '4px', color: '#f87171' }}
+                              className="btn btn-danger btn-sm"
+                              style={{ padding: '4px 8px' }}
                               onClick={() => handleDeleteVendor(vendor.id)}
                               aria-label="Delete vendor"
                             >
@@ -438,8 +459,8 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                           {vendor.status !== 'confirmed' && (
                             <button
                               type="button"
-                              className="btn btn-secondary btn-sm"
-                              style={{ padding: '3px 10px' }}
+                              className="btn btn-primary btn-sm"
+                              style={{ padding: '4px 12px' }}
                               onClick={() => advanceStage(vendor)}
                             >
                               <span>Next</span>
@@ -479,7 +500,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
             >
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <HelpCircle size={20} color="var(--gold-400)" />
+                  <HelpCircle size={20} color="var(--color-carbon)" />
                   <h3 className="modal-title">AI Vetting Guide: {activeInterviewGuide.name}</h3>
                 </div>
                 <button
@@ -509,7 +530,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                       gap: 'var(--space-3)',
                     }}
                   >
-                    <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--text-primary)', flex: 1 }}>
+                    <p style={{ fontSize: 'var(--type-body-sm)', color: 'var(--color-carbon)', fontWeight: 600, flex: 1 }}>
                       "{q}"
                     </p>
                     <button

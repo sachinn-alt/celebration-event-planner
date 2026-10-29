@@ -148,14 +148,15 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
                 status === 'success'
                   ? 'var(--status-success-bg)'
                   : status === 'error'
-                  ? 'var(--status-danger-bg)'
-                  : 'rgba(255, 255, 255, 0.05)',
+                  ? 'var(--color-ember)'
+                  : 'var(--color-soft-mist)',
               color:
                 status === 'success'
-                  ? '#34d399'
+                  ? '#057a44'
                   : status === 'error'
-                  ? '#f87171'
-                  : 'var(--text-secondary)',
+                  ? '#ffffff'
+                  : 'var(--color-carbon)',
+              fontWeight: 600,
             }}
           >
             {status === 'success' && <Check size={16} />}
@@ -165,9 +166,9 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
           </div>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: 'var(--space-3)', background: 'rgba(255, 255, 255, 0.02)', borderRadius: 'var(--radius-md)', marginBottom: 'var(--space-5)', border: '1px solid var(--border-subtle)' }}>
-          <ShieldCheck size={18} color="var(--status-success)" />
-          <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: 'var(--space-3)', background: 'var(--color-sky-wash)', borderRadius: 'var(--radius-md)', marginBottom: 'var(--space-5)', border: '1px solid var(--color-carbon)' }}>
+          <ShieldCheck size={18} color="var(--color-carbon)" />
+          <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--color-carbon)', fontWeight: 600 }}>
             Client-Side Vault: Your API key is stored strictly in your browser session. It is never logged or sent to any third-party server.
           </span>
         </div>
