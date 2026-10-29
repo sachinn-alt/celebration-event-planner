@@ -369,15 +369,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-3);
   width: 100%;
 }
 
 .filter-search-box {
   position: relative;
-  flex: 1 1 240px;
-  min-width: 200px;
+  flex: 0 1 300px;
+  max-width: 320px;
+  min-width: 180px;
 }
 
 .filter-search-input {
@@ -405,13 +406,14 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
 }
 
 .filter-select {
   height: 42px;
-  min-width: 148px;
-  max-width: 220px;
+  min-width: 140px;
+  max-width: 200px;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 700;
@@ -445,13 +447,21 @@
 }
 
 @media (max-width: 640px) {
+  .filter-toolbar {
+    flex-wrap: wrap;
+  }
+  .filter-search-box {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
   .filter-pills-group {
     width: 100%;
+    flex-wrap: nowrap;
   }
   .filter-select {
-    flex: 1 1 130px;
+    flex: 1 1 50%;
     max-width: none;
-    min-width: 120px;
+    min-width: 0;
   }
 }
 
