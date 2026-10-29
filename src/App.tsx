@@ -144,7 +144,7 @@ export function App() {
       )}
 
       {/* Slush Marquee Scrolling Announcement Strip */}
-      <div className="slush-marquee no-print" aria-hidden="true" style={{ position: 'relative', zIndex: 10 }}>
+      <div className="slush-marquee no-print" aria-hidden="true">
         <div className="slush-marquee-track">
           <span>EVENTIQ CELEBRATION ATELIER ★ WEDDINGS ★ MILESTONE BIRTHDAYS ★ COMMUNITY GALAS ★ MATHEMATICAL PRECISION ★ REAL-TIME SOLVENCY ★ ZERO BUDGET DRIFT ★</span>
           <span>EVENTIQ CELEBRATION ATELIER ★ WEDDINGS ★ MILESTONE BIRTHDAYS ★ COMMUNITY GALAS ★ MATHEMATICAL PRECISION ★ REAL-TIME SOLVENCY ★ ZERO BUDGET DRIFT ★</span>
@@ -259,18 +259,6 @@ export function App() {
               </AnimatePresence>
             </main>
 
-            {/* Persistent AI Event Director Drawer & Copilot */}
-            <Suspense fallback={null}>
-              <AiCopilot
-                event={activeEvent}
-                activeTab={activeTab}
-                isOpen={isCopilotOpen}
-                onToggle={() => setIsCopilotOpen(!isCopilotOpen)}
-                onOpenKeyVault={() => setIsApiKeyModalOpen(true)}
-                hasApiKey={hasApiKey}
-              />
-            </Suspense>
-
             {/* Neo-Brutalist Statement Footer */}
             <Footer
               onSelectArchetype={handleSelectArchetype}
@@ -279,6 +267,20 @@ export function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Persistent AI Event Director Drawer & Copilot (Viewport-level Overlay) */}
+      {viewMode === 'studio' && (
+        <Suspense fallback={null}>
+          <AiCopilot
+            event={activeEvent}
+            activeTab={activeTab}
+            isOpen={isCopilotOpen}
+            onToggle={() => setIsCopilotOpen(!isCopilotOpen)}
+            onOpenKeyVault={() => setIsApiKeyModalOpen(true)}
+            hasApiKey={hasApiKey}
+          />
+        </Suspense>
+      )}
 
       {/* Create Event Atelier Modal */}
       <CreateEventModal

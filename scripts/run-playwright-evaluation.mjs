@@ -59,7 +59,6 @@ async function runEvaluation() {
       await quoteStrip.click();
       await page.waitForTimeout(400);
     }
-    const quoteTextAfterClick = await page.textContent('.landing-quote-text').catch(() => null);
 
     if (quoteStrip && quoteTextInitial && quoteAuthor && quoteTextInitial.length > 5) {
       recordScore('Category 2', 'Dynamic Celebration Quotes & Cursive Typography', 10, 10, `Loaded quote: "${quoteTextInitial.slice(0, 35)}..." with click shuffle`);
