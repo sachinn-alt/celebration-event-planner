@@ -157,30 +157,6 @@ export const Header: React.FC<HeaderProps> = ({
                 EventiQ
               </span>
               <span className="badge badge-gold">Studio</span>
-              {onGoToLanding && (
-                <button
-                  type="button"
-                  className="btn btn-secondary no-print"
-                  onClick={onGoToLanding}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '3px 10px',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.04em',
-                    border: '1px solid var(--color-carbon)',
-                    background: 'var(--color-paper-white)',
-                    cursor: 'pointer',
-                  }}
-                  title="Return to Landing Page"
-                >
-                  <span>← Landing</span>
-                </button>
-              )}
             </div>
             <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', fontWeight: 600 }}>
               Celebration & Event Production Atelier
