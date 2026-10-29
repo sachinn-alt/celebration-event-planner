@@ -26,6 +26,7 @@ interface HeaderProps {
   onImportEvent: (imported: EventPlan) => void;
   onOpenCreateModal: () => void;
   onDeleteEvent?: (id: string) => void;
+  onGoToLanding?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -38,6 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
   onImportEvent,
   onOpenCreateModal,
   onDeleteEvent,
+  onGoToLanding,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -113,9 +115,10 @@ export const Header: React.FC<HeaderProps> = ({
           borderBottom: '1px solid var(--border-subtle)',
         }}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo & Landing Switcher */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
           <div
+            onClick={onGoToLanding}
             style={{
               width: '40px',
               height: '40px',
@@ -126,13 +129,16 @@ export const Header: React.FC<HeaderProps> = ({
               alignItems: 'center',
               justifyContent: 'center',
               overflow: 'hidden',
+              cursor: onGoToLanding ? 'pointer' : 'default',
             }}
+            title={onGoToLanding ? 'Return to Landing Page' : undefined}
           >
             <IconlyAnimation name="party" size={26} alt="EventiQ Haute Atelier Celebration" />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span
+                onClick={onGoToLanding}
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: '1.6rem',
@@ -140,11 +146,37 @@ export const Header: React.FC<HeaderProps> = ({
                   letterSpacing: '-0.01em',
                   textTransform: 'uppercase',
                   color: 'var(--color-carbon)',
+                  cursor: onGoToLanding ? 'pointer' : 'default',
                 }}
+                title={onGoToLanding ? 'Return to Landing Page' : undefined}
               >
                 EventiQ
               </span>
               <span className="badge badge-gold">Studio</span>
+              {onGoToLanding && (
+                <button
+                  type="button"
+                  className="btn btn-secondary no-print"
+                  onClick={onGoToLanding}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '3px 10px',
+                    borderRadius: 'var(--radius-full)',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    border: '1px solid var(--color-carbon)',
+                    background: 'var(--color-paper-white)',
+                    cursor: 'pointer',
+                  }}
+                  title="Return to Landing Page"
+                >
+                  <span>← Landing</span>
+                </button>
+              )}
             </div>
             <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', fontWeight: 600 }}>
               Celebration & Event Production Atelier
