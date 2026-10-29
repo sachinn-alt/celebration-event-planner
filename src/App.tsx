@@ -1,21 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { DollarSign, Clock, Users, Sparkles } from 'lucide-react';
 import type { EventPlan, EventType } from './types/event';
 import { StorageService } from './services/storage';
 import { Header } from './components/Header';
-import { BudgetModule } from './components/BudgetModule';
-import { TimelineModule } from './components/TimelineModule';
-import { VendorModule } from './components/VendorModule';
-import { CreativeStudio } from './components/CreativeStudio';
-import { AiCopilot } from './components/AiCopilot';
 import { ApiKeyModal } from './components/ApiKeyModal';
 import { CreateEventModal } from './components/CreateEventModal';
 import { IconlyAnimation } from './components/IconlyAnimation';
 import { LandingHero } from './components/LandingHero';
 import { Footer } from './components/Footer';
-import FluxLines from './components/FluxLines';
 import './App.css';
+
+// Lazy-load heavier studio modules & WebGL to ensure instant initial load and peak performance
+const BudgetModule = lazy(() => import('./components/BudgetModule').then((m) => ({ default: m.BudgetModule })));
+const TimelineModule = lazy(() => import('./components/TimelineModule').then((m) => ({ default: m.TimelineModule })));
+const VendorModule = lazy(() => import('./components/VendorModule').then((m) => ({ default: m.VendorModule })));
+const CreativeStudio = lazy(() => import('./components/CreativeStudio').then((m) => ({ default: m.CreativeStudio })));
+const AiCopilot = lazy(() => import('./components/AiCopilot').then((m) => ({ default: m.AiCopilot })));
+const FluxLines = lazy(() => import('./components/FluxLines'));
 
 type ActiveTab = 'budget' | 'timeline' | 'vendors' | 'creative';
 
@@ -35,6 +37,25 @@ export function App() {
   const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [hasApiKey, setHasApiKey] = useState<boolean>(() => Boolean(StorageService.getApiKey()));
+  const [isFxEnabled, setIsFxEnabled] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('eventiq_fx_enabled') !== 'false';
+    } catch {
+      return true;
+    }
+  });
+
+  const handleToggleFx = () => {
+    setIsFxEnabled((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('eventiq_fx_enabled', String(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
 
   const activeEvent = events.find((e) => e.id === activeEventId) || events[0];
 
@@ -89,32 +110,38 @@ export function App() {
 
   return (
     <>
-      {/* React Bits: Animated Magnetic FluxLines Background */}
-      <div
-        className="flux-lines-background no-print"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-          overflow: 'hidden',
-        }}
-        aria-hidden="true"
-      >
-        <FluxLines
-          colors={['#4da2ff', '#55db9c', '#ffd731', '#e9ccff', '#fb4903']}
-          lightMode={true}
-          transparent={true}
-          opacity={0.45}
-          speed={0.35}
-          scale={1.3}
-          lineWidth={1.2}
-          mouseInteraction={true}
-          mouseStrength={1.2}
-          mouseRadius={0.35}
-          clickSwirl={true}
-        />
-      </div>
+      {/* React Bits: Animated Magnetic FluxLines Background (Eco / Throttled) */}
+      {isFxEnabled && (
+        <div
+          className="flux-lines-background no-print"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: 'none',
+            overflow: 'hidden',
+          }}
+          aria-hidden="true"
+        >
+          <Suspense fallback={null}>
+            <FluxLines
+              colors={['#4da2ff', '#55db9c', '#ffd731', '#e9ccff', '#fb4903']}
+              lightMode={true}
+              transparent={true}
+              opacity={0.4}
+              speed={0.3}
+              scale={1.3}
+              lineWidth={1.2}
+              dpr={0.5}
+              mouseInteraction={true}
+              mouseStrength={1.1}
+              mouseRadius={0.35}
+              clickSwirl={true}
+              paused={!isFxEnabled}
+            />
+          </Suspense>
+        </div>
+      )}
 
       {/* Slush Marquee Scrolling Announcement Strip */}
       <div className="slush-marquee no-print" aria-hidden="true" style={{ position: 'relative', zIndex: 10 }}>
@@ -139,6 +166,8 @@ export function App() {
               allEvents={events}
               onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
               hasApiKey={hasApiKey}
+              onToggleFx={handleToggleFx}
+              isFxEnabled={isFxEnabled}
             />
             <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
               <Footer
@@ -168,6 +197,8 @@ export function App() {
               onOpenCreateModal={() => setIsCreateModalOpen(true)}
               onDeleteEvent={handleDeleteEvent}
               onGoToLanding={() => setViewMode('landing')}
+              isFxEnabled={isFxEnabled}
+              onToggleFx={handleToggleFx}
             />
 
             {/* Module Navigation Tabs with Slush Pill Design */}
@@ -214,31 +245,35 @@ export function App() {
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
-                  {activeTab === 'budget' && (
-                    <BudgetModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-                  )}
-                  {activeTab === 'timeline' && (
-                    <TimelineModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-                  )}
-                  {activeTab === 'vendors' && (
-                    <VendorModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-                  )}
-                  {activeTab === 'creative' && (
-                    <CreativeStudio event={activeEvent} onUpdateEvent={handleUpdateEvent} />
-                  )}
+                  <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+                    {activeTab === 'budget' && (
+                      <BudgetModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+                    )}
+                    {activeTab === 'timeline' && (
+                      <TimelineModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+                    )}
+                    {activeTab === 'vendors' && (
+                      <VendorModule event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+                    )}
+                    {activeTab === 'creative' && (
+                      <CreativeStudio event={activeEvent} onUpdateEvent={handleUpdateEvent} />
+                    )}
+                  </Suspense>
                 </motion.div>
               </AnimatePresence>
             </main>
 
             {/* Persistent AI Event Director Drawer & Copilot */}
-            <AiCopilot
-              event={activeEvent}
-              activeTab={activeTab}
-              isOpen={isCopilotOpen}
-              onToggle={() => setIsCopilotOpen(!isCopilotOpen)}
-              onOpenKeyVault={() => setIsApiKeyModalOpen(true)}
-              hasApiKey={hasApiKey}
-            />
+            <Suspense fallback={null}>
+              <AiCopilot
+                event={activeEvent}
+                activeTab={activeTab}
+                isOpen={isCopilotOpen}
+                onToggle={() => setIsCopilotOpen(!isCopilotOpen)}
+                onOpenKeyVault={() => setIsApiKeyModalOpen(true)}
+                hasApiKey={hasApiKey}
+              />
+            </Suspense>
 
             {/* Neo-Brutalist Statement Footer */}
             <Footer

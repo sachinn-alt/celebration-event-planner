@@ -10,6 +10,8 @@ interface LandingHeroProps {
   allEvents: EventPlan[];
   onOpenApiKeyModal?: () => void;
   hasApiKey?: boolean;
+  onToggleFx?: () => void;
+  isFxEnabled?: boolean;
 }
 
 interface FloatingSticker {
@@ -39,6 +41,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
   allEvents,
   onOpenApiKeyModal,
   hasApiKey = false,
+  onToggleFx,
+  isFxEnabled = true,
 }) => {
   const weddingEvent = allEvents.find((e) => e.type === 'wedding');
   const birthdayEvent = allEvents.find((e) => e.type === 'birthday');
@@ -62,6 +66,17 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
         </div>
 
         <div className="landing-deck-actions">
+          {onToggleFx && (
+            <button
+              type="button"
+              className="btn btn-secondary landing-deck-key-btn"
+              onClick={onToggleFx}
+              title={isFxEnabled ? 'Switch to Eco Mode (Disables background shader for maximum battery & speed)' : 'Enable Ambient Flux FX'}
+            >
+              <span>{isFxEnabled ? '⚡ FX: ON' : '🌱 ECO'}</span>
+            </button>
+          )}
+
           {onOpenApiKeyModal && (
             <button
               type="button"

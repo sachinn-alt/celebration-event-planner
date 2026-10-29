@@ -27,6 +27,8 @@ interface HeaderProps {
   onOpenCreateModal: () => void;
   onDeleteEvent?: (id: string) => void;
   onGoToLanding?: () => void;
+  isFxEnabled?: boolean;
+  onToggleFx?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -40,6 +42,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCreateModal,
   onDeleteEvent,
   onGoToLanding,
+  isFxEnabled = true,
+  onToggleFx,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -275,8 +279,20 @@ export const Header: React.FC<HeaderProps> = ({
           </motion.button>
         </div>
 
-        {/* Global Toolbar: Key Vault, Import, Export, Print, Reset */}
+        {/* Global Toolbar: Key Vault, Import, Export, Print, Reset, Eco Mode */}
         <div className="action-buttons no-print" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+          {onToggleFx && (
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm"
+              onClick={onToggleFx}
+              style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 700 }}
+              title={isFxEnabled ? 'Switch to Eco Mode (Disables WebGL background to maximize speed & battery)' : 'Enable Ambient Flux FX'}
+            >
+              <span>{isFxEnabled ? '⚡ FX: ON' : '🌱 ECO'}</span>
+            </button>
+          )}
+
           <button
             type="button"
             className={`btn btn-sm ${hasApiKey ? 'btn-secondary' : 'btn-ghost'}`}

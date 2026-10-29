@@ -98,13 +98,11 @@ float vn(vec2 p, float s, float seed) {
 }
 
 float dbn(vec2 p, float s, float seed) {
-  float o = s / 2.0;
+  float o = s * 0.5;
   float n0 = vn(p, s, seed);
   float n1 = vn(p + vec2(o, o), s, seed + 0.1);
-  float n2 = vn(p + vec2(-o, o), s, seed + 0.2);
-  float n3 = vn(p + vec2(o, -o), s, seed + 0.3);
-  float n4 = vn(p + vec2(-o, -o), s, seed + 0.4);
-  return (2.0 * n0 + 1.5 * n1 + 1.25 * n2 + 1.125 * n3 + n4) / 7.0;
+  float n2 = vn(p - vec2(o, o), s, seed + 0.2);
+  return (n0 * 2.0 + n1 * 1.5 + n2 * 1.5) / 5.0;
 }
 `;
 
@@ -397,9 +395,17 @@ const FluxLines = ({
       raf = 0;
       if (!visible || document.hidden) return;
       const s = settingsRef.current;
-      const dt = last ? clamp((now - last) / 1000, 0.0005, 0.05) : 1 / 60;
+      if (s.paused) return;
+
+      // Throttle rendering to max 35 FPS (~28ms) to drastically save GPU & CPU cycles
+      if (last && now - last < 28) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+
+      const dt = last ? clamp((now - last) / 1000, 0.0005, 0.05) : 1 / 35;
       last = now;
-      const motion = s.paused || reduce ? 0 : 1;
+      const motion = reduce ? 0 : 1;
       time += dt * motion;
       swirl.age += dt;
       if (s.intro && !reduce && reveal < 1) reveal = Math.min(1, reveal + dt / INTRO_SECONDS);
@@ -429,7 +435,8 @@ const FluxLines = ({
       const s = settingsRef.current;
       const width = Math.max(1, container.clientWidth);
       const height = Math.max(1, container.clientHeight);
-      const ratio = Math.min(s.dpr || window.devicePixelRatio || 1, 2);
+      // Downsample DPR to 0.6 max for the background shader: reduces shader pixels by up to 80% while retaining smooth visuals
+      const ratio = s.dpr ? Math.min(s.dpr, 1) : Math.min(window.devicePixelRatio > 1 ? 0.6 : 1, 0.75);
       canvas.width = Math.max(1, Math.round(width * ratio));
       canvas.height = Math.max(1, Math.round(height * ratio));
       render();

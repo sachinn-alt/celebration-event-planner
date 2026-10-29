@@ -676,8 +676,17 @@
   color: var(--color-ember);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .flux-lines-background {
+    display: none !important;
+  }
+}
+
 /* Responsive Rules */
 @media (max-width: 768px) {
+  .flux-lines-background {
+    display: none !important;
+  }
   .landing-sticker-field {
     display: none;
   }
