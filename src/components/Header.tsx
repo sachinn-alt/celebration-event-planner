@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   Calendar,
   MapPin,
@@ -11,6 +11,9 @@ import {
   ShieldCheck,
   Plus,
   Trash2,
+  SlidersHorizontal,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import type { EventPlan, EventType } from '../types/event';
 import { StorageService } from '../services/storage';
@@ -42,10 +45,11 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCreateModal,
   onDeleteEvent,
   onGoToLanding,
-  isFxEnabled = true,
-  onToggleFx,
+  isFxEnabled: _isFxEnabled = true,
+  onToggleFx: _onToggleFx,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isToolbarOpen, setIsToolbarOpen] = useState(false);
 
   const analytics = StorageService.calculateBudgetAnalytics(activeEvent);
   const timelineAnalytics = StorageService.calculateTimelineAnalytics(activeEvent);
@@ -255,84 +259,120 @@ export const Header: React.FC<HeaderProps> = ({
           </motion.button>
         </div>
 
-        {/* Global Toolbar: Key Vault, Import, Export, Print, Reset, Eco Mode */}
-        <div className="action-buttons no-print" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-          {onToggleFx && (
-            <button
-              type="button"
-              className="btn btn-ghost btn-sm"
-              onClick={onToggleFx}
-              style={{ fontSize: 'var(--type-caption-xs)', fontWeight: 700 }}
-              title={isFxEnabled ? 'Switch to Eco Mode (Disables WebGL background to maximize speed & battery)' : 'Enable Ambient Flux FX'}
-            >
-              <span>{isFxEnabled ? '⚡ FX: ON' : '🌱 ECO'}</span>
-            </button>
-          )}
-
+        {/* Collapsible Global Toolbar: Key Vault, Backup, Restore, Print, Reset */}
+        <div className="action-buttons-wrapper no-print" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
           <button
             type="button"
-            className={`btn btn-sm ${hasApiKey ? 'btn-secondary' : 'btn-ghost'}`}
+            className={`btn btn-sm ${isToolbarOpen ? 'btn-primary' : 'btn-ghost'}`}
             style={{
-              borderColor: hasApiKey ? 'rgba(16, 185, 129, 0.4)' : undefined,
               fontSize: 'var(--type-caption-xs)',
+              gap: '6px',
+              padding: '6px 12px',
+              borderRadius: 'var(--radius-full)',
             }}
-            onClick={onOpenApiKeyModal}
-            title={hasApiKey ? 'Google Gemini 1.5 Flash Connected' : 'Running Offline Heuristic Engine'}
+            onClick={() => setIsToolbarOpen(!isToolbarOpen)}
+            title={isToolbarOpen ? 'Collapse Tools & Utilities' : 'Expand Tools & Utilities (API Key, Backup, Print, Reset)'}
           >
-            <Key size={14} color="var(--color-carbon)" />
-            <span style={{ color: 'var(--color-carbon)', fontWeight: 700 }}>{hasApiKey ? 'Gemini 1.5 Active' : 'Offline Engine'}</span>
+            <SlidersHorizontal size={13} />
+            <span>Tools</span>
+            {hasApiKey && (
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: '#10b981',
+                  display: 'inline-block',
+                }}
+                title="Gemini AI Connected"
+              />
+            )}
+            {isToolbarOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
           </button>
 
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            onClick={handleExportJson}
-            title="Download JSON backup"
-          >
-            <Download size={14} />
-            <span className="hide-on-mobile">Backup</span>
-          </button>
+          <AnimatePresence>
+            {isToolbarOpen && (
+              <motion.div
+                initial={{ opacity: 0, x: 6, scale: 0.98 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 6, scale: 0.98 }}
+                transition={{ duration: 0.16, ease: 'easeOut' }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-2)',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <button
+                  type="button"
+                  className={`btn btn-sm ${hasApiKey ? 'btn-secondary' : 'btn-ghost'}`}
+                  style={{
+                    borderColor: hasApiKey ? 'rgba(16, 185, 129, 0.4)' : undefined,
+                    fontSize: 'var(--type-caption-xs)',
+                  }}
+                  onClick={onOpenApiKeyModal}
+                  title={hasApiKey ? 'Google Gemini 1.5 Flash Connected' : 'Running Offline Heuristic Engine'}
+                >
+                  <Key size={14} color="var(--color-carbon)" />
+                  <span style={{ color: 'var(--color-carbon)', fontWeight: 700 }}>
+                    {hasApiKey ? 'Gemini 1.5 Active' : 'Offline Engine'}
+                  </span>
+                </button>
 
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileInputChange}
-            accept=".json,application/json"
-            style={{ display: 'none' }}
-          />
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={handleExportJson}
+                  title="Download JSON backup"
+                >
+                  <Download size={14} />
+                  <span className="hide-on-mobile">Backup</span>
+                </button>
 
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            onClick={() => fileInputRef.current?.click()}
-            title="Import JSON backup"
-          >
-            <Upload size={14} />
-            <span className="hide-on-mobile">Restore</span>
-          </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileInputChange}
+                  accept=".json,application/json"
+                  style={{ display: 'none' }}
+                />
 
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            onClick={() => window.print()}
-            title="Print Ink-Friendly Itinerary"
-          >
-            <Printer size={14} />
-            <span className="hide-on-mobile">Print</span>
-          </button>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  title="Import JSON backup"
+                >
+                  <Upload size={14} />
+                  <span className="hide-on-mobile">Restore</span>
+                </button>
 
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            onClick={() => {
-              if (window.confirm('Reset all events to pristine factory presets? Custom changes will be cleared.')) {
-                onResetPresets();
-              }
-            }}
-            title="Reset to Factory Presets"
-          >
-            <RotateCcw size={14} />
-          </button>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => window.print()}
+                  title="Print Ink-Friendly Itinerary"
+                >
+                  <Printer size={14} />
+                  <span className="hide-on-mobile">Print</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => {
+                    if (window.confirm('Reset all events to pristine factory presets? Custom changes will be cleared.')) {
+                      onResetPresets();
+                    }
+                  }}
+                  title="Reset to Factory Presets"
+                >
+                  <RotateCcw size={14} />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
