@@ -1,24 +1,20 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import {
-  Sparkles,
   Calendar,
   MapPin,
-  Users,
   Download,
   Upload,
   Printer,
   RotateCcw,
   Key,
   ShieldCheck,
-  Clock,
-  DollarSign,
-  TrendingUp,
   Plus,
   Trash2,
 } from 'lucide-react';
 import type { EventPlan, EventType } from '../types/event';
 import { StorageService } from '../services/storage';
+import { IconlyAnimation } from './IconlyAnimation';
 
 interface HeaderProps {
   activeEvent: EventPlan;
@@ -129,9 +125,10 @@ export const Header: React.FC<HeaderProps> = ({
               alignItems: 'center',
               justifyContent: 'center',
               boxShadow: 'var(--shadow-sm)',
+              overflow: 'hidden',
             }}
           >
-            <Sparkles size={20} color="var(--text-inverse)" />
+            <IconlyAnimation name="party" size={28} alt="EventiQ Haute Atelier Celebration" />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -362,7 +359,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>{activeEvent.location}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--type-body-sm)' }}>
-            <Users size={16} color="var(--gold-400)" />
+            <IconlyAnimation name="users-ai" size={16} alt="Guests" />
             <span>{activeEvent.guestCount} Guests</span>
           </div>
         </div>
@@ -386,7 +383,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Total Budget
             </span>
-            <DollarSign size={16} color="var(--gold-400)" />
+            <IconlyAnimation name="dollar-up" size={20} />
           </div>
           <div style={{ fontSize: 'var(--type-metric-val)', fontWeight: 700, color: 'var(--text-primary)' }}>
             {activeEvent.budget.currency}
@@ -408,7 +405,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Allocated Spend
             </span>
-            <TrendingUp size={16} color="var(--cat-catering)" />
+            <IconlyAnimation name="receipt-check" size={20} />
           </div>
           <div style={{ fontSize: 'var(--type-metric-val)', fontWeight: 700, color: 'var(--text-primary)' }}>
             {activeEvent.budget.currency}
@@ -503,7 +500,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Countdown
             </span>
-            <Clock size={16} color="var(--gold-400)" />
+            <IconlyAnimation name="star-medal" size={20} />
           </div>
           <div style={{ fontSize: 'var(--type-metric-val)', fontWeight: 700, color: 'var(--text-primary)' }}>
             {daysRemaining} Days

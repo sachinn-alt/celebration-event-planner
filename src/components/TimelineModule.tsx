@@ -12,11 +12,11 @@ import {
   Edit2,
   Search,
   UserCheck,
-  Sparkles,
   X,
 } from 'lucide-react';
 import type { EventPlan, TimelineMilestone, TimelinePhase } from '../types/event';
 import { AiService } from '../services/aiService';
+import { IconlyAnimation } from './IconlyAnimation';
 
 interface TimelineModuleProps {
   event: EventPlan;
@@ -281,7 +281,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Sparkles size={16} color="var(--gold-400)" />
+            <IconlyAnimation name={completedCount === totalCount && totalCount > 0 ? "clap" : "repeat"} size={18} alt="Milestone Progress" />
             <span style={{ fontSize: 'var(--type-body-sm)', fontWeight: 600 }}>
               {completedCount} of {totalCount} completed ({totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0}%)
             </span>

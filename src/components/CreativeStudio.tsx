@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import type { EventPlan, InvitationDraft, SpeechDraft } from '../types/event';
 import { AiService } from '../services/aiService';
+import { IconlyAnimation } from './IconlyAnimation';
 
 interface CreativeStudioProps {
   event: EventPlan;
@@ -106,10 +107,13 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
         }}
       >
         <div>
-          <h2 style={{ fontSize: 'var(--type-heading-lg)', marginBottom: 'var(--space-1)' }}>
-            Sensory Creative Studio & Speechwriter
-          </h2>
-          <p style={{ fontSize: 'var(--type-body-sm)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <IconlyAnimation name="party" size={24} alt="Creative Atelier" />
+            <h2 style={{ fontSize: 'var(--type-heading-lg)', margin: 0 }}>
+              Sensory Creative Studio & Speechwriter
+            </h2>
+          </div>
+          <p style={{ fontSize: 'var(--type-body-sm)', marginTop: 'var(--space-1)' }}>
             Curate your aesthetic palette, generate invitations across 4 tones, and ghostwrite memorable toasts.
           </p>
         </div>

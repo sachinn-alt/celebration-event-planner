@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import type { EventPlan, Vendor, VendorPipelineStatus, BudgetCategoryKey } from '../types/event';
 import { BUDGET_CATEGORIES } from '../data/presets';
+import { IconlyAnimation } from './IconlyAnimation';
 
 interface VendorModuleProps {
   event: EventPlan;
@@ -226,10 +227,13 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
         }}
       >
         <div>
-          <h2 style={{ fontSize: 'var(--type-heading-lg)', marginBottom: 'var(--space-1)' }}>
-            Vendor Pipeline Matrix & Vetting CRM
-          </h2>
-          <p style={{ fontSize: 'var(--type-body-sm)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <IconlyAnimation name="users-ai" size={24} alt="Vendor CRM" />
+            <h2 style={{ fontSize: 'var(--type-heading-lg)', margin: 0 }}>
+              Vendor Pipeline Matrix & Vetting CRM
+            </h2>
+          </div>
+          <p style={{ fontSize: 'var(--type-body-sm)', marginTop: 'var(--space-1)' }}>
             Stage-gate contract pipeline with cost tracking and category-specific AI negotiation questions.
           </p>
         </div>

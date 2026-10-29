@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Sparkles,
-  Bot,
   X,
   Send,
   CheckCircle,
@@ -13,6 +12,7 @@ import {
 } from 'lucide-react';
 import type { EventPlan } from '../types/event';
 import { AiService, type AiResponse } from '../services/aiService';
+import { IconlyAnimation } from './IconlyAnimation';
 
 interface AiCopilotProps {
   event: EventPlan;
@@ -133,7 +133,7 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Sparkles size={16} />
+            <IconlyAnimation name="users-ai" size={20} alt="Director" />
             <span style={{ fontWeight: 600 }}>Director</span>
             {criticalCount > 0 && (
               <span
@@ -190,9 +190,10 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  overflow: 'hidden',
                 }}
               >
-                <Bot size={20} color="var(--text-inverse)" />
+                <IconlyAnimation name="users-ai" size={26} alt="Event Director AI" />
               </div>
               <div>
                 <h3 style={{ fontSize: 'var(--type-heading-md)', color: 'var(--text-primary)' }}>

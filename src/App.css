@@ -121,6 +121,20 @@
   display: none;
 }
 
+.iconly-animation {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spotlight-card:hover .iconly-animation {
+  transform: scale(1.12);
+}
+
+.nav-tab-btn:hover .iconly-animation {
+  transform: scale(1.1);
+}
+
 @media (max-width: 640px) {
   .hide-on-mobile {
     display: none !important;

@@ -11,6 +11,7 @@ import {
 import type { EventPlan, BudgetItem, BudgetCategoryKey, ExpenseStatus } from '../types/event';
 import { BUDGET_CATEGORIES } from '../data/presets';
 import { StorageService } from '../services/storage';
+import { IconlyAnimation } from './IconlyAnimation';
 
 interface BudgetModuleProps {
   event: EventPlan;
@@ -470,8 +471,9 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                           ? 'badge-warning'
                           : 'badge-muted'
                       }`}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                     >
+                      {item.status === 'paid' && <IconlyAnimation name="receipt-check" size={13} />}
                       {item.status}
                     </span>
                   </button>
@@ -525,9 +527,12 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
               onClick={(e) => e.stopPropagation()}
             >
               <div className="modal-header">
-                <h3 className="modal-title">
-                  {editingItem ? 'Edit Expense Item' : 'Add New Expense Item'}
-                </h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <IconlyAnimation name="dollar-up" size={22} alt="Expense Item" />
+                  <h3 className="modal-title" style={{ margin: 0 }}>
+                    {editingItem ? 'Edit Expense Item' : 'Add New Expense Item'}
+                  </h3>
+                </div>
                 <button
                   type="button"
                   className="btn btn-ghost btn-icon"

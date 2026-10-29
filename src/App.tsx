@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { DollarSign, Clock, Users, Sparkles, Heart } from 'lucide-react';
+import { DollarSign, Clock, Users, Sparkles } from 'lucide-react';
 import type { EventPlan } from './types/event';
 import { StorageService } from './services/storage';
 import { Header } from './components/Header';
@@ -11,15 +11,16 @@ import { CreativeStudio } from './components/CreativeStudio';
 import { AiCopilot } from './components/AiCopilot';
 import { ApiKeyModal } from './components/ApiKeyModal';
 import { CreateEventModal } from './components/CreateEventModal';
+import { IconlyAnimation } from './components/IconlyAnimation';
 import './App.css';
 
 type ActiveTab = 'budget' | 'timeline' | 'vendors' | 'creative';
 
 const NAV_TABS = [
-  { key: 'budget' as ActiveTab, label: 'Budget & Contingency', icon: DollarSign },
-  { key: 'timeline' as ActiveTab, label: 'Timeline & Run-of-Show', icon: Clock },
-  { key: 'vendors' as ActiveTab, label: 'Vendor Pipeline CRM', icon: Users },
-  { key: 'creative' as ActiveTab, label: 'Creative Atelier', icon: Sparkles },
+  { key: 'budget' as ActiveTab, label: 'Budget & Contingency', icon: DollarSign, animation: 'dollar-up' as const },
+  { key: 'timeline' as ActiveTab, label: 'Timeline & Run-of-Show', icon: Clock, animation: 'repeat' as const },
+  { key: 'vendors' as ActiveTab, label: 'Vendor Pipeline CRM', icon: Users, animation: 'users-ai' as const },
+  { key: 'creative' as ActiveTab, label: 'Creative Atelier', icon: Sparkles, animation: 'party' as const },
 ];
 
 export function App() {
@@ -110,7 +111,11 @@ export function App() {
                   />
                 )}
                 <span style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <Icon size={16} color={isActive ? 'var(--gold-400)' : 'var(--text-secondary)'} />
+                  {isActive ? (
+                    <IconlyAnimation name={tab.animation} size={18} />
+                  ) : (
+                    <Icon size={16} color="var(--text-secondary)" />
+                  )}
                   <span>{tab.label}</span>
                 </span>
               </button>
@@ -174,9 +179,9 @@ export function App() {
         <div>
           <strong>EventiQ Haute Atelier</strong> — Production-grade celebration planning for Weddings, Milestone Birthdays, and Community Galas.
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span>Crafted with mathematical precision & aesthetic care</span>
-          <Heart size={13} color="var(--gold-400)" fill="var(--gold-400)" />
+          <IconlyAnimation name="heart" size={16} alt="Crafted with care" />
         </div>
       </footer>
     </div>

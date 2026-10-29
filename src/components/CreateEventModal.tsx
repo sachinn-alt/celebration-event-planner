@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Calendar, MapPin, Users, DollarSign, X, Check, Heart, Cake, Trophy, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Users, DollarSign, X, Check, Heart, Cake, Trophy, ArrowRight } from 'lucide-react';
 import type { EventType, EventPlan } from '../types/event';
 import { createCustomEventPlan } from '../data/presets';
+import { IconlyAnimation, type IconlyAnimationName } from './IconlyAnimation';
 import confetti from 'canvas-confetti';
 
 interface CreateEventModalProps {
@@ -16,6 +17,7 @@ const ARCHETYPES: Array<{
   title: string;
   tagline: string;
   icon: typeof Heart;
+  animation: IconlyAnimationName;
   color: string;
   accent: string;
 }> = [
@@ -24,6 +26,7 @@ const ARCHETYPES: Array<{
     title: 'Wedding & Reception',
     tagline: 'Ceremonies, vows, dinner & grand party',
     icon: Heart,
+    animation: 'heart',
     color: '#F59E0B',
     accent: 'rgba(245, 158, 11, 0.15)',
   },
@@ -32,6 +35,7 @@ const ARCHETYPES: Array<{
     title: 'Milestone Birthday',
     tagline: 'Anniversaries, jubilations & soirées',
     icon: Cake,
+    animation: 'party',
     color: '#38BDF8',
     accent: 'rgba(56, 189, 248, 0.15)',
   },
@@ -40,6 +44,7 @@ const ARCHETYPES: Array<{
     title: 'Community Gala',
     tagline: 'Charity galas, awards & cultural festivals',
     icon: Trophy,
+    animation: 'star-medal',
     color: '#34D399',
     accent: 'rgba(52, 211, 153, 0.15)',
   },
@@ -156,9 +161,10 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                     alignItems: 'center',
                     justifyContent: 'center',
                     boxShadow: 'var(--shadow-sm)',
+                    overflow: 'hidden',
                   }}
                 >
-                  <Sparkles size={18} color="var(--text-inverse)" />
+                  <IconlyAnimation name="party" size={24} alt="Create Atelier" />
                 </div>
                 <div>
                   <h2 className="modal-title">Create Celebration Atelier</h2>
@@ -186,7 +192,6 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'var(--space-2)' }}>
                   {ARCHETYPES.map((arch) => {
                     const isSelected = selectedType === arch.type;
-                    const Icon = arch.icon;
                     return (
                       <motion.div
                         key={arch.type}
@@ -206,7 +211,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                          <Icon size={18} color={arch.color} />
+                          <IconlyAnimation name={arch.animation} size={22} alt={arch.title} />
                           {isSelected && <Check size={14} color={arch.color} />}
                         </div>
                         <div style={{ fontWeight: 600, fontSize: 'var(--type-body-sm)', color: 'var(--text-primary)' }}>
