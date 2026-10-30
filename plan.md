@@ -12,6 +12,14 @@
 4. **Adaptive Across Every Breakpoint:** Verified responsiveness from 360px mobile viewports up to 1440px+ ultra-wide screens.
 5. **Production Hardened & Resilient:** Compliant with the 15-point production checklist (API key protection, offline resilience, input boundaries, zero debug leak).
 
+### 🎯 Problem Statement Alignment (High Impact Contest Focus)
+*Accurately targeting the root challenge, user needs, and core objectives:*
+1. **Financial Solvency:** Combating financial drift with archetype allocation benchmarks, locked contingency shields (10–15%), and invariant arithmetic ($\text{Allocated} + \text{Remaining} + \text{Contingency} \equiv \text{Total}$).
+2. **Temporal Synchronization:** Bridging long-range planning with day-of reality through dual-horizon milestone sequencing and an automated $O(n \log n)$ schedule collision detector.
+3. **Vendor Procurement Rigor:** Eliminating asymmetric contracts via a 5-stage Kanban CRM preloaded with domain-specific interview guides.
+4. **Creative Synthesis:** Eliminating blank-page anxiety with multi-tone invitation generation, hex-coded color harmonizers, and structured speech ghostwriting with delivery cues.
+5. **Contextual GenAI Director:** Autonomous advice engine operating in dual modes (Google Gemini 1.5 Flash + 100% offline heuristic engine) ensuring zero user lock-out.
+
 ---
 
 ## 2. Foundational Design System & Tokens (Consistency First)

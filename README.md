@@ -27,6 +27,40 @@ EventiQ is designed according to the **Impeccable Design Quality Standards** to 
 
 ---
 
+## 🎯 Problem Statement Alignment (High Impact)
+
+> **Contest High-Priority Dimension:** *How accurately your submission targets the root challenge, user needs, and core objectives.*
+
+### 1. The Root Challenge in Celebration & Event Planning
+Organizing celebrations (weddings, milestone birthdays, and community galas) is among the most emotionally charged, high-stakes endeavors a person or team undertakes. Traditional planning tools (static spreadsheets, fragmented notes, generic checklists) consistently fail because they treat planning as passive data entry rather than dynamic orchestration. Real-world events suffer from **four critical failure modes**:
+
+1. **Financial Drift & Surprise Overruns:** Hosts begin with guesswork allocations, fail to budget for hidden service fees (corkage, gratuities, overtime, tax), and exhaust their budget before critical vendors are secured.
+2. **Temporal Chaos & Schedule Collapses:** Planning milestones are disconnected from day-of execution. Without automated buffer detection, a 15-minute delay during photos or transit cascades into cold dinners and overtime penalty fees.
+3. **Vendor Uncertainty & Contract Asymmetry:** Hosts lack domain expertise to properly vet, interview, and negotiate contracts across caterers, venues, and audio-visual suppliers.
+4. **Creative Impasse & Blank-Page Anxiety:** Hosts struggle with cohesive sensory themes, and designated speakers suffer acute anxiety drafting toasts and speeches.
+
+### 2. User Personas & Targeted Problem-Solution Matrix
+
+EventiQ targets three distinct celebration archetypes with customized mathematical models, workflows, and presets:
+
+| Persona & Event Archetype | Root Challenge & High-Stakes Friction | User Needs | EventiQ Targeted Solution & Technical Implementation |
+| :--- | :--- | :--- | :--- |
+| **The Couple**<br>*(Weddings & Formal Receptions)*<br>`$15k–$80k+` • `100–300+ guests` | • Hidden venue fees & unexpected overtime<br>• Zero-buffer day-of schedule collapse<br>• Speech anxiety for wedding party | • Rigorous category allocations<br>• Buffer-protected run-of-show<br>• Structured toasts & speech coaching | • **Archetype Allocation Benchmarks** (45% venue/catering, 12% photo/video)<br>• **Minute-by-minute Collision Engine** flagging overlaps & zero-buffer transitions<br>• **Speechwriter** with storytelling beats, duration controls & delivery cues |
+| **The Host / Parent**<br>*(Milestone Birthdays & Anniversaries)*<br>`$3k–$15k` • `30–100 guests` | • Decision fatigue on cohesive aesthetic<br>• Stale, generic invitations<br>• Lack of engaging hospitality/activities | • Curated sensory color palettes<br>• Multi-tone invitation drafting<br>• Signature cocktail/mocktail curation | • **Sensory Theme Harmonizer** (hex-coded palettes with 1-click clipboard copy)<br>• **Multi-Tone Invitation Drafter** (Classic, Warm, Modern, Poetic)<br>• **Hospitality Suite** with themed drinks and crowd-interactive games |
+| **The Committee Chair**<br>*(Community Galas & Festivals)*<br>`$25k–$100k+` • `200–1000+ guests` | • Multi-stakeholder budget accountability<br>• Volunteer task accountability<br>• Unsecured critical vendor risks | • Locked emergency reserve<br>• Stage cue sheets with task ownership<br>• Structured procurement pipeline | • **Locked 10–15% Contingency Shield** with real-time solvency tracking<br>• **Day-of Stage Cue Sheet** with task delegation & priority filters<br>• **5-Stage Kanban CRM** with category-specific interview & negotiation guides |
+
+### 3. Core Objectives vs. Engineered Technical Capabilities
+
+| Core Vertical Objective | Engineered Solution in EventiQ | Algorithmic Precision & Verification |
+| :--- | :--- | :--- |
+| **1. Dynamic Solvency & Zero Drift** | Proportional allocation meter + real-time expense ledger | **Mathematical Invariant:** $\text{Allocated} + \text{Remaining} + \text{Contingency} \equiv \text{Total}$. Verified by [`budget.test.ts`](src/tests/budget.test.ts). |
+| **2. Dual-Horizon Timeline Sequencing** | Macro milestone horizon (Months, Weeks, Days out) paired with micro Day-of Run of Show | **$O(n \log n)$ Collision Detector:** Scans chronological cues, detects overlaps and zero-transition friction. Verified by [`timeline.test.ts`](src/tests/timeline.test.ts). |
+| **3. Vendor CRM & Procurement Vetting** | 5-stage Kanban pipeline (`Wishlist` ➔ `Contacted` ➔ `Quote` ➔ `Deposit` ➔ `Confirmed`) | **Built-in AI Interview Guides:** Pre-loaded with category-tailored questions covering curfews, allergies, and backup equipment. |
+| **4. Creative Synthesis & Ghostwriting** | Sensory palette harmonizer, 4-tone invitation drafter, and structured speech ghostwriter | **Deterministic + LLM Hybrid:** Generates customized toasts with stage pauses (`[Pause for laughter]`) and body language coaching. |
+| **5. AI Director with Offline Resilience** | Floating AI Director drawer with proactive health diagnostics and prompt chips | **Dual-Mode Engine:** Direct Google Gemini 1.5 Flash client via secure Key Vault + 100% offline heuristic engine with zero network dependency. |
+
+---
+
 ## 🚩 Code Quality & Architecture Blueprint (High Impact)
 
 > **Contest High-Priority Dimension:** *How clean, readable, and well-structured the submitted code is.*
