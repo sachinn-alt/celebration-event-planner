@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "test": "vitest run",
     "test:e2e": "node scripts/run-playwright-evaluation.mjs",
+    "check:quality": "oxlint && tsc -b && vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
