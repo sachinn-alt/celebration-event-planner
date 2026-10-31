@@ -2,6 +2,7 @@
 
 [![Live Deployment](https://img.shields.io/badge/Live%20Demo-eventiq--kappa.vercel.app-10B981?style=for-the-badge&logo=vercel&logoColor=white)](https://eventiq-kappa.vercel.app/)
 [![Video Demo](https://img.shields.io/badge/Video%20Demo-Google%20Drive-EA4335?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1auG1s81Wyr_ZRjkF7HAsnXF-bHkjujhr/view?usp=sharing)
+[![LinkedIn Post](https://img.shields.io/badge/LinkedIn%20Post-EventiQ%20Launch-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/posts/heyitsachin_eventplanning-genai-geminiapi-share-7521956027391631361-VCCq/)
 
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -16,6 +17,8 @@
 > 🌐 **Live Production Application:** [https://eventiq-kappa.vercel.app/](https://eventiq-kappa.vercel.app/)
 >
 > 📹 **Walkthrough Demo Video:** [Google Drive Video Demo](https://drive.google.com/file/d/1auG1s81Wyr_ZRjkF7HAsnXF-bHkjujhr/view?usp=sharing)
+>
+> 🚀 **Official LinkedIn Post:** [EventiQ Launch & Walkthrough](https://www.linkedin.com/posts/heyitsachin_eventplanning-genai-geminiapi-share-7521956027391631361-VCCq/)
 
 ---
 
