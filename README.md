@@ -1,6 +1,7 @@
 # ✨ EventiQ — Intelligent Celebration & Event Planner
 
 [![Live Deployment](https://img.shields.io/badge/Live%20Demo-eventiq--kappa.vercel.app-10B981?style=for-the-badge&logo=vercel&logoColor=white)](https://eventiq-kappa.vercel.app/)
+[![Video Demo](https://img.shields.io/badge/Video%20Demo-Google%20Drive-EA4335?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1auG1s81Wyr_ZRjkF7HAsnXF-bHkjujhr/view?usp=sharing)
 
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -13,6 +14,8 @@
 > **EventiQ** is an intelligent, context-aware GenAI event management atelier engineered for **Weddings**, **Milestone Birthdays**, and **Community Galas**. It marries rigorous financial math with dual-horizon timelines, vendor vetting CRM, creative asset synthesis, and an autonomous AI Event Director.
 >
 > 🌐 **Live Production Application:** [https://eventiq-kappa.vercel.app/](https://eventiq-kappa.vercel.app/)
+>
+> 📹 **Walkthrough Demo Video:** [Google Drive Video Demo](https://drive.google.com/file/d/1auG1s81Wyr_ZRjkF7HAsnXF-bHkjujhr/view?usp=sharing)
 
 ---
 
