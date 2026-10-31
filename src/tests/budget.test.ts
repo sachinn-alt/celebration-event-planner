@@ -60,4 +60,17 @@ describe('Budget Calculation Engine', () => {
     const analytics = StorageService.calculateBudgetAnalytics(zeroGuestEvent);
     expect(analytics.perGuestSpend).toBe(0);
   });
+
+  it('enforces mathematical invariant: actualSpent + remaining === totalBudget across all archetypes', () => {
+    PRESET_EVENTS.forEach((event) => {
+      const analytics = StorageService.calculateBudgetAnalytics(event);
+      expect(analytics.actualSpent + analytics.remaining).toBe(analytics.totalBudget);
+    });
+  });
+
+  it('correctly calculates budget percent spent clamped between 0 and 100', () => {
+    const analytics = StorageService.calculateBudgetAnalytics(weddingEvent);
+    expect(analytics.percentSpent).toBeGreaterThanOrEqual(0);
+    expect(analytics.percentSpent).toBeLessThanOrEqual(100);
+  });
 });

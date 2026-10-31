@@ -106,4 +106,73 @@ describe('Timeline & Conflict Detection Engine', () => {
     const conflicts = AiService.detectTimelineConflicts(healthyTimeline);
     expect(conflicts.length).toBe(0);
   });
+
+  it('handles malformed or missing timeframes gracefully without throwing exceptions', () => {
+    const malformedTimeline: TimelineMilestone[] = [
+      {
+        id: 'bad-cue-1',
+        phase: 'day_of',
+        timeframe: 'invalid time string',
+        title: 'Malformed Cue',
+        description: 'Should not crash',
+        category: 'general',
+        completed: false,
+        priority: 'optional',
+      },
+      {
+        id: 'bad-cue-2',
+        phase: 'day_of',
+        timeframe: 'TBD',
+        title: 'Unscheduled Cue',
+        description: 'Should be ignored gracefully',
+        category: 'general',
+        completed: false,
+        priority: 'optional',
+      },
+    ];
+
+    expect(() => AiService.detectTimelineConflicts(malformedTimeline)).not.toThrow();
+    const conflicts = AiService.detectTimelineConflicts(malformedTimeline);
+    expect(conflicts.length).toBe(0);
+  });
+
+  it('detects multiple cascades across 3 or more contiguous schedule items', () => {
+    const cascadingTimeline: TimelineMilestone[] = [
+      {
+        id: 'c-1',
+        phase: 'day_of',
+        timeframe: '14:00 - 15:00',
+        title: 'Ceremony',
+        description: '',
+        category: 'ceremony',
+        completed: false,
+        priority: 'critical',
+      },
+      {
+        id: 'c-2',
+        phase: 'day_of',
+        timeframe: '15:00 - 16:00',
+        title: 'Cocktails',
+        description: '',
+        category: 'catering',
+        completed: false,
+        priority: 'normal',
+      },
+      {
+        id: 'c-3',
+        phase: 'day_of',
+        timeframe: '15:45 - 17:00',
+        title: 'Dinner Seating',
+        description: '',
+        category: 'catering',
+        completed: false,
+        priority: 'critical',
+      },
+    ];
+
+    const conflicts = AiService.detectTimelineConflicts(cascadingTimeline);
+    expect(conflicts.length).toBe(2);
+    expect(conflicts.some((c) => c.type === 'zero_buffer')).toBe(true);
+    expect(conflicts.some((c) => c.type === 'overlap')).toBe(true);
+  });
 });

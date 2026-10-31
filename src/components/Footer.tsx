@@ -50,6 +50,7 @@ export const Footer: React.FC<FooterProps> = ({
                   type="button"
                   className="brutalist-footer-link"
                   onClick={() => onSelectArchetype('wedding')}
+                  aria-label="View Weddings and Receptions atelier demo"
                 >
                   WEDDINGS & RECEPTIONS
                 </button>
@@ -57,6 +58,7 @@ export const Footer: React.FC<FooterProps> = ({
                   type="button"
                   className="brutalist-footer-link"
                   onClick={() => onSelectArchetype('birthday')}
+                  aria-label="View Milestone Birthdays atelier demo"
                 >
                   MILESTONE BIRTHDAYS
                 </button>
@@ -64,6 +66,7 @@ export const Footer: React.FC<FooterProps> = ({
                   type="button"
                   className="brutalist-footer-link"
                   onClick={() => onSelectArchetype('community')}
+                  aria-label="View Community Galas atelier demo"
                 >
                   COMMUNITY GALAS
                 </button>
@@ -93,6 +96,7 @@ export const Footer: React.FC<FooterProps> = ({
               className="brutalist-scroll-top-btn"
               onClick={handleScrollToTop}
               title="Scroll back to top of the page"
+              aria-label="Scroll back to top of page"
             >
               SCROLL TO TOP
             </button>

@@ -238,7 +238,12 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
           </p>
         </div>
 
-        <button type="button" className="btn btn-primary" onClick={openAddModal}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={openAddModal}
+          aria-label="Add new vendor to pipeline"
+        >
           <Plus size={16} />
           <span>Add Vendor</span>
         </button>
@@ -251,6 +256,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
           className={`btn btn-sm ${selectedCategoryFilter === 'all' ? 'btn-primary' : 'btn-ghost'}`}
           style={{ fontSize: 'var(--type-caption-xs)' }}
           onClick={() => setSelectedCategoryFilter('all')}
+          aria-label="Filter by all vendor categories"
         >
           All Categories ({event.vendors.length})
         </button>
@@ -264,6 +270,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
               className={`btn btn-sm ${selectedCategoryFilter === cat.key ? 'btn-primary' : 'btn-ghost'}`}
               style={{ fontSize: 'var(--type-caption-xs)' }}
               onClick={() => setSelectedCategoryFilter(cat.key)}
+              aria-label={`Filter vendors by ${cat.label}`}
             >
               {cat.label} ({count})
             </button>
@@ -419,6 +426,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                           className="btn btn-sm shimmer-btn"
                           style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--type-caption-xs)' }}
                           onClick={() => setActiveInterviewGuide(vendor)}
+                          aria-label={`Open AI interview guide for ${vendor.name}`}
                         >
                           <HelpCircle size={14} />
                           <span>AI Interview Guide</span>
@@ -462,6 +470,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                               className="btn btn-primary btn-sm"
                               style={{ padding: '4px 12px' }}
                               onClick={() => advanceStage(vendor)}
+                              aria-label={`Advance ${vendor.name} to next stage`}
                             >
                               <span>Next</span>
                               <ArrowRight size={12} />
@@ -489,6 +498,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
             onClick={() => setActiveInterviewGuide(null)}
             role="dialog"
             aria-modal="true"
+            aria-labelledby="vetting-guide-title"
           >
             <motion.div
               className="modal-content"
@@ -501,12 +511,13 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <HelpCircle size={20} color="var(--color-carbon)" />
-                  <h3 className="modal-title">AI Vetting Guide: {activeInterviewGuide.name}</h3>
+                  <h3 id="vetting-guide-title" className="modal-title">AI Vetting Guide: {activeInterviewGuide.name}</h3>
                 </div>
                 <button
                   type="button"
                   className="btn btn-ghost btn-icon"
                   onClick={() => setActiveInterviewGuide(null)}
+                  aria-label="Close interview guide dialog"
                 >
                   <X size={18} />
                 </button>
@@ -538,6 +549,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                       className="btn btn-ghost btn-sm"
                       onClick={() => copyQuestion(q, idx)}
                       title="Copy question text"
+                      aria-label={`Copy interview question: ${q}`}
                     >
                       {copiedQuestionIdx === idx ? <Check size={14} color="var(--status-success)" /> : <Copy size={14} />}
                     </button>
@@ -550,6 +562,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                   type="button"
                   className="btn btn-primary btn-sm"
                   onClick={() => setActiveInterviewGuide(null)}
+                  aria-label="Done reviewing interview guide"
                 >
                   Done
                 </button>
@@ -570,6 +583,7 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
             onClick={() => setIsModalOpen(false)}
             role="dialog"
             aria-modal="true"
+            aria-labelledby="vendor-modal-title"
           >
             <motion.div
               className="modal-content"
@@ -580,11 +594,12 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
               onClick={(e) => e.stopPropagation()}
             >
               <div className="modal-header">
-                <h3 className="modal-title">{editingVendor ? 'Edit Vendor' : 'Add New Vendor'}</h3>
+                <h3 id="vendor-modal-title" className="modal-title">{editingVendor ? 'Edit Vendor' : 'Add New Vendor'}</h3>
                 <button
                   type="button"
                   className="btn btn-ghost btn-icon"
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Close vendor dialog"
                 >
                   <X size={18} />
                 </button>
@@ -742,10 +757,15 @@ export const VendorModule: React.FC<VendorModuleProps> = ({ event, onUpdateEvent
                   type="button"
                   className="btn btn-secondary btn-sm"
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Cancel editing vendor"
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary btn-sm">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                  aria-label="Save vendor details"
+                >
                   {editingVendor ? 'Save Changes' : 'Add Vendor'}
                 </button>
               </div>

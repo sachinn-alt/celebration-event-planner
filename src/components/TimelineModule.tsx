@@ -212,6 +212,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
               className={`btn btn-sm ${activeHorizon === 'macro' ? 'btn-primary' : 'btn-ghost'}`}
               style={{ borderRadius: 'var(--radius-full)' }}
               onClick={() => setActiveHorizon('macro')}
+              aria-label="Switch to Macro Countdown view"
             >
               <Calendar size={14} />
               <span>Macro Countdown</span>
@@ -221,6 +222,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
               className={`btn btn-sm ${activeHorizon === 'day_of' ? 'btn-primary' : 'btn-ghost'}`}
               style={{ borderRadius: 'var(--radius-full)' }}
               onClick={() => setActiveHorizon('day_of')}
+              aria-label="Switch to Day-Of Run-of-Show view"
             >
               <Clock size={14} />
               <span>Day-Of Run-of-Show</span>
@@ -231,6 +233,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
             type="button"
             className="btn btn-secondary btn-sm"
             onClick={() => openAddModal(activeHorizon === 'day_of' ? 'day_of' : 'macro_months')}
+            aria-label={`Add new ${activeHorizon === 'day_of' ? 'day-of cue' : 'macro milestone'}`}
           >
             <Plus size={16} />
             <span>Add {activeHorizon === 'day_of' ? 'Cue' : 'Milestone'}</span>
@@ -320,6 +323,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                   className={`btn btn-sm ${selectedPhaseFilter === p ? 'btn-primary' : 'btn-ghost'}`}
                   style={{ fontSize: 'var(--type-caption-xs)' }}
                   onClick={() => setSelectedPhaseFilter(p)}
+                  aria-label={`Filter timeline by ${label} phase`}
                 >
                   {label}
                 </button>
@@ -441,6 +445,7 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
             onClick={() => setIsModalOpen(false)}
             role="dialog"
             aria-modal="true"
+            aria-labelledby="timeline-modal-title"
           >
             <motion.div
               className="modal-content"
@@ -451,13 +456,14 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
               onClick={(e) => e.stopPropagation()}
             >
               <div className="modal-header">
-                <h3 className="modal-title">
+                <h3 id="timeline-modal-title" className="modal-title">
                   {editingMilestone ? 'Edit Timeline Item' : 'Add New Timeline Item'}
                 </h3>
                 <button
                   type="button"
                   className="btn btn-ghost btn-icon"
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Close timeline dialog"
                 >
                   <X size={18} />
                 </button>
@@ -553,10 +559,15 @@ export const TimelineModule: React.FC<TimelineModuleProps> = ({ event, onUpdateE
                   type="button"
                   className="btn btn-secondary btn-sm"
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Cancel editing timeline item"
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary btn-sm">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                  aria-label="Save timeline item"
+                >
                   {editingMilestone ? 'Save Changes' : 'Add Item'}
                 </button>
               </div>

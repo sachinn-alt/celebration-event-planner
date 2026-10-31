@@ -30,8 +30,6 @@ interface HeaderProps {
   onOpenCreateModal: () => void;
   onDeleteEvent?: (id: string) => void;
   onGoToLanding?: () => void;
-  isFxEnabled?: boolean;
-  onToggleFx?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -45,8 +43,6 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCreateModal,
   onDeleteEvent,
   onGoToLanding,
-  isFxEnabled: _isFxEnabled = true,
-  onToggleFx: _onToggleFx,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isToolbarOpen, setIsToolbarOpen] = useState(false);
@@ -232,6 +228,7 @@ export const Header: React.FC<HeaderProps> = ({
                       alignItems: 'center',
                     }}
                     title="Delete custom celebration"
+                    aria-label={`Delete custom celebration ${evt.title}`}
                   >
                     <Trash2 size={11} />
                   </button>
@@ -272,6 +269,7 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             onClick={() => setIsToolbarOpen(!isToolbarOpen)}
             title={isToolbarOpen ? 'Collapse Tools & Utilities' : 'Expand Tools & Utilities (API Key, Backup, Print, Reset)'}
+            aria-label={isToolbarOpen ? 'Collapse tools and utilities drawer' : 'Expand tools and utilities drawer'}
           >
             <SlidersHorizontal size={13} />
             <span>Tools</span>
@@ -313,6 +311,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   onClick={onOpenApiKeyModal}
                   title={hasApiKey ? 'Google Gemini 1.5 Flash Connected' : 'Running Offline Heuristic Engine'}
+                  aria-label="Open Google Gemini API Key Vault configuration"
                 >
                   <Key size={14} color="var(--color-carbon)" />
                   <span style={{ color: 'var(--color-carbon)', fontWeight: 700 }}>
@@ -325,6 +324,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="btn btn-ghost btn-sm"
                   onClick={handleExportJson}
                   title="Download JSON backup"
+                  aria-label="Download event JSON backup"
                 >
                   <Download size={14} />
                   <span className="hide-on-mobile">Backup</span>
@@ -336,6 +336,7 @@ export const Header: React.FC<HeaderProps> = ({
                   onChange={handleFileInputChange}
                   accept=".json,application/json"
                   style={{ display: 'none' }}
+                  aria-label="Upload event JSON file"
                 />
 
                 <button
@@ -343,6 +344,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="btn btn-ghost btn-sm"
                   onClick={() => fileInputRef.current?.click()}
                   title="Import JSON backup"
+                  aria-label="Restore event from JSON backup file"
                 >
                   <Upload size={14} />
                   <span className="hide-on-mobile">Restore</span>
@@ -353,6 +355,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="btn btn-ghost btn-sm"
                   onClick={() => window.print()}
                   title="Print Ink-Friendly Itinerary"
+                  aria-label="Print ink-friendly event itinerary"
                 >
                   <Printer size={14} />
                   <span className="hide-on-mobile">Print</span>
@@ -367,6 +370,7 @@ export const Header: React.FC<HeaderProps> = ({
                     }
                   }}
                   title="Reset to Factory Presets"
+                  aria-label="Reset all events to factory presets"
                 >
                   <RotateCcw size={14} />
                 </button>

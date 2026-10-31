@@ -787,7 +787,12 @@ export function createCustomEventPlan(params: CreateCustomEventParams): EventPla
   } = params;
 
   const id = `custom-${Date.now()}`;
-  const total = Math.max(1000, totalBudget);
+  const total = Math.max(500, totalBudget);
+  const safeGuestCount = Math.max(1, guestCount);
+  const safeTitle = (title || 'Celebration').trim().slice(0, 100);
+  const safeLocation = (location || 'Private Venue').trim().slice(0, 100);
+  const safeVibe = (vibe || 'Bespoke and celebratory').trim().slice(0, 200);
+  const safeContingency = Math.max(5, Math.min(25, contingencyPercent));
 
   const venueCost = Math.round(total * (type === 'wedding' ? 0.35 : type === 'birthday' ? 0.28 : 0.32));
   const cateringCost = Math.round(total * (type === 'wedding' ? 0.28 : type === 'birthday' ? 0.30 : 0.25));
@@ -846,21 +851,21 @@ export function createCustomEventPlan(params: CreateCustomEventParams): EventPla
   return {
     id,
     type,
-    title,
+    title: safeTitle,
     date,
-    location,
-    guestCount,
-    vibe,
+    location: safeLocation,
+    guestCount: safeGuestCount,
+    vibe: safeVibe,
     lastModified: new Date().toISOString(),
     aiContextNotes: [
       `Custom celebration atelier created on ${new Date().toLocaleDateString()}.`,
-      `Archetype: ${type.toUpperCase()}, Guest Count: ${guestCount}, Total Budget: ${currency}${total.toLocaleString()}.`,
-      `Contingency Shield locked at ${contingencyPercent}%.`,
+      `Archetype: ${type.toUpperCase()}, Guest Count: ${safeGuestCount}, Total Budget: ${currency}${total.toLocaleString()}.`,
+      `Contingency Shield locked at ${safeContingency}%.`,
     ],
     budget: {
       totalBudget: total,
       currency,
-      contingencyPercent,
+      contingencyPercent: safeContingency,
       items,
     },
     timeline: [

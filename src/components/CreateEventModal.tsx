@@ -138,6 +138,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
           onClick={onClose}
           role="dialog"
           aria-modal="true"
+          aria-labelledby="create-modal-title"
         >
           <motion.div
             className="modal-content"
@@ -167,7 +168,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                   <IconlyAnimation name="party" size={24} alt="Create Atelier" />
                 </div>
                 <div>
-                  <h2 className="modal-title">Create Celebration Atelier</h2>
+                  <h2 id="create-modal-title" className="modal-title">Create Celebration Atelier</h2>
                   <p style={{ fontSize: 'var(--type-caption-xs)', color: 'var(--text-muted)' }}>
                     Auto-seeds benchmark budgets, run-of-show cues, and curated creative assets
                   </p>
@@ -177,6 +178,7 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
                 type="button"
                 className="btn btn-ghost btn-icon"
                 onClick={onClose}
+                aria-label="Close creation dialog"
                 whileTap={{ scale: 0.9 }}
               >
                 <X size={18} />
@@ -397,12 +399,18 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({ isOpen, onCl
 
               {/* Action Buttons */}
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={onClose}>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={onClose}
+                  aria-label="Cancel custom event creation"
+                >
                   Cancel
                 </button>
                 <motion.button
                   type="submit"
                   className="btn btn-primary"
+                  aria-label="Build customized celebration atelier workspace"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                 >

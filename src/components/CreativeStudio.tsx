@@ -134,6 +134,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
             className={`btn btn-sm ${activeTab === 'palette' ? 'btn-primary' : 'btn-ghost'}`}
             style={{ borderRadius: 'var(--radius-full)' }}
             onClick={() => setActiveTab('palette')}
+            aria-label="Switch to Palette and Theme studio"
           >
             <Palette size={14} />
             <span>Palette & Theme</span>
@@ -143,6 +144,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
             className={`btn btn-sm ${activeTab === 'invitations' ? 'btn-primary' : 'btn-ghost'}`}
             style={{ borderRadius: 'var(--radius-full)' }}
             onClick={() => setActiveTab('invitations')}
+            aria-label="Switch to Invitations copywriting studio"
           >
             <FileText size={14} />
             <span>Invitations</span>
@@ -152,6 +154,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
             className={`btn btn-sm ${activeTab === 'speeches' ? 'btn-primary' : 'btn-ghost'}`}
             style={{ borderRadius: 'var(--radius-full)' }}
             onClick={() => setActiveTab('speeches')}
+            aria-label="Switch to Speechwriter ghostwriting studio"
           >
             <MessageSquare size={14} />
             <span>Speechwriter</span>
@@ -161,6 +164,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
             className={`btn btn-sm ${activeTab === 'activities' ? 'btn-primary' : 'btn-ghost'}`}
             style={{ borderRadius: 'var(--radius-full)' }}
             onClick={() => setActiveTab('activities')}
+            aria-label="Switch to Hospitality and Activities studio"
           >
             <Wine size={14} />
             <span>Bar & Activities</span>
@@ -291,6 +295,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                       className="btn btn-ghost btn-sm"
                       onClick={() => handleCopyInvite(draft)}
                       title="Copy invitation text"
+                      aria-label={`Copy ${draft.style.replace('_', ' ')} invitation text`}
                     >
                       {copiedInviteId === draft.id ? (
                         <span style={{ color: 'var(--color-carbon)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
@@ -419,6 +424,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                   type="submit"
                   className="btn btn-primary"
                   disabled={isGeneratingSpeech}
+                  aria-label="Generate customized toast and speech framework"
                 >
                   <Sparkles size={16} />
                   <span>{isGeneratingSpeech ? 'Composing...' : 'Generate Toast Framework'}</span>
@@ -444,6 +450,7 @@ export const CreativeStudio: React.FC<CreativeStudioProps> = ({ event, onUpdateE
                     type="button"
                     className="btn btn-secondary btn-sm"
                     onClick={() => handleCopySpeech(draft)}
+                    aria-label={`Copy speech script for ${draft.role}`}
                   >
                     {copiedSpeechId === draft.id ? <Check size={14} color="var(--status-success)" /> : <Copy size={14} />}
                     <span>{copiedSpeechId === draft.id ? 'Copied' : 'Copy Full Speech'}</span>

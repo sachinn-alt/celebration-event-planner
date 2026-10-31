@@ -37,25 +37,13 @@ export function App() {
   const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [hasApiKey, setHasApiKey] = useState<boolean>(() => Boolean(StorageService.getApiKey()));
-  const [isFxEnabled, setIsFxEnabled] = useState<boolean>(() => {
+  const [isFxEnabled] = useState<boolean>(() => {
     try {
       return localStorage.getItem('eventiq_fx_enabled') !== 'false';
     } catch {
       return true;
     }
   });
-
-  const handleToggleFx = () => {
-    setIsFxEnabled((prev) => {
-      const next = !prev;
-      try {
-        localStorage.setItem('eventiq_fx_enabled', String(next));
-      } catch {
-        // ignore
-      }
-      return next;
-    });
-  };
 
   const activeEvent = events.find((e) => e.id === activeEventId) || events[0];
 
@@ -193,8 +181,6 @@ export function App() {
               onOpenCreateModal={() => setIsCreateModalOpen(true)}
               onDeleteEvent={handleDeleteEvent}
               onGoToLanding={() => setViewMode('landing')}
-              isFxEnabled={isFxEnabled}
-              onToggleFx={handleToggleFx}
             />
 
             {/* Module Navigation Tabs with Slush Pill Design */}

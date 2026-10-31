@@ -105,7 +105,7 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
             <a
               href="https://aistudio.google.com/app/apikey"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               style={{ color: 'var(--color-voltage-violet)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontSize: 'var(--type-caption-xs)' }}
             >
               Get Free Gemini Key <ExternalLink size={12} />
@@ -174,14 +174,31 @@ const ApiKeyModalDialog: React.FC<{ onClose: () => void; onKeySaved: () => void 
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-3)' }}>
-          <button type="button" className="btn btn-danger btn-sm" onClick={handleClear} disabled={!apiKey}>
+          <button
+            type="button"
+            className="btn btn-danger btn-sm"
+            onClick={handleClear}
+            disabled={!apiKey}
+            aria-label="Clear stored Google Gemini API key"
+          >
             Clear Key
           </button>
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={handleTestKey} disabled={!apiKey.trim() || status === 'testing'}>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={handleTestKey}
+              disabled={!apiKey.trim() || status === 'testing'}
+              aria-label="Test connection to Google Gemini 1.5 Flash API"
+            >
               {status === 'testing' ? 'Testing...' : 'Test Connection'}
             </button>
-            <button type="button" className="btn btn-primary btn-sm" onClick={handleSave}>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={handleSave}
+              aria-label="Save and activate Google Gemini API key"
+            >
               Save & Apply
             </button>
           </div>

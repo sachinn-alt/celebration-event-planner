@@ -6,7 +6,7 @@
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vitest](https://img.shields.io/badge/Tests-17%20Passed-10B981?logo=vitest&logoColor=white)](https://vitest.dev/)
+[![Vitest](https://img.shields.io/badge/Tests-30%20Passed-10B981?logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Oxlint](https://img.shields.io/badge/Oxlint-0%20Warnings-10B981)](https://oxc-project.github.io/)
 [![Playwright](https://img.shields.io/badge/Playwright%20Score-105%20%2F%20100-10B981?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![Design](https://img.shields.io/badge/Design-Impeccable%20Standard-F59E0B)](https://impeccable.style/)
@@ -207,11 +207,13 @@ npm run build
 
 | Test Suite | Focus Area | Result |
 | :--- | :--- | :--- |
-| [`storage.test.ts`](src/tests/storage.test.ts) | Persistence, presets hydration, custom event factory & deletion | ✅ 4 / 4 Passed |
-| [`budget.test.ts`](src/tests/budget.test.ts) | Invariant total math, category benchmarks, contingency shield, zero-guest safety | ✅ 4 / 4 Passed |
-| [`timeline.test.ts`](src/tests/timeline.test.ts) | Completion math, schedule collision detection, zero-buffer warnings | ✅ 4 / 4 Passed |
+| [`accessibility.test.ts`](src/tests/accessibility.test.ts) | 100% button ARIA coverage, dialog roles, modal labeling, noopener safety | ✅ 4 / 4 Passed |
+| [`security.test.ts`](src/tests/security.test.ts) | Key Vault session isolation, numeric bounds clamping, string boundary defense | ✅ 5 / 5 Passed |
+| [`budget.test.ts`](src/tests/budget.test.ts) | Invariant total math ($\text{Allocated} + \text{Remaining} \equiv \text{Total}$), benchmark distribution | ✅ 6 / 6 Passed |
+| [`timeline.test.ts`](src/tests/timeline.test.ts) | Schedule collision detection, zero-buffer warnings, cascade detection, malformed timeframes | ✅ 6 / 6 Passed |
 | [`aiService.test.ts`](src/tests/aiService.test.ts) | Heuristic audit, deficit detection, speech generation, offline fallback | ✅ 5 / 5 Passed |
-| **Total** | **Comprehensive Full System Coverage** | **✅ 17 / 17 Passed (100%)** |
+| [`storage.test.ts`](src/tests/storage.test.ts) | Persistence lifecycle, presets hydration, custom event scaling & deletion | ✅ 4 / 4 Passed |
+| **Total** | **Comprehensive Full System Coverage across 6 Suites** | **✅ 30 / 30 Passed (100%)** |
 
 ---
 

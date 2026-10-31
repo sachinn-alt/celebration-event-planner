@@ -216,6 +216,7 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                     gap: '4px',
                   }}
                   title="Configure Gemini API Key"
+                  aria-label="Configure Google Gemini API Key Vault"
                 >
                   <span>{hasApiKey ? '⚡ Gemini 1.5 Flash' : '🧠 Offline Heuristic Mode'}</span>
                   <Key size={10} />
@@ -373,6 +374,7 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                     }}
                     onClick={() => handleAskDirector(chip)}
                     disabled={isLoading}
+                    aria-label={`Ask AI: ${chip}`}
                   >
                     <ChevronRight size={14} color="var(--color-carbon)" style={{ flexShrink: 0 }} />
                     <span style={{ color: 'var(--color-carbon)', fontWeight: 600 }}>{chip}</span>
@@ -431,6 +433,7 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                         className="btn btn-ghost btn-sm"
                         style={{ padding: '2px 6px', fontSize: 'var(--type-caption-xs)' }}
                         onClick={() => handleCopyDraft(latestResponse.draftContent || '')}
+                        aria-label="Copy synthesized content draft to clipboard"
                       >
                         {copiedDraft ? <Check size={12} color="var(--color-carbon)" /> : <Copy size={12} />}
                         <span>{copiedDraft ? 'Copied' : 'Copy'}</span>
@@ -482,6 +485,7 @@ export const AiCopilot: React.FC<AiCopilotProps> = ({
                 className="btn btn-primary btn-sm"
                 style={{ padding: '8px 14px' }}
                 disabled={isLoading || !userInput.trim()}
+                aria-label="Send message to EventiQ Director"
               >
                 {isLoading ? '...' : <Send size={15} />}
               </button>

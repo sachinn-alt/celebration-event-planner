@@ -115,6 +115,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             type="button"
             className="island-nav-link"
             onClick={() => onSelectArchetype('wedding')}
+            aria-label="View Weddings and Receptions"
           >
             Weddings
           </button>
@@ -122,6 +123,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             type="button"
             className="island-nav-link"
             onClick={() => onSelectArchetype('birthday')}
+            aria-label="View Milestone Birthdays"
           >
             Milestones
           </button>
@@ -129,6 +131,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             type="button"
             className="island-nav-link"
             onClick={() => onSelectArchetype('community')}
+            aria-label="View Community Galas"
           >
             Galas
           </button>
@@ -136,6 +139,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             type="button"
             className="island-nav-link"
             onClick={onEnterApp}
+            aria-label="Enter EventiQ Atelier Studio"
           >
             Studio
           </button>
@@ -255,6 +259,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           type="button"
           className="btn btn-primary landing-main-cta"
           onClick={onEnterApp}
+          aria-label="Enter EventiQ Atelier Studio"
         >
           <span>Enter Atelier Studio</span>
           <ArrowRight size={18} />
@@ -264,6 +269,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           type="button"
           className="btn btn-secondary landing-secondary-cta"
           onClick={() => onSelectArchetype('wedding')}
+          aria-label="Explore Wedding Demo Archetype"
         >
           <span>Explore Wedding Demo</span>
         </button>

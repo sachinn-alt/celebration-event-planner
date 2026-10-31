@@ -194,6 +194,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
           type="button"
           className="btn btn-primary"
           onClick={() => openAddModal()}
+          aria-label="Add new expense line item"
         >
           <Plus size={16} />
           <span>Add Expense Item</span>
@@ -328,6 +329,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
               type="button"
               className={`btn btn-sm ${event.budget.contingencyPercent === pct ? 'btn-primary' : 'btn-secondary'}`}
               onClick={() => handleContingencyChange(pct)}
+              aria-label={`Set contingency reserve to ${pct}%`}
             >
               {pct}%
             </button>
@@ -385,6 +387,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
               style={{ height: '42px', padding: '0 14px', fontSize: '12px' }}
               onClick={resetFilters}
               title="Reset all filters"
+              aria-label="Reset all search and category filters"
             >
               <X size={14} />
               <span>Reset</span>
@@ -479,7 +482,8 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                     type="button"
                     onClick={() => cycleStatus(item)}
                     style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-                    title="Click to cycle status"
+                    title={`Current status ${item.status}. Click to cycle.`}
+                    aria-label={`Current status ${item.status} for ${item.name}. Click to cycle status.`}
                   >
                     <span
                       className={`badge ${
@@ -535,6 +539,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
             onClick={() => setIsModalOpen(false)}
             role="dialog"
             aria-modal="true"
+            aria-labelledby="budget-modal-title"
           >
             <motion.div
               className="modal-content"
@@ -547,7 +552,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
               <div className="modal-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <IconlyAnimation name="dollar-up" size={22} alt="Expense Item" />
-                  <h3 className="modal-title" style={{ margin: 0 }}>
+                  <h3 id="budget-modal-title" className="modal-title" style={{ margin: 0 }}>
                     {editingItem ? 'Edit Expense Item' : 'Add New Expense Item'}
                   </h3>
                 </div>
@@ -555,6 +560,7 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                   type="button"
                   className="btn btn-ghost btn-icon"
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Close expense modal"
                 >
                   <X size={18} />
                 </button>
@@ -651,10 +657,15 @@ export const BudgetModule: React.FC<BudgetModuleProps> = ({ event, onUpdateEvent
                   type="button"
                   className="btn btn-secondary btn-sm"
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Cancel editing expense item"
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary btn-sm">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                  aria-label="Save expense line item"
+                >
                   {editingItem ? 'Save Changes' : 'Add Item'}
                 </button>
               </div>
